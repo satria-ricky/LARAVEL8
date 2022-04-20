@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Aset;
 use Illuminate\Http\Request;
-
-
+use App\Http\Controllers\Controller;
 
 class AdminController extends Controller
 {
@@ -55,5 +54,4 @@ class AdminController extends Controller
         return redirect('/daftar-aset');
 
     }
-    
 }

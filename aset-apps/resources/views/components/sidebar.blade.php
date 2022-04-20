@@ -80,7 +80,7 @@
 							</form>
 			              </li>
 
-						  <a href="/"> login </a>
+						  <a href="/auth"> login </a>
 					</ul>
 				</div>
 			</div>

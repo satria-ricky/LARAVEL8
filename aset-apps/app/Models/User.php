@@ -24,9 +24,8 @@ class User extends Authenticatable
     // ];
 
     protected $table = 'tb_user';
+    protected $primaryKey = 'user_id';
 
     protected $guarded = ['user_id'];
-
-
 
 }

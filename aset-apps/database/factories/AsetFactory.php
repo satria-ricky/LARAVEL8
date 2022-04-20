@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class AsetFactory extends Factory
@@ -28,5 +27,6 @@ class AsetFactory extends Factory
             'aset_uraian' => $this->faker->text($maxNbChars = 100),
             'aset_sumber_perolehan' => $this->faker->randomDigit(1),
         ];
+        
     }
 }

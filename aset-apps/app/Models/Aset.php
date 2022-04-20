@@ -10,8 +10,7 @@ class Aset extends Model
     use HasFactory;
     
     protected $table = 'tb_aset';
-
+    
     protected $guarded = ['aset_id'];
 
-    
 }

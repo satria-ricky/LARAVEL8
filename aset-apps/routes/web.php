@@ -1,10 +1,8 @@
 <?php
 
-use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
-use \App\Http\Middleware\Authenticate;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +15,6 @@ use \App\Http\Middleware\Authenticate;
 |
 */
 
-
 Route::group(['middleware' => ['auth']], function(){
     Route::get('/beranda', [AdminController::class,'beranda'])->name('beranda');
     Route::get('/daftar-aset', [AdminController::class,'get_aset']);
@@ -28,7 +25,7 @@ Route::group(['middleware' => ['auth']], function(){
 });
 
 Route::group(['middleware' => ['guest']], function(){
-    Route::get('/auth', [LoginController::class,'login'])->name('login');
+    Route::get('/login', [LoginController::class,'login'])->name('login');
 });
 
 
@@ -36,11 +33,3 @@ Route::get('/itu', [AdminController::class,'beranda'])->name('itu');
 
 Route::post('/login', [LoginController::class,'cekLogin']);
 Route::post('/logout', [LoginController::class,'logout']);
-
-
-
-
-
-
-
-
