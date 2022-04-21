@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Aset;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Redirect;
 
 class AdminController extends Controller
 {
@@ -15,7 +16,7 @@ class AdminController extends Controller
         ]);
     }
 
-    public function get_aset(){
+    public function getAset(){
         return view('admin/daftar_aset', [
             "is_aktif" => "aset",
             "judul_navigasi" => "Daftar Aset",
@@ -23,18 +24,18 @@ class AdminController extends Controller
         ]);
     }
     
-    public function tambah_aset(){
+    public function tambahAset(){
         return view('admin/tambah_aset', [
             "is_aktif" => "aset",
             "judul_navigasi" => "Tambah Aset"
         ]);
     }
     
-    public function create_aset(Request $request){
+    public function createAset(Request $request){
         
         $data = $request->validate([
-            'aset_no_rekening' => 'required|unique:tb_aset,aset_no_rekening',
             'aset_gssl_induk' => 'required',
+            'aset_no_rekening' => 'required|unique:tb_aset,aset_no_rekening',
             'aset_deskripsi' => 'required',
             'aset_qty' => 'required',
             'aset_tgl_perolehan' => 'required',
@@ -46,7 +47,7 @@ class AdminController extends Controller
             'aset_akm_susut' => 'required',
             'aset_uraian' => 'required'
         ]);
-        
+
         // dd('berhasil ditambah');
         Aset::create($data);
 

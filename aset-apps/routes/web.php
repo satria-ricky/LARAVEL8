@@ -17,19 +17,18 @@ use App\Http\Controllers\LoginController;
 
 Route::group(['middleware' => ['auth']], function(){
     Route::get('/beranda', [AdminController::class,'beranda'])->name('beranda');
-    Route::get('/daftar-aset', [AdminController::class,'get_aset']);
-    Route::get('/tambah-aset', [AdminController::class,'tambah_aset']);
-    Route::post('/tambah-aset', [AdminController::class,'create_aset']);
+    Route::get('/daftar-aset', [AdminController::class,'getAset']);
+    Route::get('/tambah-aset', [AdminController::class,'tambahAset']);
+    Route::post('/tambah-aset', [AdminController::class,'createAset']);
 
 	// Route::get('/admin', [AdminController::class, 'index']);
 });
 
 Route::group(['middleware' => ['guest']], function(){
-    Route::get('/login', [LoginController::class,'login'])->name('login');
+    Route::get('/', [LoginController::class,'login'])->name('login');
 });
 
 
-Route::get('/itu', [AdminController::class,'beranda'])->name('itu');
 
 Route::post('/login', [LoginController::class,'cekLogin']);
 Route::post('/logout', [LoginController::class,'logout']);

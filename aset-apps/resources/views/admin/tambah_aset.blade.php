@@ -31,11 +31,12 @@
 				<div class="card-body">
 					<div class="row">
 						<div class="col-md-6 col-lg-6">
-						<form action="/tambah-aset" method="post">	
+						<form action="/tambah-aset" method="post" id="form-tambah">	
 							@csrf
 							<div class="form-group">
 								<label for="exampleFormControlSelect1">Nama Aset :</label>
 								<select class="form-control" id="exampleFormControlSelect1" name="aset_gssl_induk">
+									<option >-- Pilih nama aset -- </option>
 									<option value="1390101">Tanah Bangunan Kantor </option>
 									<option value="1390102">Tanah Rumah Dinas </option>
 									<option value="1390201">Bangunan KTR. Permanen </option>
@@ -54,11 +55,16 @@
 									<option value="1390502">Kendaraan roda 4 </option>
 									<option value="1340101">Aktiva Tak Terwujud </option>
 								</select>
+								@error('aset_gssl_induk') 
+									<div class="invalid-feedback">
+										{{ $message }}
+								  	</div>
+								@enderror
 							</div>
 							
 							<div class="form-group">
 								<label for="password">No. Rekening</label>
-								<input type="number" class="form-control @error('no_rekening') is-invalid @enderror" min="0" id="password"  name="aset_no_rekening" placeholder="Isi no rekening..." value="{{ old('aset_no_rekening') }}" >
+								<input type="number" class="form-control @error('aset_no_rekening') is-invalid @enderror" min="0" id="password"  name="aset_no_rekening" placeholder="Isi no rekening..." value="{{ old('aset_no_rekening') }}" >
 								@error('aset_no_rekening') 
 									<div class="invalid-feedback">
 										{{ $message }}
@@ -71,6 +77,11 @@
 								<textarea class="form-control" id="comment" rows="5" name="aset_deskripsi">
 									{{ old('aset_deskripsi') }}
 								</textarea>
+								@error('aset_deskripsi') 
+									<div class="invalid-feedback">
+										{{ $message }}
+								  	</div>
+								@enderror
 							</div>
 
 							<div class="form-group">
@@ -78,18 +89,19 @@
 									<div class="input-group-prepend">
 										<span class="input-group-text">Qty</span>
 									</div>
-									<input type="number" class="form-control" name="aset_qty"   aria-label="Amount (to the nearest dollar)">
+									<input type="number" class="form-control" name="aset_qty"   aria-label="Amount (to the nearest dollar)" value="{{ old('aset_qty') }}">
 								</div>
+								
 							</div>
 
 							<div class="form-group">
 								<label for="tgl1">Tanggal Perolehan</label>
-								<input type="date" class="form-control" min="0" id="tgl1"  name="aset_tgl_perolehan"   >
+								<input type="date" class="form-control" min="0" id="tgl1"  name="aset_tgl_perolehan"  value="{{ old('aset_tgl_perolehan') }}">
 							</div>
 
 							<div class="form-group">
 								<label for="tgl2">Tanggal Akhir</label>
-								<input type="date" class="form-control" min="0" id="tgl2"  name="aset_tgl_akhir"   >
+								<input type="date" class="form-control" min="0" id="tgl2"  name="aset_tgl_akhir"  value="{{ old('aset_tgl_akhir') }}" >
 							</div>
 
 							<div class="form-group">
@@ -106,7 +118,7 @@
 									<div class="input-group-prepend">
 										<span class="input-group-text">Sumber Perolehan :</span>
 									</div>
-									<input type="number" class="form-control" name="aset_sumber_perolehan"   aria-label="Amount (to the nearest dollar)">
+									<input type="number" class="form-control" name="aset_sumber_perolehan"   aria-label="Amount (to the nearest dollar)" value="{{ old('aset_sumber_perolehan') }}">
 								</div>
 							</div>
 
@@ -114,27 +126,27 @@
 						<div class="col-md-6 col-lg-6">				
 							<div class="form-group">
 								<label for="password">Saldo Perolehan :</label>
-								<input type="number" class="form-control" min="0" id="password"  name="aset_saldo_perolehan" placeholder="Rp. ...">
+								<input type="number" class="form-control" min="0" id="password"  name="aset_saldo_perolehan" placeholder="Rp. ..." value="{{ old('aset_saldo_perolehan') }}">
 							</div>
 
 							<div class="form-group">
 								<label for="password">AKM Susut :</label>
-								<input type="number" class="form-control" min="0" id="password"  name="aset_akm_susut" placeholder="Rp. ...">
+								<input type="number" class="form-control" min="0" id="password"  name="aset_akm_susut" placeholder="Rp. ..." value="{{ old('aset_akm_susut') }}">
 							</div>
 
 							<div class="form-group">
 								<label for="password">Nilai Buku</label>
-								<input type="number" class="form-control" min="0" id="password"  name="aset_nilai_buku" placeholder="Rp. ...">
+								<input type="number" class="form-control" min="0" id="password"  name="aset_nilai_buku" placeholder="Rp. ..." value="{{ old('aset_nilai_buku') }}">
 							</div>
 
 							<div class="form-group">
 								<label for="comment">Uraian</label>
-								<textarea class="form-control" id="comment" rows="5" name="aset_uraian">
+								<textarea class="form-control" id="comment" rows="5" name="aset_uraian" value="{{ old('aset_uraian') }}">
 								</textarea>
 							</div>
 							
 							<div class="form-group">
-								<button class="btn btn-primary"><i class="fa fa-plus"></i>   Tambah Aset</button>
+								<button class="btn btn-primary" type="button" id="button-tambah"><i class="fa fa-plus"></i>   Tambah Aset</button>
 							</div>
 						</div>
 					</form>
@@ -151,4 +163,6 @@
 </div>
 @endsection
 
-
+@section('isi_js')
+	@include('components.js_tambah')
+@endsection

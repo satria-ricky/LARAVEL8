@@ -12,4 +12,7 @@
 			</div>
 
 @include('components.footer')
+@yield('isi_js')
+
 @include('components.load_css_js')
+

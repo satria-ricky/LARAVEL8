@@ -69,18 +69,6 @@
 							</div>
 						</li>
 
-						 <hr class="sidebar-divider">
-
-			              <li class="nav-item">
-							<form action="/logout" method="post">
-								@csrf
-								<div class="nav">
-									<button	button type="submit" class="btn btn-danger"> <i class="fas fa-arrow-alt-circle-left text-white"></i> Logout </button>
-								</div>
-							</form>
-			              </li>
-
-						  <a href="/auth"> login </a>
 					</ul>
 				</div>
 			</div>
