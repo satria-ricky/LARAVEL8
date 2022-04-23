@@ -35,7 +35,10 @@ class AdminController extends Controller
         
         $data = $request->validate([
             'aset_gssl_induk' => 'required',
-            'aset_no_rekening' => 'required|unique:tb_aset,aset_no_rekening',
+        'aset_no_rekening' =>   [ 
+                                    ["required" => "Form harus diisi!"],
+                                    ["unique:tb_aset,aset_no_rekening" => "No rekening sudah ada!"]
+                                ],
             'aset_deskripsi' => 'required',
             'aset_qty' => 'required',
             'aset_tgl_perolehan' => 'required',
@@ -55,4 +58,6 @@ class AdminController extends Controller
         return redirect('/daftar-aset');
 
     }
+
+    
 }

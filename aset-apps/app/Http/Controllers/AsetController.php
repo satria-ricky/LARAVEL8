@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Aset;
+use Illuminate\Routing\Controller;
 use App\Http\Requests\StoreAsetRequest;
 use App\Http\Requests\UpdateAsetRequest;
 
@@ -81,6 +82,10 @@ class AsetController extends Controller
      */
     public function destroy(Aset $aset)
     {
-        //
+        // Aset::destroy($aset->aset_id);
+        
+        $aset->delete();
+        
+        return redirect('/daftar-aset')->with('pesan', 'Data Berhasil Dihapus!');
     }
 }

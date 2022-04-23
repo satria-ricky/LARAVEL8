@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Aset;
 use Illuminate\Database\Seeder;
 
 class AsetSeeder extends Seeder
@@ -13,6 +14,6 @@ class AsetSeeder extends Seeder
      */
     public function run()
     {
-        //
+        Aset::factory(5)->create();
     }
 }

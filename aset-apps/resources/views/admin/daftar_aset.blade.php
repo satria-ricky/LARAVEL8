@@ -55,7 +55,11 @@
                                     <td>
                                         <button class="btn btn-primary btn-xs btn-round" onclick="detail({{$row->aset_id}})">Detail</button>
                                         <button class="btn btn-success btn-xs btn-round m-0" onclick="edit({{$row->aset_id}})">Edit</button>
-                                        <button class="btn btn-danger btn-xs btn-round" onclick="hapus({{$row->aset_id}})"> Hapus </button> 
+                                        <form action="/aset/{{$row->aset_id}}" method="post" id="form-hapus{{$row->aset_id}}">
+                                            @method('delete')
+                                            @csrf
+                                            <button type="button" class="btn btn-danger btn-xs btn-round" onclick="hapus({{$row->aset_id}})"> Hapus </button>
+                                        </form> 
                                     </td>
                                 </tr>    
                             @endforeach
@@ -72,3 +76,6 @@
 @endsection
 
 
+@section('isi_js')
+	@include('components.js_hapus')
+@endsection

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AsetController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
 
@@ -20,8 +21,10 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get('/daftar-aset', [AdminController::class,'getAset']);
     Route::get('/tambah-aset', [AdminController::class,'tambahAset']);
     Route::post('/tambah-aset', [AdminController::class,'createAset']);
+    
+    //backend CRUD
+    Route::resource('/aset', AsetController::class); 
 
-	// Route::get('/admin', [AdminController::class, 'index']);
 });
 
 Route::group(['middleware' => ['guest']], function(){

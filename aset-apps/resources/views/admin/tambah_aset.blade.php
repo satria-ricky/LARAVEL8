@@ -91,7 +91,9 @@
 									</div>
 									<input type="number" class="form-control" name="aset_qty"   aria-label="Amount (to the nearest dollar)" value="{{ old('aset_qty') }}">
 								</div>
-								
+								@if($errors->any())
+									{{ implode('', $errors->all('<div>:message</div>')) }}
+								@endif
 							</div>
 
 							<div class="form-group">
@@ -109,7 +111,7 @@
 									<div class="input-group-prepend">
 										<span class="input-group-text">PRS Susut</span>
 									</div>
-									<input type="number" class="form-control" name="aset_prs_susut"   aria-label="Amount (to the nearest dollar)" value="{{ old('prs_susut') }}">
+									<input type="number" class="form-control" name="aset_prs_susut"   aria-label="Amount (to the nearest dollar)" value="{{ old('aset_prs_susut') }}">
 								</div>
 							</div>
 
