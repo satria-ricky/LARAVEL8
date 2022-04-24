@@ -48,7 +48,7 @@ class AsetController extends Controller
      */
     public function show(Aset $aset)
     {
-        //
+        
     }
 
     /**
@@ -59,7 +59,10 @@ class AsetController extends Controller
      */
     public function edit(Aset $aset)
     {
-        //
+        return view('admin/edit_aset', [
+            "is_aktif" => "aset",
+            "judul_navigasi" => "Edit Aset"
+        ]);
     }
 
     /**
