@@ -35,8 +35,8 @@
 							@csrf
 							<div class="form-group">
 								<label for="exampleFormControlSelect1">Nama Aset :</label>
-								<select class="form-control" id="exampleFormControlSelect1" name="aset_gssl_induk">
-									<option >-- Pilih nama aset -- </option>
+								<select class="form-control @error('aset_gssl_induk') is-invalid @enderror" id="exampleFormControlSelect1" name="aset_gssl_induk">
+									<option value="">-- Pilih nama aset -- </option>
 									<option value="1390101">Tanah Bangunan Kantor </option>
 									<option value="1390102">Tanah Rumah Dinas </option>
 									<option value="1390201">Bangunan KTR. Permanen </option>
@@ -74,8 +74,8 @@
 
 							<div class="form-group">
 								<label for="comment">Deskripsi</label>
-								<textarea class="form-control" id="comment" rows="5" name="aset_deskripsi">
-									{{ old('aset_deskripsi') }}
+								<textarea class="form-control @error('aset_deskripsi') is-invalid @enderror" id="comment" rows="5" name="aset_deskripsi">
+									{{ old('aset_deskripsi') }} 
 								</textarea>
 								@error('aset_deskripsi') 
 									<div class="invalid-feedback">
@@ -89,21 +89,33 @@
 									<div class="input-group-prepend">
 										<span class="input-group-text">Qty</span>
 									</div>
-									<input type="number" class="form-control" name="aset_qty"   aria-label="Amount (to the nearest dollar)" value="{{ old('aset_qty') }}">
+									<input type="number" class="form-control @error('aset_qty') is-invalid @enderror" name="aset_qty"   aria-label="Amount (to the nearest dollar)" value="{{ old('aset_qty') }}">
 								</div>
-								@if($errors->any())
-									{{ implode('', $errors->all('<div>:message</div>')) }}
-								@endif
+								@error('aset_qty') 
+									<div class="invalid-feedback">
+										{{ $message }}
+								  	</div>
+								@enderror
 							</div>
 
 							<div class="form-group">
 								<label for="tgl1">Tanggal Perolehan</label>
-								<input type="date" class="form-control" min="0" id="tgl1"  name="aset_tgl_perolehan"  value="{{ old('aset_tgl_perolehan') }}">
+								<input type="date" class="form-control @error('aset_tgl_perolehan') is-invalid @enderror" min="0" id="tgl1"  name="aset_tgl_perolehan"  value="{{ old('aset_tgl_perolehan') }}">
+								@error('aset_tgl_perolehan') 
+									<div class="invalid-feedback">
+										{{ $message }}
+								  	</div>
+								@enderror
 							</div>
 
 							<div class="form-group">
 								<label for="tgl2">Tanggal Akhir</label>
-								<input type="date" class="form-control" min="0" id="tgl2"  name="aset_tgl_akhir"  value="{{ old('aset_tgl_akhir') }}" >
+								<input type="date" class="form-control @error('aset_tgl_akhir') is-invalid @enderror" min="0" id="tgl2"  name="aset_tgl_akhir"  value="{{ old('aset_tgl_akhir') }}" >
+								@error('aset_tgl_akhir') 
+									<div class="invalid-feedback">
+										{{ $message }}
+								  	</div>
+								@enderror
 							</div>
 
 							<div class="form-group">
@@ -111,8 +123,13 @@
 									<div class="input-group-prepend">
 										<span class="input-group-text">PRS Susut</span>
 									</div>
-									<input type="number" class="form-control" name="aset_prs_susut"   aria-label="Amount (to the nearest dollar)" value="{{ old('aset_prs_susut') }}">
+									<input type="number" class="form-control @error('aset_prs_susut') is-invalid @enderror" name="aset_prs_susut"   aria-label="Amount (to the nearest dollar)" value="{{ old('aset_prs_susut') }}">
 								</div>
+								@error('aset_prs_susut') 
+									<div class="invalid-feedback">
+										{{ $message }}
+								  	</div>
+								@enderror
 							</div>
 
 							<div class="form-group">
@@ -120,31 +137,57 @@
 									<div class="input-group-prepend">
 										<span class="input-group-text">Sumber Perolehan :</span>
 									</div>
-									<input type="number" class="form-control" name="aset_sumber_perolehan"   aria-label="Amount (to the nearest dollar)" value="{{ old('aset_sumber_perolehan') }}">
+									<input type="number" class="form-control @error('aset_sumber_perolehan') is-invalid @enderror" name="aset_sumber_perolehan"   aria-label="Amount (to the nearest dollar)" value="{{ old('aset_sumber_perolehan') }}">
 								</div>
+								@error('aset_sumber_perolehan') 
+									<div class="invalid-feedback">
+										{{ $message }}
+								  	</div>
+								@enderror
 							</div>
 
 						</div>
 						<div class="col-md-6 col-lg-6">				
 							<div class="form-group">
 								<label for="password">Saldo Perolehan :</label>
-								<input type="number" class="form-control" min="0" id="password"  name="aset_saldo_perolehan" placeholder="Rp. ..." value="{{ old('aset_saldo_perolehan') }}">
+								<input type="number" class="form-control @error('aset_saldo_perolehan') is-invalid @enderror" min="0" id="password"  name="aset_saldo_perolehan" placeholder="Rp. ..." value="{{ old('aset_saldo_perolehan') }}">
+								@error('aset_saldo_perolehan') 
+									<div class="invalid-feedback">
+										{{ $message }}
+								  	</div>
+								@enderror
 							</div>
 
 							<div class="form-group">
 								<label for="password">AKM Susut :</label>
-								<input type="number" class="form-control" min="0" id="password"  name="aset_akm_susut" placeholder="Rp. ..." value="{{ old('aset_akm_susut') }}">
+								<input type="number" class="form-control @error('aset_akm_susut') is-invalid @enderror" min="0" id="password"  name="aset_akm_susut" placeholder="Rp. ..." value="{{ old('aset_akm_susut') }}">
+								@error('aset_akm_susut') 
+									<div class="invalid-feedback">
+										{{ $message }}
+								  	</div>
+								@enderror
 							</div>
 
 							<div class="form-group">
 								<label for="password">Nilai Buku</label>
-								<input type="number" class="form-control" min="0" id="password"  name="aset_nilai_buku" placeholder="Rp. ..." value="{{ old('aset_nilai_buku') }}">
+								<input type="number" class="form-control @error('aset_nilai_buku') is-invalid @enderror" min="0" id="password"  name="aset_nilai_buku" placeholder="Rp. ..." value="{{ old('aset_nilai_buku') }}">
+								@error('aset_nilai_buku') 
+									<div class="invalid-feedback">
+										{{ $message }}
+								  	</div>
+								@enderror
 							</div>
 
 							<div class="form-group">
 								<label for="comment">Uraian</label>
-								<textarea class="form-control" id="comment" rows="5" name="aset_uraian" value="{{ old('aset_uraian') }}">
+								<textarea class="form-control @error('aset_uraian') is-invalid @enderror" id="comment" rows="5" name="aset_uraian">
+									{{ old('aset_uraian') }}
 								</textarea>
+								@error('aset_uraian') 
+									<div class="invalid-feedback">
+										{{ $message }}
+								  	</div>
+								@enderror
 							</div>
 							
 							<div class="form-group">

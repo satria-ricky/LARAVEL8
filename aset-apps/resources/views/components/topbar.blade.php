@@ -48,9 +48,9 @@
 									<li>
 										<div class="user-box">
 											<div class="avatar-lg"><img src="{{ url('/assets/img/profile.jpg') }}" alt="image profile" class="avatar-img rounded"></div>
-											<div class="u-text">
-												<h4>Hizrian</h4>
-												<p class="text-muted">hello@example.com</p><a href="profile.html" class="btn btn-xs btn-secondary btn-sm">View Profile</a>
+											<div class="u-text">												
+												<h4>{{ auth()->user()->user_nama; }}</h4>
+												<p class="text-muted">{{ auth()->user()->email; }}</p><a href="#" class="btn btn-xs btn-secondary btn-sm">View Profile</a>
 											</div>
 										</div>
 									</li>
@@ -58,9 +58,9 @@
 										<div class="dropdown-divider"></div>
 										<a class="dropdown-item" href="#">Pengaturan Akun</a>
 										<div class="dropdown-divider"></div>
-										<form action="/logout" method="post">
+										<form action="/logout" method="post" id="form-logout">
 											@csrf
-											<button class="dropdown-item" type="submit">Logout</button>	
+											<button class="dropdown-item" type="button" onclick="logout()">Logout</button>	
 										</form>
 										
 									</li>

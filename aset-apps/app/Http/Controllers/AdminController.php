@@ -5,10 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\Aset;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+// use Illuminate\Validation\Validator;
+// use Validator;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
 
 class AdminController extends Controller
 {
+    
+    
     public function beranda(){
         return view('admin/beranda', [
             "is_aktif" => "beranda",
@@ -35,10 +40,7 @@ class AdminController extends Controller
         
         $data = $request->validate([
             'aset_gssl_induk' => 'required',
-        'aset_no_rekening' =>   [ 
-                                    ["required" => "Form harus diisi!"],
-                                    ["unique:tb_aset,aset_no_rekening" => "No rekening sudah ada!"]
-                                ],
+            'aset_no_rekening' => 'required|unique:tb_aset,aset_no_rekening',
             'aset_deskripsi' => 'required',
             'aset_qty' => 'required',
             'aset_tgl_perolehan' => 'required',
@@ -51,7 +53,6 @@ class AdminController extends Controller
             'aset_uraian' => 'required'
         ]);
 
-        // dd('berhasil ditambah');
         Aset::create($data);
 
         $request->session()->flash('pesan', 'Data Berhasil Ditambah');

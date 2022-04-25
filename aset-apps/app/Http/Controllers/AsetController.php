@@ -60,8 +60,9 @@ class AsetController extends Controller
     public function edit(Aset $aset)
     {
         return view('admin/edit_aset', [
-            "is_aktif" => "aset",
-            "judul_navigasi" => "Edit Aset"
+            'is_aktif' => 'aset',
+            'judul_navigasi' => 'Edit Aset',
+            'data' => $aset
         ]);
     }
 
@@ -74,7 +75,32 @@ class AsetController extends Controller
      */
     public function update(UpdateAsetRequest $request, Aset $aset)
     {
-        //
+
+        $rules = [
+            'aset_gssl_induk' => 'required',
+            'aset_deskripsi' => 'required',
+            'aset_qty' => 'required',
+            'aset_tgl_perolehan' => 'required',
+            'aset_tgl_akhir' => 'required',
+            'aset_prs_susut' => 'required',
+            'aset_sumber_perolehan' => 'required',
+            'aset_saldo_perolehan' => 'required',
+            'aset_nilai_buku' => 'required',
+            'aset_akm_susut' => 'required',
+            'aset_uraian' => 'required'
+        ];
+
+        if($request->aset_no_rekening != $aset->aset_no_rekening) {
+            $rules['aset_no_rekening'] = 'required|unique:tb_aset,aset_no_rekening';
+        }
+
+        $data = $request->validate($rules);
+
+        Aset::where('aset_id', $aset->aset_id)
+                    ->update($data);
+
+        $request->session()->flash('pesan', 'Data Berhasil Diubah');
+        return redirect('/daftar-aset');
     }
 
     /**

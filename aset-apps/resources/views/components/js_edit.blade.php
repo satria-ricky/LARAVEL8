@@ -3,11 +3,11 @@
 <script >
 	$('#button-edit').click(function(e) {
         swal({
-			title: 'Yakin ditambah?',
+			title: 'Yakin diubah?',
 			icon: 'warning',
 			buttons:{
 				confirm: {
-				text : 'Tambah',
+				text : 'Ubah',
 				className : 'btn btn-success'
 				},
 				cancel: {

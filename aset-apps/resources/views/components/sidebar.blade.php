@@ -9,8 +9,14 @@
 						<div class="info">
 							<a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
 								<span>
-									Hizrian
-									<span class="user-level">Administrator</span>
+									{{ auth()->user()->user_nama; }}
+									<span class="user-level">
+									@if (auth()->user()->user_level == 1 )
+										Administrator
+									@else
+										User
+									@endif 
+								</span>
 									<span class="caret"></span>
 								</span>
 							</a>
