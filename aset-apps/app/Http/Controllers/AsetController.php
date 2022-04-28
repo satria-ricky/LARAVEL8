@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Aset;
 use Illuminate\Routing\Controller;
 use App\Http\Requests\StoreAsetRequest;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\UpdateAsetRequest;
 
 class AsetController extends Controller
@@ -48,7 +49,7 @@ class AsetController extends Controller
      */
     public function show(Aset $aset)
     {
-        
+        // return $aset->aset_id;
     }
 
     /**
@@ -100,14 +101,16 @@ class AsetController extends Controller
         $data = $request->validate($rules);
 
         if($request->file('aset_foto')){
+            if($request->fotoLama != 'foto/asetDefault.png'){
+                Storage::delete($request->fotoLama);
+            }
             $data['aset_foto'] = $request->file('aset_foto')->store('foto');
         }
         
         Aset::where('aset_id', $aset->aset_id)
                     ->update($data);
 
-        $request->session()->flash('pesan', 'Data Berhasil Diubah');
-        return redirect('/daftar-aset');
+        return redirect('/daftar-aset')->with('pesan', 'Data Berhasil Diubah');
     }
 
     /**
@@ -119,7 +122,10 @@ class AsetController extends Controller
     public function destroy(Aset $aset)
     {
         // Aset::destroy($aset->aset_id);
-        
+        if($aset->aset_foto != 'foto/asetDefault.png'){
+            Storage::delete($aset->aset_foto);
+        }
+
         $aset->delete();
         
         return redirect('/daftar-aset')->with('pesan', 'Data Berhasil Dihapus!');

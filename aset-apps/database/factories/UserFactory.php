@@ -19,7 +19,8 @@ class UserFactory extends Factory
             'user_nama' => $this->faker->name(),
             'user_level' => random_int(1,2), 
             'email' => $this->faker->unique()->safeEmail(),
-            'password' => Hash::make('12345')
+            'password' => Hash::make('12345'),
+            'user_foto' => 'foto/user/userDefault.jpg'
         ];
     }
 

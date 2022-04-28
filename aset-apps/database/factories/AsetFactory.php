@@ -26,6 +26,7 @@ class AsetFactory extends Factory
             'aset_gssl_induk' => $this->faker->randomDigit(5),
             'aset_uraian' => $this->faker->text($maxNbChars = 100),
             'aset_sumber_perolehan' => $this->faker->randomDigit(1),
+            'aset_foto' => 'foto/asetDefault.png'
         ];
         
     }

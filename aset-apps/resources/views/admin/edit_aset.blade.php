@@ -195,6 +195,7 @@
 							<div class="form-group">
 								
 								<div class="custom-file">
+									<input type="hidden" value="{{$data->aset_foto}}" name="fotoLama">
 									<input type="file" name="aset_foto" class="custom-file-input @error('aset_foto') is-invalid @enderror" accept="image/*" id="getFoto" onchange="cekFoto()">
 									<label class="custom-file-label" for="customFile">Pilih Foto Aset</label>
 									@error('aset_foto') 
@@ -203,10 +204,10 @@
 										</div>
 									@enderror
 								</div>
-								@if ( $data->aset_foto )
-									<img src="{{ asset('storage/'.$data->aset_foto) }}" class="img-priview rounded mt-2" width="150" id="priviewFoto">
-								@else
+								@if ( old('aset_foto') )
 									<img class="img-priview rounded mt-2" width="150" id="priviewFoto">
+								@else
+									<img src="{{ asset('storage/'.$data->aset_foto) }}" class="img-priview rounded mt-2" width="150" id="priviewFoto">
 								@endif
 								  
 								 

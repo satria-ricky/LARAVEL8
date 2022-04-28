@@ -13,4 +13,5 @@ class Aset extends Model
     protected $primaryKey = 'aset_id';
     protected $guarded = ['aset_id'];
 
+
 }

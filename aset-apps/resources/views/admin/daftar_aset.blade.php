@@ -53,9 +53,15 @@
                                     <td>{{ $row->aset_akm_susut }}</td>
                                     <td>{{ $row->aset_nilai_buku }}</td>
                                     <td>
-                                        <button class="btn btn-primary btn-xs btn-round" onclick="detail({{$row->aset_id}})">Detail</button>
+                                        <a href="/detail-aset/{{Crypt::encrypt($row->aset_id)}}" class="btn btn-info btn-xs btn-round" target="_blank" >Detail</a>
                                         
+                                        {{-- <form action="/qr-code/{{$row->aset_id}}" method="post">
+                                            @csrf
+                                            <button type="submit" class="btn btn-primary btn-xs btn-round"> Detail </button>
+                                        </form> --}}
+
                                         <a href="/aset/{{ $row->aset_id }}/edit" class="btn btn-success btn-xs btn-round m-0"> Edit</a>
+                                        
                                         
                                         <form action="/aset/{{$row->aset_id}}" method="post" id="form-hapus{{$row->aset_id}}">
                                             @method('delete')

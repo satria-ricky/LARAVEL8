@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Aset;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-// use Illuminate\Validation\Validator;
-// use Validator;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller
 {
@@ -60,7 +60,7 @@ class AdminController extends Controller
         if($request->file('aset_foto')){
             $data['aset_foto'] = $request->file('aset_foto')->store('foto');
         }else{
-            $data['aset_foto'] = 'foto/Logo.PNG';
+            $data['aset_foto'] = 'foto/asetDefault.png';
         }
 
         Aset::create($data);
@@ -70,5 +70,10 @@ class AdminController extends Controller
 
     }
 
+    public function detailAset(Request $request){
+        $aset_id = Crypt::decrypt($request->aset);
+        return $user = DB::table('tb_aset')->where('aset_id', $aset_id)->first();
+        
+    }
     
 }

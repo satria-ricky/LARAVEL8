@@ -93,7 +93,7 @@ class AkunController extends Controller
 
         if($request->file('user_foto')){
             
-            if($request->fotoLama != 'foto/user/default.jpg'){
+            if($request->fotoLama != 'foto/user/userDefault.jpg'){
                 Storage::delete($request->fotoLama);
             }
 

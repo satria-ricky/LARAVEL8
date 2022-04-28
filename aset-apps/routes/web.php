@@ -21,19 +21,15 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get('/beranda', [AdminController::class,'beranda'])->name('beranda');
     Route::get('/daftar-aset', [AdminController::class,'getAset']);
     Route::get('/tambah-aset', [AdminController::class,'tambahAset']);
-    Route::post('/tambah-aset', [AdminController::class,'createAset']); 
-
-    // Route::resource('/aset', AsetController::class);
-    // Route::resource('/profile', AkunController::class);
     
+    Route::post('/tambah-aset', [AdminController::class,'createAset']);     
+
     Route::resources([
         '/aset' => AsetController::class,
         '/profile' => AkunController::class,
     ]);
     
 });
-    //backend CRUD
-    // Route::resource('/aset', AsetController::class)->middleware('admin');
 
 
 
@@ -41,6 +37,7 @@ Route::group(['middleware' => ['guest']], function(){
     Route::get('/', [LoginController::class,'login'])->name('login');
 });
 
+Route::get('/detail-aset/{aset}', [AdminController::class,'detailAset'])->name('detail-aset');
 
 
 Route::post('/login', [LoginController::class,'cekLogin']);
