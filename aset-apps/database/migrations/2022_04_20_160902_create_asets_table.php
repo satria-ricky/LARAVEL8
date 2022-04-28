@@ -27,6 +27,7 @@ class CreateAsetsTable extends Migration
             $table->double('aset_prs_susut');
             $table->string('aset_gssl_induk');
             $table->text('aset_uraian');
+            $table->string('aset_foto')->nullable();
             $table->integer('aset_sumber_perolehan');
             $table->timestamps();
         });

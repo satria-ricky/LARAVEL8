@@ -31,7 +31,7 @@
 				<div class="card-body">
 					<div class="row">
 						<div class="col-md-6 col-lg-6">
-						<form action="/tambah-aset" method="post" id="form-tambah">	
+						<form action="/tambah-aset" method="post" id="form-tambah" enctype="multipart/form-data">	
 							@csrf
 							<div class="form-group">
 								<label for="exampleFormControlSelect1">Nama Aset :</label>
@@ -90,12 +90,12 @@
 										<span class="input-group-text">Qty</span>
 									</div>
 									<input type="number" class="form-control @error('aset_qty') is-invalid @enderror" name="aset_qty"   aria-label="Amount (to the nearest dollar)" value="{{ old('aset_qty') }}">
+									@error('aset_qty') 
+										<div class="invalid-feedback">
+											{{ $message }}
+										</div>
+									@enderror
 								</div>
-								@error('aset_qty') 
-									<div class="invalid-feedback">
-										{{ $message }}
-								  	</div>
-								@enderror
 							</div>
 
 							<div class="form-group">
@@ -124,12 +124,12 @@
 										<span class="input-group-text">PRS Susut</span>
 									</div>
 									<input type="number" class="form-control @error('aset_prs_susut') is-invalid @enderror" name="aset_prs_susut"   aria-label="Amount (to the nearest dollar)" value="{{ old('aset_prs_susut') }}">
+									@error('aset_prs_susut') 
+										<div class="invalid-feedback">
+											{{ $message }}
+										</div>
+									@enderror
 								</div>
-								@error('aset_prs_susut') 
-									<div class="invalid-feedback">
-										{{ $message }}
-								  	</div>
-								@enderror
 							</div>
 
 							<div class="form-group">
@@ -138,12 +138,12 @@
 										<span class="input-group-text">Sumber Perolehan :</span>
 									</div>
 									<input type="number" class="form-control @error('aset_sumber_perolehan') is-invalid @enderror" name="aset_sumber_perolehan"   aria-label="Amount (to the nearest dollar)" value="{{ old('aset_sumber_perolehan') }}">
+									@error('aset_sumber_perolehan') 
+										<div class="invalid-feedback">
+											{{ $message }}
+										</div>
+									@enderror
 								</div>
-								@error('aset_sumber_perolehan') 
-									<div class="invalid-feedback">
-										{{ $message }}
-								  	</div>
-								@enderror
 							</div>
 
 						</div>
@@ -190,6 +190,21 @@
 								@enderror
 							</div>
 							
+							
+							<div class="form-group">
+								<div class="custom-file">
+									<input type="file" name="aset_foto" class="custom-file-input @error('aset_foto') is-invalid @enderror" accept="image/*" id="getFoto" onchange="cekFoto()">
+									<label class="custom-file-label" for="getFoto">Pilih Foto Aset</label>
+									@error('aset_foto') 
+										<div class="invalid-feedback">
+											{{ $message }}
+										</div>
+									@enderror
+									
+								  </div>	
+								  <img class="img-priview rounded mt-2" width="150" id="priviewFoto">
+							</div>
+
 							<div class="form-group">
 								<button class="btn btn-primary" type="button" id="button-tambah"><i class="fa fa-plus"></i>   Tambah Aset</button>
 							</div>
@@ -209,5 +224,6 @@
 @endsection
 
 @section('isi_js')
+	@include('components.js_priviewImage')
 	@include('components.js_tambah')
 @endsection

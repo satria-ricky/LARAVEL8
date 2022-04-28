@@ -94,8 +94,15 @@ class AsetController extends Controller
             $rules['aset_no_rekening'] = 'required|unique:tb_aset,aset_no_rekening';
         }
 
+        
+        
+
         $data = $request->validate($rules);
 
+        if($request->file('aset_foto')){
+            $data['aset_foto'] = $request->file('aset_foto')->store('foto');
+        }
+        
         Aset::where('aset_id', $aset->aset_id)
                     ->update($data);
 

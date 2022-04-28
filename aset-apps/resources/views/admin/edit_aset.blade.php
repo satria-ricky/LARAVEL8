@@ -31,7 +31,7 @@
 				<div class="card-body">
 					<div class="row">
 						<div class="col-md-6 col-lg-6">
-						<form action="/aset/{{ $data->aset_id }}" id="form-edit" method="post">
+						<form action="/aset/{{ $data->aset_id }}" id="form-edit" method="post" enctype="multipart/form-data">
 							@method('put')	
 							@csrf
 							<div class="form-group">
@@ -191,6 +191,28 @@
 								@enderror
 							</div>
 							
+
+							<div class="form-group">
+								
+								<div class="custom-file">
+									<input type="file" name="aset_foto" class="custom-file-input @error('aset_foto') is-invalid @enderror" accept="image/*" id="getFoto" onchange="cekFoto()">
+									<label class="custom-file-label" for="customFile">Pilih Foto Aset</label>
+									@error('aset_foto') 
+										<div class="invalid-feedback">
+											{{ $message }}
+										</div>
+									@enderror
+								</div>
+								@if ( $data->aset_foto )
+									<img src="{{ asset('storage/'.$data->aset_foto) }}" class="img-priview rounded mt-2" width="150" id="priviewFoto">
+								@else
+									<img class="img-priview rounded mt-2" width="150" id="priviewFoto">
+								@endif
+								  
+								 
+							</div>
+
+
 							<div class="form-group">
 								<button class="btn btn-primary" type="button" id="button-edit"><i class="fa fa-edit"></i>   Edit Aset</button>
 							</div>
@@ -210,5 +232,6 @@
 @endsection
 
 @section('isi_js')
+	@include('components.js_priviewImage')
 	@include('components.js_edit')
 @endsection

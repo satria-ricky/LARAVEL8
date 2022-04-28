@@ -38,6 +38,8 @@ class AdminController extends Controller
     
     public function createAset(Request $request){
         
+        // return $request->file('aset_foto')->store('foto');
+
         $data = $request->validate([
             'aset_gssl_induk' => 'required',
             'aset_no_rekening' => 'required|unique:tb_aset,aset_no_rekening',
@@ -50,8 +52,16 @@ class AdminController extends Controller
             'aset_saldo_perolehan' => 'required',
             'aset_nilai_buku' => 'required',
             'aset_akm_susut' => 'required',
-            'aset_uraian' => 'required'
+            'aset_uraian' => 'required',
+            'aset_foto' => 'image|file|max:1024'
         ]);
+
+        
+        if($request->file('aset_foto')){
+            $data['aset_foto'] = $request->file('aset_foto')->store('foto');
+        }else{
+            $data['aset_foto'] = 'foto/Logo.PNG';
+        }
 
         Aset::create($data);
 

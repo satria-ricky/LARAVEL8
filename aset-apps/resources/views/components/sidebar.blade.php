@@ -25,13 +25,8 @@
 							<div class="collapse in" id="collapseExample">
 								<ul class="nav">
 									<li>
-										<a href="#profile">
+										<a href="/profile">
 											<span class="link-collapse">My Profile</span>
-										</a>
-									</li>
-									<li>
-										<a href="#settings">
-											<span class="link-collapse">Pengaturan Akun</span>
 										</a>
 									</li>
 								</ul>

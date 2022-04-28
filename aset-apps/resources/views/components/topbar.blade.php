@@ -50,14 +50,20 @@
 											<div class="avatar-lg"><img src="{{ url('/assets/img/profile.jpg') }}" alt="image profile" class="avatar-img rounded"></div>
 											<div class="u-text">												
 												<h4>{{ auth()->user()->user_nama; }}</h4>
-												<p class="text-muted">{{ auth()->user()->email; }}</p><a href="#" class="btn btn-xs btn-secondary btn-sm">View Profile</a>
+												<p class="text-muted">{{ auth()->user()->email; }}</p>
+												<a href="/profile" class="btn btn-xs btn-secondary btn-sm">View Profile</a>
+												{{-- <form action="/profile">
+													@csrf
+													<button type="submit" class="btn btn-xs btn-secondary btn-sm">View Profile</button>
+												</form> --}}
+												
 											</div>
 										</div>
 									</li>
 									<li>
 										<div class="dropdown-divider"></div>
-										<a class="dropdown-item" href="#">Pengaturan Akun</a>
-										<div class="dropdown-divider"></div>
+										{{-- <a class="dropdown-item" href="#">Pengaturan Akun</a>
+										<div class="dropdown-divider"></div> --}}
 										<form action="/logout" method="post" id="form-logout">
 											@csrf
 											<button class="dropdown-item" type="button" onclick="logout()">Logout</button>	

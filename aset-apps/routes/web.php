@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AkunController;
 use App\Http\Controllers\AsetController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
@@ -22,7 +23,14 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get('/tambah-aset', [AdminController::class,'tambahAset']);
     Route::post('/tambah-aset', [AdminController::class,'createAset']); 
 
-    Route::resource('/aset', AsetController::class);
+    // Route::resource('/aset', AsetController::class);
+    // Route::resource('/profile', AkunController::class);
+    
+    Route::resources([
+        '/aset' => AsetController::class,
+        '/profile' => AkunController::class,
+    ]);
+    
 });
     //backend CRUD
     // Route::resource('/aset', AsetController::class)->middleware('admin');
