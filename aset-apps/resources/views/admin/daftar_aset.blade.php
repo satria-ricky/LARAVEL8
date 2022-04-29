@@ -54,11 +54,8 @@
                                     <td>{{ $row->aset_nilai_buku }}</td>
                                     <td>
                                         <a href="/detail-aset/{{Crypt::encrypt($row->aset_id)}}" class="btn btn-info btn-xs btn-round" target="_blank" >Detail</a>
-                                        
-                                        {{-- <form action="/qr-code/{{$row->aset_id}}" method="post">
-                                            @csrf
-                                            <button type="submit" class="btn btn-primary btn-xs btn-round"> Detail </button>
-                                        </form> --}}
+
+                                        <a href="/qr-code/{{Crypt::encrypt($row->aset_id)}}" class="btn btn-primary btn-xs btn-round" target="_blank" >QR Code</a>
 
                                         <a href="/aset/{{ $row->aset_id }}/edit" class="btn btn-success btn-xs btn-round m-0"> Edit</a>
                                         

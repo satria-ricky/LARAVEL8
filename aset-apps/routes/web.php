@@ -22,6 +22,12 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get('/daftar-aset', [AdminController::class,'getAset']);
     Route::get('/tambah-aset', [AdminController::class,'tambahAset']);
     
+    Route::get('/qr-code/{aset}', function($aset){
+        return view('qr-code/qrcode',[
+            'data' => url('detail-aset/'.$aset)
+        ]);
+    });
+
     Route::post('/tambah-aset', [AdminController::class,'createAset']);     
 
     Route::resources([
@@ -30,8 +36,6 @@ Route::group(['middleware' => ['auth']], function(){
     ]);
     
 });
-
-
 
 Route::group(['middleware' => ['guest']], function(){
     Route::get('/', [LoginController::class,'login'])->name('login');

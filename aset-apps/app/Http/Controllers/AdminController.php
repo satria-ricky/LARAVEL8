@@ -73,7 +73,7 @@ class AdminController extends Controller
     public function detailAset(Request $request){
         $aset_id = Crypt::decrypt($request->aset);
         return $user = DB::table('tb_aset')->where('aset_id', $aset_id)->first();
-        
+
     }
-    
+
 }
