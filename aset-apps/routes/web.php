@@ -20,6 +20,8 @@ use App\Http\Controllers\LoginController;
 Route::group(['middleware' => ['auth']], function(){
     Route::get('/beranda', [AdminController::class,'beranda'])->name('beranda');
     Route::get('/daftar-aset', [AdminController::class,'getAset']);
+    Route::get('/filterAset/{jenis_id}', [AdminController::class,'filterAset'])->name('filterAset');
+
     Route::get('/tambah-aset', [AdminController::class,'tambahAset']);
     
     Route::get('/qr-code/{aset}', function($aset){
@@ -40,6 +42,7 @@ Route::group(['middleware' => ['auth']], function(){
 Route::group(['middleware' => ['guest']], function(){
     Route::get('/', [LoginController::class,'login'])->name('login');
 });
+
 
 Route::get('/detail-aset/{aset}', [AdminController::class,'detailAset'])->name('detail-aset');
 

@@ -6,6 +6,7 @@ use App\Models\Aset;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\JenisAset;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
@@ -25,14 +26,33 @@ class AdminController extends Controller
         return view('admin/daftar_aset', [
             "is_aktif" => "aset",
             "judul_navigasi" => "Daftar Aset",
-            "data" => Aset::all()
+            "data" => Aset::all(),
+            "jenis_aset" => JenisAset::all()
         ]);
     }
+
+
+    public function filterAset(Request $request){
+
+        if ($request->jenis_id != '-') {
+            $data = DB::table('tb_aset')
+                    ->where('aset_gssl_induk', '=', $request->jenis_id)
+                    ->get();
+        } else {
+            // $data = DB::table('tb_aset')->get();
+            return redirect('/daftar-aset');
+        }
+        
+
+        return response()->json($data);
+    }
+
     
     public function tambahAset(){
         return view('admin/tambah_aset', [
             "is_aktif" => "aset",
-            "judul_navigasi" => "Tambah Aset"
+            "judul_navigasi" => "Tambah Aset",
+            "jenis_aset" => JenisAset::all()
         ]);
     }
     
@@ -72,8 +92,8 @@ class AdminController extends Controller
 
     public function detailAset(Request $request){
         $aset_id = Crypt::decrypt($request->aset);
-        return $user = DB::table('tb_aset')->where('aset_id', $aset_id)->first();
-
+        $user = DB::table('tb_aset')->where('aset_id', $aset_id)->first();
+        dd($user);
     }
 
 }

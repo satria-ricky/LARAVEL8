@@ -38,23 +38,14 @@
 								<label for="exampleFormControlSelect1">Nama Aset :</label>
 								<select class="form-control @error('aset_gssl_induk') is-invalid @enderror" id="exampleFormControlSelect1" name="aset_gssl_induk">
 									<option value="">-- Pilih nama aset -- </option>
-									<option value="1390101">Tanah Bangunan Kantor </option>
-									<option value="1390102">Tanah Rumah Dinas </option>
-									<option value="1390201">Bangunan KTR. Permanen </option>
-									<option value="1390202">Bangunan Gudang </option>
-									<option value="1390203">Bangunan GD. Pertokoan </option>
-									<option value="1390205">Bangunan Rumah Dinas </option>
-									<option value="1390207">Bangunan Lainnya </option>
-									<option value="1390405">Perabot Kantor dari kayu </option>
-									<option value="1390402">Mesin Kantor </option>
-									<option value="1390408">Perlengkapan Lainnya </option>
-									<option value="1390406">Alat Kesenian / Olahraga </option>
-									<option value="1390401">Komputer </option>
-									<option value="1390403">Peralatan Komunikasi </option>
-									<option value="1390504">Perabot Kantor Logam </option>
-									<option value="1390501">Mesin - Mesin </option>
-									<option value="1390502">Kendaraan roda 4 </option>
-									<option value="1340101">Aktiva Tak Terwujud </option>
+									
+									@foreach ($jenis_aset as $j)
+										@if (old('aset_gssl_induk', $data->aset_gssl_induk) == $j->jenis_id)
+											<option selected value="{{ $j->jenis_id }}"> {{$j->jenis_nama}} </option>
+										@else
+											<option value="{{ $j->jenis_id }}"> {{$j->jenis_nama}} </option>
+										@endif
+									@endforeach	
 								</select>
 								@error('aset_gssl_induk') 
 									<div class="invalid-feedback">

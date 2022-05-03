@@ -27,14 +27,28 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Basic</h4>
+                <div class="row">
+                    <div class="col col-4">
+                        <div class="form-group">    
+                            <select class="form-control" id="filterAset">
+                                <option value="-"> -- Pilih Nama Aset --</option>
+                                @foreach ($jenis_aset as $j)
+                                    @if (old('aset_gssl_induk') == $j->jenis_id)
+                                        <option selected value="{{ $j->jenis_id }}"> {{$j->jenis_nama}} </option>
+                                    @endif
+                                    <option value="{{ $j->jenis_id }}"> {{$j->jenis_nama}} </option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
                     <table id="basic-datatables" class="display table table-striped table-hover" >
                         <thead>
                             <tr>
-                                <th>#NO</th>
+                         
                                 <th>No. Rekening</th>
                                 <th>Deskripsi</th>
                                 <th>Saldo Perolehan</th>
@@ -46,7 +60,6 @@
                         <tbody>
                             @foreach ($data as $row)
                                 <tr>
-                                    <td>{{$loop->iteration}}</td>
                                     <td>{{ $row->aset_no_rekening }}</td>
                                     <td>{{ $row->aset_deskripsi }}</td>
                                     <td>{{ $row->aset_saldo_perolehan }}</td>
@@ -83,4 +96,55 @@
 
 @section('isi_js')
 	@include('components.js_hapus')
+    <script>
+
+        $('#filterAset').change(function () {
+            var id = $(this).val();
+            // console.log(id);
+            $('#basic-datatables').DataTable().destroy();
+
+            $.ajax({
+                url        :'/filterAset/'+id,
+                type       :'GET',
+                dataType   :'json',
+                success: function(data){
+                    // console.log(data);
+                    $('#basic-datatables').DataTable( {
+                        "data": data,
+                        "columns": [
+                            {
+                                "data": "aset_no_rekening",
+                            },
+                            {
+                                "data": "aset_deskripsi",
+                            },
+                            {
+                                "data": "aset_saldo_perolehan",
+                            },
+                            {
+                                "data": "aset_akm_susut",
+                            },
+                            {
+                                "data": "aset_nilai_buku",
+                            },
+                            {
+                                "data": "aset_id",
+                                "render": function(data, type, row, meta) {
+                                return `
+                                <button class="btn btn-danger btn-xs btn-round" onclick="hapus(${row.aset_id})"> Hapus </button> 
+                                `;
+                                }
+                            }
+                        ]
+
+                    } );
+                }, 
+                error: function(){
+                    console.log('AJAX load did not work');
+                }
+            });
+
+        });
+
+    </script>
 @endsection

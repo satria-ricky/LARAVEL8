@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Aset;
+use App\Models\JenisAset;
 use Illuminate\Routing\Controller;
 use App\Http\Requests\StoreAsetRequest;
 use Illuminate\Support\Facades\Storage;
@@ -63,7 +64,8 @@ class AsetController extends Controller
         return view('admin/edit_aset', [
             'is_aktif' => 'aset',
             'judul_navigasi' => 'Edit Aset',
-            'data' => $aset
+            'data' => $aset,
+            "jenis_aset" => JenisAset::all()
         ]);
     }
 
