@@ -5,7 +5,7 @@ use App\Http\Controllers\AkunController;
 use App\Http\Controllers\AsetController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
-
+use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,7 +30,10 @@ Route::group(['middleware' => ['auth']], function(){
         ]);
     });
 
-    Route::post('/tambah-aset', [AdminController::class,'createAset']);     
+    Route::post('/tambah-aset', [AdminController::class,'createAset']);
+    Route::post('/import-aset', function(Request $request){
+        return $request;
+    });     
 
     Route::resources([
         '/aset' => AsetController::class,

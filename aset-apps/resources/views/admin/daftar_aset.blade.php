@@ -12,8 +12,18 @@
                 <!-- <h5 class="text-white op-7 mb-2">Premium Bootstrap 4 Admin Dashboard</h5> -->
             </div>
             <div class="ml-md-auto py-2 py-md-0">
-                <!-- <a href="#" class="btn btn-white btn-border btn-round mr-2">Manage</a>
-                <a href="#" class="btn btn-secondary btn-round">Add Customer</a> -->
+                {{-- <a href="#" class="btn btn-white btn-border btn-round mr-2">Manage</a>
+                <a href="#" class="btn btn-secondary btn-round">Add Customer</a> --}}
+                <div class="btn-group">
+                    <button type="button" class="btn btn-secondary btn-round dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Action
+                    </button>
+                    <div class="dropdown-menu">
+                      <a class="dropdown-item" href="#" id="buttonImport"> <i class="fas fa-upload"></i> Import </a>
+                      <a class="dropdown-item" href="#"> <i class="fas fa-download"></i> Export</a>
+                      <a class="dropdown-item" href="#"> <i class="fas fa-qrcode"></i> Generate QR-Code</a>
+                    </div>
+                </div>  
             </div>
         </div>
 
@@ -41,6 +51,7 @@
                             </select>
                         </div>
                     </div>
+                    
                 </div>
             </div>
             <div class="card-body">
@@ -92,7 +103,30 @@
     
 </div>
 @endsection
-
+<!-- Modal -->
+<div class="modal fade" id="ModalImport" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Import Data Excel</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="/import-aset" method="post" id="formModalImport" enctype="multipart/form-data">
+            @csrf
+            <input type="file">
+         
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-focus" data-dismiss="modal">Close</button>
+          <button type="button" id="buttonModalImport" class="btn btn-primary">Import Data</button>
+        </form>
+        </div>
+      </div>
+    </div>
+  </div>
 
 @section('isi_js')
 	@include('components.js_hapus')
@@ -131,7 +165,21 @@
                                 "data": "aset_id",
                                 "render": function(data, type, row, meta) {
                                 return `
-                                <button class="btn btn-danger btn-xs btn-round" onclick="hapus(${row.aset_id})"> Hapus </button> 
+                                    
+                                    <a href="/detail-aset/{{Crypt::encrypt('${row.aset_id}')}}" class="btn btn-info btn-xs btn-round" target="_blank" >Detail</a>
+
+                                    <a href="/qr-code/{{Crypt::encrypt('${row.aset_id}')}}" class="btn btn-primary btn-xs btn-round" target="_blank" >QR Code</a>
+
+                                    <a href="/aset/${row.aset_id}/edit" class="btn btn-success btn-xs btn-round m-0"> Edit</a>
+                                    
+                                    
+                                    <form action="/aset/${row.aset_id}" method="post" id="form-hapus${row.aset_id}">
+                                        @method('delete')
+                                        @csrf
+                                        <button type="button" class="btn btn-danger btn-xs btn-round" onclick="hapus(${row.aset_id})"> Hapus </button>
+                                    </form> 
+
+                               
                                 `;
                                 }
                             }
@@ -145,6 +193,39 @@
             });
 
         });
+
+
+        
+
+    $('#buttonImport').click(function(e) {
+        $('#ModalImport').modal('show');
+    
+    });
+
+
+    $('#buttonModalImport').click(function(e) {
+        swal({
+            title: 'Yakin Import Data Excel?',
+            icon: 'warning',
+            buttons:{
+                confirm: {
+                text : 'Import',
+                className : 'btn btn-success'
+                },
+                cancel: {
+                text : 'Tidak',
+                visible: true,
+                className: 'btn btn-focus'
+                }
+            }
+            }).then((Import) => {
+            if (Import) {
+                document.getElementById("formModalImport").submit();
+            } else {
+                swal.close();
+            }
+        });
+    });
 
     </script>
 @endsection

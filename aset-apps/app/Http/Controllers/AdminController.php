@@ -39,8 +39,8 @@ class AdminController extends Controller
                     ->where('aset_gssl_induk', '=', $request->jenis_id)
                     ->get();
         } else {
-            // $data = DB::table('tb_aset')->get();
-            return redirect('/daftar-aset');
+            $data = DB::table('tb_aset')->get();
+            // return redirect('/daftar-aset');
         }
         
 
