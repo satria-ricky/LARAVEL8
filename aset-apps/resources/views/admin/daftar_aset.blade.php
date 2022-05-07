@@ -20,7 +20,7 @@
                     </button>
                     <div class="dropdown-menu">
                       <a class="dropdown-item" href="#" id="buttonImport"> <i class="fas fa-upload"></i> Import </a>
-                      <a class="dropdown-item" href="#"> <i class="fas fa-download"></i> Export</a>
+                      <a class="dropdown-item" href="/export"> <i class="fas fa-download"></i> Export</a>
                       <a class="dropdown-item" href="#"> <i class="fas fa-qrcode"></i> Generate QR-Code</a>
                     </div>
                 </div>  
@@ -59,7 +59,6 @@
                     <table id="basic-datatables" class="display table table-striped table-hover" >
                         <thead>
                             <tr>
-                         
                                 <th>No. Rekening</th>
                                 <th>Deskripsi</th>
                                 <th>Saldo Perolehan</th>
@@ -102,8 +101,7 @@
 
     
 </div>
-@endsection
-<!-- Modal -->
+
 <div class="modal fade" id="ModalImport" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -127,6 +125,10 @@
       </div>
     </div>
   </div>
+  
+@endsection
+
+
 
 @section('isi_js')
 	@include('components.js_hapus')
@@ -229,3 +231,4 @@
 
     </script>
 @endsection
+

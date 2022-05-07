@@ -34,7 +34,7 @@
 						</div>
 					</div>
 					<ul class="nav nav-primary">
-						<li class="nav-item <?= ($is_aktif === 'beranda') ? 'active' : '' ?>">
+						<li class="nav-item <?= ($is_aktif === 'beranda') ? 'active' : '' ?> ">
 							<a href="/beranda">
 								<i class="fas fa-home"></i>
 								<p>Beranda</p>

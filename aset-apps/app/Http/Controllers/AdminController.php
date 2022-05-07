@@ -8,8 +8,8 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\JenisAset;
 use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Validator;
+use App\Exports\AsetExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AdminController extends Controller
 {
@@ -46,6 +46,15 @@ class AdminController extends Controller
 
         return response()->json($data);
     }
+
+
+    public function exportAset() 
+    {
+        
+        return new AsetExport();
+    
+    }
+
 
     
     public function tambahAset(){
@@ -92,8 +101,12 @@ class AdminController extends Controller
 
     public function detailAset(Request $request){
         $aset_id = Crypt::decrypt($request->aset);
-        $user = DB::table('tb_aset')->where('aset_id', $aset_id)->first();
-        dd($user);
+        $aset = DB::table('tb_aset')->where('aset_id', $aset_id)->first();
+        return view('admin.detail', [
+            "data" => $aset,
+            "url" => url('detail-aset/'.$request->aset)
+        ]);
+
     }
 
 }

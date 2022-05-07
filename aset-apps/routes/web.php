@@ -22,6 +22,10 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get('/daftar-aset', [AdminController::class,'getAset']);
     Route::get('/filterAset/{jenis_id}', [AdminController::class,'filterAset'])->name('filterAset');
 
+    Route::get('/export', [AdminController::class, 'exportAset']);
+
+
+
     Route::get('/tambah-aset', [AdminController::class,'tambahAset']);
     
     Route::get('/qr-code/{aset}', function($aset){

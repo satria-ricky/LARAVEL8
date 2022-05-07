@@ -1,7 +1,7 @@
 <footer class="footer">
 				<div class="container-fluid">
 					<nav class="pull-left">
-						<ul class="nav">
+						{{-- <ul class="nav">
 							<li class="nav-item">
 								<a class="nav-link" href="https://www.themekita.com">
 									ThemeKita
@@ -17,10 +17,10 @@
 									Licenses
 								</a>
 							</li>
-						</ul>
+						</ul> --}}
 					</nav>
 					<div class="copyright ml-auto">
-						2018, made with <i class="fa fa-heart heart text-danger"></i> by <a href="https://www.themekita.com">ThemeKita</a>
+						2018 &copy; Macan</a>
 					</div>				
 				</div>
 			</footer>
