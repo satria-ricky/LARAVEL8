@@ -10,15 +10,21 @@ use App\Models\JenisAset;
 use Illuminate\Support\Facades\Crypt;
 use App\Exports\AsetExport;
 use Maatwebsite\Excel\Facades\Excel;
+use Barryvdh\DomPDF\Facade\PDF;
 
 class AdminController extends Controller
 {
     
     
     public function beranda(){
+        $aset = DB::table('tb_aset')
+             ->select(DB::raw('SUM(aset_saldo_perolehan) AS saldo_perolehan, SUM(aset_akm_susut) AS akm_susut, SUM(	aset_nilai_buku) AS nilai_buku'))
+             ->get();
+
         return view('admin/beranda', [
             "is_aktif" => "beranda",
-            "judul_navigasi" => "Beranda"
+            "judul_navigasi" => "Beranda",
+            "data" => $aset
         ]);
     }
 
@@ -52,6 +58,19 @@ class AdminController extends Controller
     {
         
         return new AsetExport();
+    
+    }
+
+    public function generatQR() 
+    {
+        
+        // return dd('generat');
+        // $pdf = PDF::loadView('export.pdfqr');
+        // return $pdf;
+        $pdf = PDF::loadView('export.pdfqr',[
+            "data" => Aset::all()
+        ]);
+        return $pdf->download('generate.pdf');
     
     }
 

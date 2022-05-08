@@ -23,6 +23,43 @@
 <div class="page-inner mt--5">
 
 
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card card-secondary">
+                <div class="card-body skew-shadow">
+                    <h1>Rp. {{ number_format($data[0]->saldo_perolehan, 2, ",", ".")}}</h1>
+                    <h5 class="op-8">Total Saldo Perolehan</h5>
+                    <div class="pull-right">
+                        <h3 class="fw-bold op-8">(Rp.)</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card card-dark bg-secondary-gradient">
+                <div class="card-body bubble-shadow">
+                    <h1>Rp. {{ number_format($data[0]->akm_susut, 2, ",", ".")}}</h1>
+                    <h5 class="op-8">Total AKM Susut</h5>
+                    <div class="pull-right">
+                        <h3 class="fw-bold op-8">(Rp.)</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card card-dark bg-secondary2">
+                <div class="card-body curves-shadow">
+                    <h1>Rp. {{ number_format($data[0]->nilai_buku, 2, ",", ".")}}</h1>
+                    <h5 class="op-8">Total Nilai Buku</h5>
+                    <div class="pull-right">
+                        <h3 class="fw-bold op-8">(Rp.)</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     
 </div>
 @endsection
