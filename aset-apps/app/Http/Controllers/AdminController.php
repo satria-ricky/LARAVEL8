@@ -3,14 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Aset;
+use App\Models\JenisAset;
+use App\Exports\AsetExport;
+use App\Imports\AsetImport;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\PDF;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Models\JenisAset;
-use Illuminate\Support\Facades\Crypt;
-use App\Exports\AsetExport;
 use Maatwebsite\Excel\Facades\Excel;
-use Barryvdh\DomPDF\Facade\PDF;
+use Illuminate\Support\Facades\Crypt;
 
 class AdminController extends Controller
 {
@@ -53,6 +54,14 @@ class AdminController extends Controller
         return response()->json($data);
     }
 
+
+    public function importAset(Request $request) 
+    {
+        // dd($request->file('file_import'));
+        Excel::import(new AsetImport, $request->file('file_import'));
+        
+        return redirect('/daftar-aset')->with('pesan', 'Data Berhasil Diimport!');
+    }
 
     public function exportAset() 
     {

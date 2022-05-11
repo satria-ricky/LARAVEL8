@@ -114,7 +114,7 @@
         <div class="modal-body">
           <form action="/import-aset" method="post" id="formModalImport" enctype="multipart/form-data">
             @csrf
-            <input type="file">
+            <input type="file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" name="file_import" required>
          
         </div>
         <div class="modal-footer">

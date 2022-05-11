@@ -36,9 +36,7 @@ Route::group(['middleware' => ['auth']], function(){
     });
 
     Route::post('/tambah-aset', [AdminController::class,'createAset']);
-    Route::post('/import-aset', function(Request $request){
-        return $request;
-    });     
+    Route::post('/import-aset', [AdminController::class,'importAset']);     
 
     Route::resources([
         '/aset' => AsetController::class,
