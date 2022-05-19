@@ -105,7 +105,7 @@
                                                 <form method="post" action="terimapenimbanganbahan">
                                                     @csrf
                                                     <input type="hidden" name="nobatch" value="{{ $row['no_loth'] }}" />
-                                                    <button type="submit" class="btn btn-primary">terima</button>
+                                                    <button type="submit" class="btn btn-danger disabled">terima</button>
                                                 </form>
                                                 @else
                                                 <form action="detiltimbangbahan" method="post" class="float-left mr-3">

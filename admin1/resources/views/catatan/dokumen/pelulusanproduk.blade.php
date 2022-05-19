@@ -177,7 +177,7 @@
                                 <form method="post" action="terimapelulusanproduk">
                                     @csrf
                                     <input type="hidden" name="nobatch" value="{{ $row['no_batch'] }}" />
-                                    <button type="submit" class="btn btn-primary">terima</button>
+                                    <button type="submit" class="btn btn-danger disabled">terima</button>
                                 </form>
                                 @else
                                 <button id="klik_lulus" class="btn btn-primary" data-toggle="modal" data-target="#editlulus" data-tanggal="{{ $row['tanggal'] }}" data-nama="{{ $row['nama_bahan'] }}" data-nobatch="{{ $row['no_batch'] }}" data-kadaluarsa="{{ $newDate = date('Y-m-d\TH:i', strtotime($row['kedaluwarsa'])); }}" data-pemasok="{{ $row['nama_pemasok'] }}" data-warna="{{ $row['warna'] }}" data-bau="{{ $row['bau'] }}" data-ph="{{ $row['ph'] }}" data-berat="{{ $row['berat_jenis'] }}" data-id="{{ $row['id_pelulusan'] }}">Edit</button>

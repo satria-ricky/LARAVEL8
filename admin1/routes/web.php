@@ -163,6 +163,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/terimapemeriksaanbahanbaku', [pjt::class, 'terima_pemeriksaanbahanbaku'])->name('terima_pemeriksaanbahanbaku');
         Route::post('/terimapemeriksaanbahankemas', [pjt::class, 'terima_pemeriksaanbahankemas'])->name('terima_pemeriksaanbahankemas');
         Route::post('/terimapemeriksaanprodukjadi', [pjt::class, 'terima_pemeriksaanprodukjadi'])->name('terima_pemeriksaanprodukjadi');
+        Route::post('/terimaperiksasanialat', [pjt::class, 'terima_periksasanialat'])->name('terima_periksasanialat');
 
         Route::post('/terimabahanmasuk', [pjt::class, 'terima_bahanmasuk'])->name('terima_bahanmasuk');
         Route::post('/terimabahankeluar', [pjt::class, 'terima_bahankeluar'])->name('terima_bahankeluar');

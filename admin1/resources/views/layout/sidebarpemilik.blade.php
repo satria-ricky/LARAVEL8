@@ -3,22 +3,22 @@
         <div class="sb-sidenav-menu">
             <div class="nav">
 
-                <a style="color: black;" class="nav-link collapsed"  href="/dashboard">
+                <a   class="nav-link collapsed"  href="/dashboard">
                     <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                     DASHBOARD
                 </a>
 
-                <a style="color: black;"  class="nav-link collapsed" href="karyawan">
+                <a    class="nav-link collapsed" href="karyawan">
                     <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                     KELOLA USER
                 </a>
 
-                <a style="color: black;"  class="nav-link collapsed" href="aplicant">
+                <a    class="nav-link collapsed" href="aplicant">
                     <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                     DAFTAR APLIKAN
                 </a>
 
-                <a style="color: black;"  class="nav-link collapsed" href="bos_audit">
+                <a    class="nav-link collapsed" href="bos_audit">
                     <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                     DAFTAR AUDIT
                 </a>

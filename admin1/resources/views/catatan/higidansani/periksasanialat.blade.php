@@ -159,11 +159,15 @@
                                                 </td>
                                             @else
                                                 <td>
-                                                    <form method="post" action="terimapemusnahanprodukjadi">
+                                                    <form method="post" action="terimaperiksasanialat">
                                                         @csrf
                                                         <input type="hidden" name="id"
                                                             value="{{ $row['id_periksaalat'] }}" />
-                                                        <button type="submit" class="btn btn-primary">Terima</button>
+                                                        <button type="submit" @if ($row['status'] == 0)
+                                                            class="btn btn-primary"
+                                                        @else
+                                                            class="btn btn-danger disabled"
+                                                        @endif >Terima</button>
                                                     </form>
                                                 </td>
                                             @endif

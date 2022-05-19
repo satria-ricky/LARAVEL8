@@ -1,5 +1,5 @@
 <div id="layoutSidenav_nav">
-    <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+    <nav class="sb-sidenav accordion bg-def" id="sidenavAccordion">
         <div class="sb-sidenav-menu">
             <div class="nav">
                 <a class="nav-link" href="{{ route('dashboard') }}">
@@ -182,7 +182,7 @@
                     </nav>
                 </div>
 
-                <div class="sb-sidenav-menu-heading">Summary</div>
+                {{-- <div class="sb-sidenav-menu-heading">Summary</div> --}}
 
                 <a class="nav-link" href="{{ route('laporan') }}">
                     <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
@@ -264,9 +264,9 @@
                 <!-- </a> -->
             </div>
         </div>
-        <div class="sb-sidenav-footer">
+        {{-- <div class="sb-sidenav-footer">
             <div class="small">Logged in as:</div>
             UD. Semeloto
-        </div>
+        </div> --}}
     </nav>
 </div>

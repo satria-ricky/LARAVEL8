@@ -171,7 +171,7 @@
                                                 <form method="post" action="terimapemeriksaanbahanbaku">
                                                     @csrf
                                                     <input type="hidden" name="id" value="{{ $row['id_spesifikasibahanbaku'] }}" />
-                                                    <button type="submit" class="btn btn-primary">Terima</button>
+                                                    <button type="submit" class="btn btn-danger disabled">Terima</button>
                                                 </form>
                                             </td>
                                             @endif

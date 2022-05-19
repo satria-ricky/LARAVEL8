@@ -167,7 +167,7 @@
                                                 <form method="post" action="terimapelatihanhigisani">
                                                     @csrf
                                                     <input type="hidden" name="nobatch" value="{{ $row['kode_pelatihan'] }}" />
-                                                    <button type="submit" class="btn btn-primary">terima</button>
+                                                    <button type="submit" class="btn btn-danger disabled">terima</button>
                                                 </form>
                                                 @else
                                                 <button type="button" id="klikhigi" class="btn btn-primary" data-toggle="modal" data-target="#edithigi" data-kode="{{ $row['kode_pelatihan'] }}" data-materi="{{ $row['materi_pelatihan'] }}" data-peserta="{{ $row['peserta_pelatihan'] }}" data-pelatih="{{ $row['pelatih'] }}" data-metode="{{ $row['metode_pelatihan'] }}" data-mulai="{{

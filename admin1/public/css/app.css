@@ -1,1 +1,9 @@
+.bg-def {
+    background-color: #184680;
+    opacity: 0.9;
+}
 
+a.nav-link {
+    color: white;
+    
+}

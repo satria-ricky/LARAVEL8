@@ -129,7 +129,7 @@
                                 <form method="post" action="terimaoperasialat">
                                     @csrf
                                     <input type="hidden" name="nobatch" value="{{ $row['id_operasi'] }}" />
-                                    <button @if ($row['status']=='1' ) {{'disabled'}} @endif type="submit" class="btn btn-primary">terima</button>
+                                    <button @if ($row['status']=='1' ) {{'disabled'}} @endif type="submit" class="btn btn-danger">terima</button>
                                 </form>
                                 @else
                                 <form method="post" action="detil-alat" class="float-left mr-2">

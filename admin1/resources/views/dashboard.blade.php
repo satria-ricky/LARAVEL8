@@ -13,7 +13,7 @@
         </ol>
 
         <div class="row d-flex justify-content-between">
-            <div class="col-xs-12 col-md-6 col-lg-6 col-xl-3 card text-white bg-dark ml-4 mb-3" style="max-width: 22rem;">
+            <div class="col-xs-12 col-md-6 col-lg-6 col-xl-3 card text-white bg-info ml-4 mb-3" style="max-width: 22rem;">
                 <div class="card-header text-white">Aturan Baru BPOM</div>
                 <div class="card-body">
                     <h5>Tanggal : 27 Maret 2019 </h5>

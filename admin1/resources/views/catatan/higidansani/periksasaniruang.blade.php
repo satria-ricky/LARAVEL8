@@ -212,18 +212,35 @@
                                         @endif
                                     </td>
                                     <td>
-                                        @if ($row['status'] == 0)
-                                        <form method="post" action="terimaperiksaruang">
-                                            @csrf
-                                            <input type="hidden" name="id" value="{{ $row['id_periksaruang'] }}" />
-                                            <button type="submit" class="btn btn-primary">Terima</button>
-                                        </form>
-                                        @else
-                                        <form method="post" action="detil_batch">
-                                            <input type="hidden" name="_token" value="" />
-                                            <input type="hidden" name="nobatch" value="" />
-                                            <button type="submit" class="btn btn-primary" disabled>Edit</button>
-                                        </form>
+                                       
+                                        @if (Auth::user()->level == 2)
+                                            @if ($row['status'] == 0)
+                                            <form method="post" action="terimaperiksaruang">
+                                                @csrf
+                                                <input type="hidden" name="id" value="{{ $row['id_periksaruang'] }}" />
+                                                <button type="submit" class="btn btn-primary">Terima</button>
+                                            </form>
+                                            @else
+                                            <form method="post" action="detil_batch">
+                                                <input type="hidden" name="_token" value="" />
+                                                <input type="hidden" name="nobatch" value="" />
+                                                <button type="submit" class="btn btn-danger disabled">Terima</button>
+                                            </form>
+                                            @endif
+                                        @elseif (Auth::user()->level == 3)
+                                            @if ($row['status'] == 0)
+                                            <form method="post" action="terimaperiksaruang">
+                                                @csrf
+                                                <input type="hidden" name="id" value="{{ $row['id_periksaruang'] }}" />
+                                                <button type="submit" class="btn btn-primary">Edit</button>
+                                            </form>
+                                            @else
+                                            <form method="post" action="detil_batch">
+                                                <input type="hidden" name="_token" value="" />
+                                                <input type="hidden" name="nobatch" value="" />
+                                                <button type="submit" class="btn btn-primary disabled">Edit</button>
+                                            </form>
+                                            @endif
                                         @endif
                                     </td>
                                 </tr>

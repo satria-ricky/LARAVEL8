@@ -181,7 +181,7 @@
                                                 <form method="post" action="terimaambilbahanbaku">
                                                     @csrf
                                                     <input type="hidden" name="nobatch" value="{{ $row['no_batch'] }}" />
-                                                    <button type="submit" class="btn btn-primary" @if ($row['status']==1) {{ 'disabled' }} @endif>Terima</button>
+                                                    <button type="submit" class="btn btn-danger" @if ($row['status']==1) {{ 'disabled' }} @endif>Terima</button>
                                                 </form>
                                             </td>
                                             @endif

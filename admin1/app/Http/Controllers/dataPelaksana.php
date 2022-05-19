@@ -25,7 +25,7 @@ class dataPelaksana extends Controller
     {
         $id = Auth::user()->pabrik;
         if (Auth::user()->level == 2) {
-            $data = cp_bahan::all()->where('pabrik', $id)->where('status', 0);
+            $data = cp_bahan::all()->where('pabrik', $id);
         } else {
             $data = cp_bahan::all()->where('pabrik', $id);
         }
@@ -44,25 +44,48 @@ class dataPelaksana extends Controller
         })->addColumn('action', function ($data) {
 
             if (Auth::user()->level != 2) {
-                return '<form method="post" class="float-left mr-1" action="detilterimabb">
-                ' . '<input type="hidden" name="_token" value="' . csrf_token() . '   " />' . '
-                <input type="hidden" name="jenis" value=1 />
-                <input type="hidden" name="induk"
-                    value=' . $data->cp_bahan_id . ' />
-                    <input type="hidden" name="nama"
-                    value=' . $data->nama . ' />
-                <button type="submit" class="btn btn-primary">Lihat</button>
-            </form>' . '<button type="button" id="editbahan" class="btn btn-success" data-toggle="modal" data-target="#modaleditbahan"
-            data-nama="' . $data->nama . '" data-ruangan=' . $data->ruang . ' data-jumlah=' . $data->jumlah . ' data-kode=' . $data->kode . ' data-cpid=' . $data->cp_bahan_id . '>Edit</button>';
+                if ($data->status == 0) {
+                    return '<form method="post" class="float-left mr-1" action="detilterimabb">
+                        ' . '<input type="hidden" name="_token" value="' . csrf_token() . '   " />' . '
+                        <input type="hidden" name="jenis" value=1 />
+                        <input type="hidden" name="induk"
+                            value=' . $data->cp_bahan_id . ' />
+                            <input type="hidden" name="nama"
+                            value=' . $data->nama . ' />
+                        <button type="submit" class="btn btn-primary">Lihat</button>
+                    </form>' . '<button type="button" id="editbahan" class="btn btn-success" data-toggle="modal" data-target="#modaleditbahan"
+                    data-nama="' . $data->nama . '" data-ruangan=' . $data->ruang . ' data-jumlah=' . $data->jumlah . ' data-kode=' . $data->kode . ' data-cpid=' . $data->cp_bahan_id . '>Edit</button>';
+                } elseif ($data->status == 1) {
+                    return '<form method="post" class="float-left mr-1" action="detilterimabb">
+                        ' . '<input type="hidden" name="_token" value="' . csrf_token() . '   " />' . '
+                        <input type="hidden" name="jenis" value=1 />
+                        <input type="hidden" name="induk"
+                            value=' . $data->cp_bahan_id . ' />
+                            <input type="hidden" name="nama"
+                            value=' . $data->nama . ' />
+                        <button type="submit" class="btn btn-primary">Lihat</button>
+                    </form>' . '<button type="button" id="editbahan" class="btn btn-danger disabled" data-toggle="modal" data-target="#modaleditbahan"
+                    data-nama="' . $data->nama . '" data-ruangan=' . $data->ruang . ' data-jumlah=' . $data->jumlah . ' data-kode=' . $data->kode . ' data-cpid=' . $data->cp_bahan_id . '>Edit</button>';
+                }
             } else {
-                return '<form method="post" action="terima_cpbahan">
-            ' . '<input type="hidden" name="_token" value="' . csrf_token() . '   " />' . '
-            <input type="hidden" name="jenis" value=1 />
-            <input type="hidden" name="nobatch"
-                value=' . $data->cp_bahan_id . ' />
-            <button type="submit" class="btn btn-primary">Terima</button>
-        </form>';
-            }
+                if ($data->status == 0) {
+                    return '<form method="post" action="terima_cpbahan">
+                    ' . '<input type="hidden" name="_token" value="' . csrf_token() . '   " />' . '
+                    <input type="hidden" name="jenis" value=1 />
+                    <input type="hidden" name="nobatch"
+                        value=' . $data->cp_bahan_id . ' />
+                    <button type="submit" class="btn btn-primary">Terima</button>
+                </form>';
+                } elseif ($data->status == 1) {
+                    return '<form method="post" action="terima_cpbahan">
+                        ' . '<input type="hidden" name="_token" value="' . csrf_token() . '   " />' . '
+                        <input type="hidden" name="jenis" value=1 />
+                        <input type="hidden" name="nobatch"
+                            value=' . $data->cp_bahan_id . ' />
+                        <button type="submit" class="btn btn-danger disabled">Terima</button>
+                    </form>';
+                        }
+                }
         })->rawColumns(['action'])->make();
     }
 

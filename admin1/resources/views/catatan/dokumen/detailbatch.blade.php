@@ -522,7 +522,7 @@
                         <form action="/pjt_pengolahanbatch" method="post">
                             @csrf
                             <input type="hidden" name="id" value="{{ $nobatch }}">
-                            <button type="submit" class="btn btn-success btn-lg mt-5" <?php if ($status > 0) {
+                            <button type="submit" class="btn btn-danger btn-lg mt-5" <?php if ($status > 0) {
                                                                                             echo 'disabled';
                                                                                         } ?>>
                                 Terima

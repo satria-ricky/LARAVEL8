@@ -160,7 +160,7 @@
                                 <form method="post" action="terimapenarikanproduk">
                                     @csrf
                                     <input type="hidden" name="id" value="{{ $row['id_produk_penarikan'] }}" />
-                                    <button type="submit" class="btn btn-primary">Terima</button>
+                                    <button type="submit" class="btn btn-danger disabled">Terima</button>
                                 </form>
                             </td>
                             @endif

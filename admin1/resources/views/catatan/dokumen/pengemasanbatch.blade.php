@@ -192,7 +192,7 @@
                                 <form method="post" action="terima_kemasbatch">
                                     @csrf
                                     <input type="hidden" name="id" value="{{ $row['id_pengemasanbatchproduk'] }}" />
-                                    <button type="submit" class="btn btn-primary" @if($row['status']==1) disabled @endif>terima</button>
+                                    <button type="submit" class="btn btn-danger" @if($row['status']==1) disabled @endif>terima</button>
                                 </form>
                                 @else
                                 <form method="post" action="detilkemasbatch" class="float-left mr-2">

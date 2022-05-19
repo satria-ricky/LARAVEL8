@@ -103,7 +103,7 @@
                                             <form method="post" action="terimapenimbanganproduk">
                                                 @csrf
                                                 <input type="hidden" name="nobatch" value="{{ $row['personil_id'] }}" />
-                                                <button type="submit" class="btn btn-primary">Terima</button>
+                                                <button type="submit" class="btn btn-danger disabled">Terima</button>
                                             </form>
                                         @else
                                             <a href="asset/health_personil/{{ $row['nama_file'] }}"

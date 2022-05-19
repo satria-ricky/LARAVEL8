@@ -356,6 +356,25 @@ class pjt extends Controller
         $data = penarikanproduk::all()->where('status', 1);
         return redirect()->route('penarikan-produk');
     }
+
+    public function terima_periksasanialat(Request $req)
+    {
+        // dd($req);
+        date_default_timezone_set("Asia/Jakarta");
+        $tgl = new \DateTime(Carbon::now()->toDateTimeString());
+        $tgl = $tgl->format('Y-m-d');
+        $pabrik = Auth::user()->pabrik;
+        $user = Periksaalat::where("id_periksaalat", $req['id'])->update([
+            'status' => 1,
+        ]);
+        laporan::all()->where('laporan_nomor', $req['id'])->where('laporan_nama', 'periksa sanitasi alat')->first()->update([
+            'laporan_diterima' =>  Auth::user()->namadepan.' '.Auth::user()->namabelakang,
+            'tgl_diterima' => $tgl
+        ]);
+        $data = Periksaalat::all()->where('status', 1);
+        return redirect()->route('periksasanialat');
+    }
+
     public function terima_pemusnahanbahanbaku(Request $req)
     {
         // dd($req);
@@ -409,7 +428,7 @@ class pjt extends Controller
     }
     public function terima_pemusnahanprodukjadi(Request $req)
     {
-        // dd($req);
+        dd($req);
         date_default_timezone_set("Asia/Jakarta");
         $tgl = new \DateTime(Carbon::now()->toDateTimeString());
         $tgl = $tgl->format('Y-m-d');

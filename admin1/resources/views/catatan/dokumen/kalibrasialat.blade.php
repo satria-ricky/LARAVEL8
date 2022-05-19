@@ -93,7 +93,7 @@
                             <td>{{ $row['nama_alat'] }}</td>
                             <td>
                                 <a href="asset/kalibrasi_alat/{{ $row['nama_file'] }}" class="btn btn-primary">Buka</a>
-                                <a href="#" type="submit" data-toggle="modal" data-target="#modalForm" class="btn btn-primary" onclick="editdata({{ $row }})">Edit</a>
+                                <a href="#" type="submit" data-toggle="modal" data-target="#modalForm" class="btn btn-primary disabled" onclick="editdata({{ $row }})">Edit</a>
                             </td>
                         </tr>
                         @endforeach
