@@ -10,6 +10,12 @@
   <link rel="stylesheet" href="{{url('assets')}}/vendors/mdi/css/materialdesignicons.min.css">
   <link rel="stylesheet" href="{{url('assets')}}/vendors/aos/css/aos.css">
   <link rel="stylesheet" href="{{url('assets')}}/css/style.min.css">
+
+  {{-- sweetalert --}}
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
+  <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
+  <script src="{{ asset('js/alert.js') }}"></script>
+
 </head>
 <body id="body" data-spy="scroll" data-target=".navbar" data-offset="100">
   <header id="header-section">
@@ -472,6 +478,26 @@
       </div>
     </div> 
   </div>
+  
+  @if(session()->has('success'))
+        <script>
+            Swal.fire({
+                icon: "success",
+                title: "Berhasil!",
+                text: "{{ session('success') }}",
+            });
+        </script>
+    @endif
+    @if(session()->has('error'))
+    <script>
+        Swal.fire({
+            icon: "error",
+            title: "Gagal!",
+            text: "{{ session('error') }}",
+        });
+    </script>
+    @endif
+
   <script src="{{url('assets')}}/vendors/jquery/jquery.min.js"></script>
   <script src="{{url('assets')}}/vendors/bootstrap/bootstrap.min.js"></script>
   <script src="{{url('assets')}}/vendors/owl-carousel/js/owl.carousel.min.js"></script>

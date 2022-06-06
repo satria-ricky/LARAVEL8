@@ -13,6 +13,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home_page');
+Route::get('/', [superadmin::class, 'tampil_pabrik']);
+
+Route::group(['middleware' => 'auth'], function () {
+
+    Route::get('/pabrik', [superadmin::class, 'tampil_pabrik']);
+    Route::get('/audit', [superadmin::class, 'tampil_audit']);
+    Route::get('/inspek', [superadmin::class, 'tampil_inspek']);
+    Route::post('/register_pabrik', [superadmin::class, 'register']);
+    Route::post('/register_audit', [superadmin::class, 'register_audit']);
+    Route::post('/register_inspek', [superadmin::class, 'register_inspek']);
+    Route::post('/input_aturan', [superadmin::class, 'input_aturan']);
+    Route::get('/update-protap', [superadmin::class, 'tampil_protap'])->name('updateprotap');
+
 });
