@@ -1,16 +1,18 @@
 
 function buttonLogout() {
+    var link = "formLogout";
     Swal.fire({
-        title: "Logout",
-        text: "Yakin Ingin Keluar?",
-        icon: "warning",
+        title: 'Are you sure?',
+        // text: "You won't be able to revert this!",
+        icon: 'warning',
         showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Logout",
-    }).then((result) => {
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes'
+      }).then((result) => {
         if (result.isConfirmed) {
-            // window.location.href = "/logout";
+            document.getElementById(link).submit();
         }
-    });
+      })
+      
 }

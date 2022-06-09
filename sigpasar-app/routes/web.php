@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,17 +15,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [superadmin::class, 'tampil_pabrik']);
+Route::get('/', [AuthController::class, 'index'])->name('home_page');
+
+Route::post('/login', [AuthController::class, 'login']);
+
 
 Route::group(['middleware' => 'auth'], function () {
 
-    Route::get('/pabrik', [superadmin::class, 'tampil_pabrik']);
-    Route::get('/audit', [superadmin::class, 'tampil_audit']);
-    Route::get('/inspek', [superadmin::class, 'tampil_inspek']);
-    Route::post('/register_pabrik', [superadmin::class, 'register']);
-    Route::post('/register_audit', [superadmin::class, 'register_audit']);
-    Route::post('/register_inspek', [superadmin::class, 'register_inspek']);
-    Route::post('/input_aturan', [superadmin::class, 'input_aturan']);
-    Route::get('/update-protap', [superadmin::class, 'tampil_protap'])->name('updateprotap');
+    Route::post('/logout', [AuthController::class, 'logout']);
+    Route::get('/dashboard', [UserController::class, 'tampil_dashboard']);
+    Route::get('/pasar', [UserController::class, 'tampil_pasar']);
 
 });

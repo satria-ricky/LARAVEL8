@@ -11,10 +11,13 @@
   <link rel="stylesheet" href="{{url('assets')}}/vendors/aos/css/aos.css">
   <link rel="stylesheet" href="{{url('assets')}}/css/style.min.css">
 
-  {{-- sweetalert --}}
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
+  {{-- swall --}}
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
   <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
-  <script src="{{ asset('js/alert.js') }}"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+{{-- <link rel="stylesheet" href="{{url('js')}}/alert.js"> --}}
+<script src="{{ asset('js/alert.js') }}"></script>
 
 </head>
 <body id="body" data-spy="scroll" data-target=".navbar" data-offset="100">
@@ -51,7 +54,15 @@
           </li> --}}
           
           <li class="nav-item btn-contact-us pl-4 pl-lg-0">
-            <button class="btn btn-info" data-toggle="modal" data-target="#exampleModal">Login</button>
+            @if (Auth::user())
+            {{-- <button class="btn btn-info" >Logout</button> --}}
+            <form action="logout" method="post" id="formLogout">
+              @csrf
+              <button type="button" onclick="buttonLogout()" class="btn btn-danger">Logout </button>
+            </form>
+            @else
+            <button class="btn btn-info" data-toggle="modal" data-target="#exampleModal">Login </button>
+            @endif
           </li>
         </ul>
       </div>
@@ -456,15 +467,15 @@
               <h4 class="modal-title" id="exampleModalLabel">Login as Administrator</h4>
             </div>
             <div class="modal-body">
-              <form action="auth" method="post">
+              <form action="login" method="post">
                 @csrf
                 <div class="form-group">
                   <label for="Name">Username</label>
-                  <input type="text" class="form-control" id="Name" placeholder="Username">
+                  <input type="text" class="form-control" id="Name" name="username" placeholder="Username" required>
                 </div>
                 <div class="form-group">
                   <label for="Email">Password</label>
-                  <input type="password" class="form-control" id="Email-1" placeholder="Password">
+                  <input type="password" class="form-control" id="Email-1" name="password" placeholder="Password" required>
                 </div>
               
             </div>
