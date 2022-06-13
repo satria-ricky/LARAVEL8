@@ -14,7 +14,7 @@ class PasarFactory extends Factory
     public function definition()
     {
         return [
-            'nama' => $this->faker->name(),
+            'nama_pasar' => $this->faker->name(),
             'alamat' => $this->faker->address(),
             'tahun_didirikan' => $this->faker->year(),
             'perbaikan_terakhir' => $this->faker->year(),

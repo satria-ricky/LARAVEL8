@@ -15,8 +15,9 @@ class CreatePasarsTable extends Migration
     {
         Schema::create('pasars', function (Blueprint $table) {
             $table->id('id_pasar');
-            $table->string('nama');
+            $table->string('nama_pasar');
             $table->string('alamat');
+            $table->string('deskripsi')->nullable();
             $table->string('tahun_didirikan')->nullable();
             $table->string('perbaikan_terakhir')->nullable();
             $table->string('status_kepemilikan')->nullable();

@@ -23,24 +23,22 @@
 			<div class="card">
 				<div class="card-header">
 					<div class="d-flex align-items-center">
-						<h4 class="card-title">Daftar Pasar</h4>
-						<button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#addRowModal">
+						<h4 class="card-title">Daftar Produk</h4>
+						<button class="btn btn-primary btn-round ml-auto" onclick="buttonModalTambah('tambah_produk')">
 							<i class="fa fa-plus"></i>
-							Tambah Pasar
+							Tambah Produk
 						</button>
 					</div>
 				</div>
 				<div class="card-body">
 					<!-- Modal -->
 					<div class="modal fade" id="addRowModal" tabindex="-1" role="dialog" aria-hidden="true">
-						<div class="modal-dialog" role="document">
+						<div class="modal-dialog modal-sm" role="document">
 							<div class="modal-content">
 								<div class="modal-header no-bd">
 									<h5 class="modal-title">
 										<span class="fw-mediumbold">
-										New</span> 
-										<span class="fw-light">
-											Row
+										Entry Data
 										</span>
 									</h5>
 									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -48,45 +46,37 @@
 									</button>
 								</div>
 								<div class="modal-body">
-									<p class="small">Create a new row using this form, make sure you fill them all</p>
-									<form>
+									<form action="tambah_produk" method="post" id="forminput1" enctype="multipart/form-data">
+										<input type="hidden" id="token" name="_token" value="{{ csrf_token() }}" />
 										<div class="row">
 											<div class="col-sm-12">
 												<div class="form-group form-group-default">
-													<label>Name</label>
-													<input id="addName" type="text" class="form-control" placeholder="fill name">
-												</div>
-											</div>
-											<div class="col-md-6 pr-0">
-												<div class="form-group form-group-default">
-													<label>Position</label>
-													<input id="addPosition" type="text" class="form-control" placeholder="fill position">
-												</div>
-											</div>
-											<div class="col-md-6">
-												<div class="form-group form-group-default">
-													<label>Office</label>
-													<input id="addOffice" type="text" class="form-control" placeholder="fill office">
+													<label>Nama*</label>
+													<input id="id_nama" name="nama" required type="text" class="form-control 1 @error('nama') is-invalid @enderror" placeholder="nama pasar" >
+													@error('nama') 
+														<div class="invalid-feedback">
+															{{ $message }}
+														</div>
+													@enderror
 												</div>
 											</div>
 										</div>
 									</form>
 								</div>
 								<div class="modal-footer no-bd">
-									<button type="button" id="addRowButton" class="btn btn-primary">Add</button>
-									<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+									<button type="button"  onclick="buttonSimpan(1)" class="btn btn-primary">Simpan</button>
+									<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="buttonClear()">Close</button>
 								</div>
 							</div>
 						</div>
 					</div>
 		
 					<div class="table-responsive">
-						<table id="add-row" class="display table table-striped table-hover" >
+						<table id="tabel1" class="display table table-striped table-hover" >
 							<thead>
 								<tr>
 									<th style="text-align: center; width:3%">No</th>
 									<th>Nama</th>
-									<th>Alamat</th>
 									<th style="text-align: center; width:10%">Action</th>
 								</tr>
 							</thead>
@@ -95,18 +85,19 @@
 								<tr>
 									<td>{{$loop->iteration}}</td>
 									<td>{{$row['nama']}}</td>
-									<td>{{$row['alamat']}}</td>
 									<td>
 										<div class="form-button-action">
-											<button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-info btn-lg" data-original-title="Detail">
-												<i class="fa fa-info"></i>
-											</button>
-											<button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit">
+
+											<button type="button" onclick="buttonModalEditProduk({{$row}})" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit" >
 												<i class="fa fa-edit"></i>
 											</button>
-											<button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Hapus">
-												<i class="fa fa-times"></i>
-											</button>
+											<form action="hapus_produk" method="post" id="formHapus{{$row['id']}}">
+												@csrf
+												<input type="hidden" name="id" value="{{$row['id']}}">
+												<button type="button" onclick="buttonHapus({{$row}})" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Hapus">
+													<i class="fa fa-trash"></i>
+												</button>
+											</form>
 										</div>
 									</td>
 								</tr>

@@ -9,5 +9,6 @@ class Produk extends Model
 {
     use HasFactory;
 
-    protected $guarded =['id'];
+    protected $primaryKey = 'id_produk';
+    protected $guarded = ['id_produk'];
 }

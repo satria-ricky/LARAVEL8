@@ -14,7 +14,7 @@ class ProdukFactory extends Factory
     public function definition()
     {
         return [
-            'nama' => $this->faker->name(),
+            'nama_produk' => $this->faker->name(),
         ];
     }
 }

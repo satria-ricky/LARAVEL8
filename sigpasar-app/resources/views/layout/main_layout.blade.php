@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<title>Atlantis Lite - Bootstrap 4 Admin Dashboard</title>
+	<title>Sistem Informasi Pemetaan Lokasi Pasar di Kota Mataram</title>
 	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
 	<link rel="icon" href="{{url('assets_user')}}/img/icon.ico" type="image/x-icon"/>
 
@@ -26,9 +26,12 @@
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-
-	{{-- <link rel="stylesheet" href="{{url('js')}}/alert.js"> --}}
 	<script src="{{ asset('js/alert.js') }}"></script>
+
+	{{-- LEAFLET --}}
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css" integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ==" crossorigin=""/>
+	<script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js" integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ==" crossorigin=""></script>
+
 </head>
 <body>
 	<div class="wrapper">
@@ -36,8 +39,9 @@
 			<!-- Logo Header -->
 			<div class="logo-header" data-background-color="blue">
 				
-				<a href="index.html" class="logo">
-					<img src="{{url('assets_user')}}/img/logo.svg" alt="navbar brand" class="navbar-brand">
+				<a href="#" class="logo">
+					{{-- <img src="{{url('assets_user')}}/img/logo.svg" alt="navbar brand" class="navbar-brand"> --}}
+					<h2 class="text-white pt-3 fw-bold ml-5">SIMPLE</h2>
 				</a>
 				<button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon">
@@ -122,13 +126,18 @@
 											<span class="link-collapse">My Profile</span>
 										</a>
 									</li>
+									<li>
+										<a href="/">
+											<span class="link-collapse">Home Page</span>
+										</a>
+									</li>
 								</ul>
 							</div>
 						</div>
 					</div>
 					<ul class="nav nav-primary">
-						<li class="nav-item active">
-							<a href="#dashboard">
+						<li class="nav-item @if(Request::is('dashboard')) active @endif">
+							<a href="dashboard">
 								<i class="fas fa-home"></i>
 								<p>Dashboard</p>
 							</a>
@@ -141,13 +150,13 @@
 							<h4 class="text-section">Data</h4>
 						</li>
 
-						<li class="nav-item">
+						<li class="nav-item @if(Request::is('pasar')) active @endif">
 							<a href="pasar">
 								<i class="fas fa-store"></i>
 								<p>Pasar</p>
 							</a>
 						</li>
-						<li class="nav-item">
+						<li class="nav-item @if(Request::is('produk')) active @endif">
 							<a href="produk">
 								<i class="fas fa-th-list"></i>
 								<p> Produk </p>
@@ -236,6 +245,11 @@
 	<!-- Atlantis JS -->
 	<script src="{{url('assets_user')}}/js/atlantis.min.js"></script>
 
+	 <script>
+		$('#tabel1').DataTable({
+			});
+	 </script>
+
 	@if(session()->has('success'))
         <script>
             Swal.fire({
@@ -254,5 +268,6 @@
         });
     </script>
     @endif
+
 </body>
 </html>
