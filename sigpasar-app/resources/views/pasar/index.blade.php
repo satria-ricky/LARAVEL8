@@ -41,7 +41,7 @@
 								@foreach ($data as $row)
 								<tr>
 									<td>{{$loop->iteration}}</td>
-									<td>{{$row['nama']}}</td>
+									<td>{{$row['nama_pasar']}}</td>
 									<td>{{$row['alamat']}}</td>
 									<td>
 										<div class="form-button-action">
@@ -58,7 +58,7 @@
 											<form action="hapus_pasar" method="post" id="formHapus{{$row['id_pasar']}}">
 												@csrf
 												<input type="hidden" name="id" value="{{$row['id_pasar']}}">
-												<button type="button" onclick="buttonHapus({{$row}})" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Hapus">
+												<button type="button" onclick="buttonHapus('formHapus',{{$row['id_pasar']}})" data-toggle="tooltip" class="btn btn-link btn-danger" data-original-title="Hapus">
 													<i class="fa fa-trash"></i>
 												</button>
 											</form>

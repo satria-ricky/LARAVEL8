@@ -15,6 +15,7 @@ class PasarFactory extends Factory
     {
         return [
             'nama_pasar' => $this->faker->name(),
+            'deskripsi' => $this->faker->paragraphs(2, true),
             'alamat' => $this->faker->address(),
             'tahun_didirikan' => $this->faker->year(),
             'perbaikan_terakhir' => $this->faker->year(),
@@ -27,7 +28,7 @@ class PasarFactory extends Factory
             'jumlah_pedagang_kios' => $this->faker->randomDigit(),
             'aktivitas' => $this->faker->word(),
             'type_pasar' => $this->faker->word(),
-            'foto' => $this->faker->word(),
+            // 'foto' => $this->faker->word(),
             'latitude' => $this->faker->latitude(),
             'longitude' => $this->faker->longitude(),
         ];

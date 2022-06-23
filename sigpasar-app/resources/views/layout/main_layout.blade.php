@@ -32,6 +32,11 @@
 	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css" integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ==" crossorigin=""/>
 	<script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js" integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ==" crossorigin=""></script>
 
+	<link rel="stylesheet" href="{{ url('leaflet-locatecontrol') }}/dist/L.Control.Locate.min.css" />
+    <script src="{{ url('leaflet-locatecontrol') }}/src/L.Control.Locate.js"></script>
+    <link rel="stylesheet" href="{{ url('leaflet-search') }}/src/leaflet-search.css" />
+    <script src="{{ url('leaflet-search') }}/src/leaflet-search.js"></script>
+	
 </head>
 <body>
 	<div class="wrapper">
@@ -263,6 +268,9 @@
 
 	<!-- Atlantis JS -->
 	<script src="{{url('assets_user')}}/js/atlantis.min.js"></script>
+
+	
+	@if(Request::is('tambah_pasar')) <script src="{{ asset('js/peta_tambah_pasar.js') }}"></script> @endif
 
 	 <script>
 		$('#tabel1').DataTable({

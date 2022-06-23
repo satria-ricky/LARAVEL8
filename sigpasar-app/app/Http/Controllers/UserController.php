@@ -76,9 +76,18 @@ class UserController extends Controller
         ]);
     }
 
+    public function hapus_pasar(Request $req)
+    {
+       
+        // $user = Produk::all()->where('id_produk', $req->id)->each->delete();
+        return redirect('/pasar')->with('success', 'Data Berhasil Dihapus');
+
+    }
+
+
     public function tampil_tambah_pasar ()
     {
-        return view('pasar.index');
+        return view('pasar.tambah_pasar');
     }
 
    

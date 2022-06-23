@@ -17,7 +17,7 @@ class CreatePasarsTable extends Migration
             $table->id('id_pasar');
             $table->string('nama_pasar');
             $table->string('alamat');
-            $table->string('deskripsi')->nullable();
+            $table->text('deskripsi')->nullable();
             $table->string('tahun_didirikan')->nullable();
             $table->string('perbaikan_terakhir')->nullable();
             $table->string('status_kepemilikan')->nullable();
