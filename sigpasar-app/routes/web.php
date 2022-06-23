@@ -32,6 +32,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/profile', [UserController::class, 'tampil_profile']);
     Route::get('/resetPassword', [UserController::class, 'tampil_reset_password']);
     Route::get('/pasar', [UserController::class, 'tampil_pasar']);
+    Route::get('/tambah_pasar', [UserController::class, 'tampil_tambah_pasar']);
     Route::get('/produk', [UserController::class, 'tampil_produk']);
     Route::post('/detil_pasar', [UserController::class, 'detil_pasar']);
 

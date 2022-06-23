@@ -153,11 +153,27 @@
 						</li>
 
 						<li class="nav-item @if(Request::is('pasar')) active @endif">
-							<a href="pasar">
+							<a data-toggle="collapse" href="#tambah_pasar">
 								<i class="fas fa-store"></i>
 								<p>Pasar</p>
+								<span class="caret"></span>
 							</a>
+							<div class="collapse" id="tambah_pasar">
+								<ul class="nav nav-collapse">
+									<li>
+										<a href="/pasar">
+											<span class="sub-item">Daftar Pasar</span>
+										</a>
+									</li>
+									<li>
+										<a href="/tambah_pasar">
+											<span class="sub-item">Tambah Aset</span>
+										</a>
+									</li>
+								</ul>
+							</div>
 						</li>
+
 						<li class="nav-item @if(Request::is('produk')) active @endif">
 							<a href="produk">
 								<i class="fas fa-th-list"></i>

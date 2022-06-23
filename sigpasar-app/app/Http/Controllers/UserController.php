@@ -37,15 +37,10 @@ class UserController extends Controller
 
     public function edit_profile (Request $req)
     {
-        date_default_timezone_set("Asia/Jakarta");
-        $tgl = new \DateTime(Carbon::now()->toDateTimeString());
-        // $tgl = Carbon::parse(date('Y-m-d H:i:s', strtotime($tgl1)));
-        $tgl = $tgl->format('Y-m-d H:i:s');
-        // dd($tgl);
+
         $hasil = [
             'nama' => $req['nama'],
-            'username' => $req['username'],
-            'updated_at' => $tgl
+            'username' => $req['username']
         ];
 
         if($req->file('foto')){
@@ -54,7 +49,7 @@ class UserController extends Controller
                 Storage::delete(Auth::user()->foto);
             }
 
-            $hasil['foto'] = $req->file('foto')->store('foto-user/');
+            $hasil['foto'] = $req->file('foto')->store('foto-user');
         }
 
         User::all()->where('id', Auth::user()->id)->first()->update($hasil);
@@ -79,6 +74,11 @@ class UserController extends Controller
         return view('pasar.index',[
             'data' => $data
         ]);
+    }
+
+    public function tampil_tambah_pasar ()
+    {
+        return view('pasar.index');
     }
 
     public function tampil_produk ()
