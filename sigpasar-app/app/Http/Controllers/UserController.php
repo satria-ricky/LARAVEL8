@@ -81,14 +81,7 @@ class UserController extends Controller
         return view('pasar.index');
     }
 
-    public function tampil_produk ()
-    {
-        $data = Produk::all();
-        return view('produk.index',[
-            'data' => $data
-        ]);
-    }
-
+   
 
     public function tambah_pasar (Request $req)
     {
@@ -96,17 +89,62 @@ class UserController extends Controller
         
     }
 
+    public function tampil_produk ()
+    {
+        $data = Produk::all();
+        return view('produk.index',[
+            'data' => $data
+        ]);
+    }
+    
+    public function edit_produk(Request $req)
+    {
+        // dd($req);
+        $this->validate(
+            $req,
+            ['nama' => 'required|unique:produks,nama_produk'],
+            ['nama.unique' => 'nama produk telah tersedia!']
+        );
+
+        Produk::all()->where('id_produk', $req['id'])->first()->update([
+            'nama_produk' => $req['nama']
+        ]);
+
+        return redirect('/produk')->with('success', 'Data Berhasil Diubah');
+
+    }
+
+
     public function tambah_produk (Request $req)
     {
         // dd($req);
-        $validated = $req->validate([
-            'nama' => 'required|unique:produks,nama|max:100'
-        ]);
+
         
-        Produk::create($validated);
+
+        $this->validate(
+            $req,
+            ['nama' => 'required|unique:produks,nama_produk'],
+            ['nama.unique' => 'nama produk telah tersedia!']
+        );
+        
+        $hasil = [
+            'nama_produk' => $req['nama'],
+        ];
+
+        Produk::create($hasil);
             return redirect('/produk')->with('success', 'Data Berhasil Ditambah');
     
     }
+
+
+    public function hapus_produk(Request $req)
+    {
+       
+        $user = Produk::all()->where('id_produk', $req->id)->each->delete();
+        return redirect('/produk')->with('success', 'Data Berhasil Dihapus');
+
+    }
+
 
     //GUEST
     public function peta_by_pasar ()

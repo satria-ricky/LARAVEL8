@@ -48,6 +48,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     //EDIT
     Route::post('/edit_profile', [UserController::class, 'edit_profile']);
+    Route::post('/edit_produk', [UserController::class, 'edit_produk']);
     Route::post('/reset_password', [UserController::class, 'reset_password']);
 
     //PETA

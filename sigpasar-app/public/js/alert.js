@@ -40,13 +40,6 @@ function buttonSimpan(params) {
       }
   }
 
-  function buttonClear(){
-    $(document).ready(function() {
-        $('.modal').on('hidden.bs.modal', function(){
-            $(this).find('forminput1')[0].reset();
-         });
-    });
-  }
  
   function buttonModalTambah(p) {
     // console.log(params)
@@ -91,10 +84,10 @@ function buttonModalEditProduk(params) {
 
     // console.log($("#forminput1"));
 
-        var inputid = '<input type="hidden" name="id" value="' + params.id_pasar + '"/>'
+        var inputid = '<input type="hidden" name="id" value="' + params.id_produk + '"/>'
         $(inputid).insertAfter("#token")
 
-        $("#id_nama").val(params.nama)
+        $("#id_nama").val(params.nama_produk)
 }
 
 
@@ -112,8 +105,25 @@ function buttonLogout() {
         if (result.isConfirmed) {
             document.getElementById(link).submit();
         }
-      })
-      
+      })   
+}
+
+function buttonHapus(action,id) {
+    var link = action+id;
+    console.log(link)
+    Swal.fire({
+        title: 'Are you sure?',
+        // text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes'
+      }).then((result) => {
+        if (result.isConfirmed) {
+            document.getElementById(link).submit();
+        }
+      })   
 }
 
 

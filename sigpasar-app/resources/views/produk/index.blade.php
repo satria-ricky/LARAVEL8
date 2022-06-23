@@ -52,7 +52,7 @@
 											<div class="col-sm-12">
 												<div class="form-group form-group-default">
 													<label>Nama*</label>
-													<input id="id_nama" name="nama" required type="text" class="form-control 1 @error('nama') is-invalid @enderror" placeholder="nama pasar" >
+													<input id="id_nama" name="nama" required type="text" class="form-control 1 @error('nama') is-invalid @enderror" placeholder="nama produk" >
 													@error('nama') 
 														<div class="invalid-feedback">
 															{{ $message }}
@@ -65,7 +65,7 @@
 								</div>
 								<div class="modal-footer no-bd">
 									<button type="button"  onclick="buttonSimpan(1)" class="btn btn-primary">Simpan</button>
-									<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="buttonClear()">Close</button>
+									<button type="button" class="btn btn-danger" data-dismiss="modal" >Tutup</button>
 								</div>
 							</div>
 						</div>
@@ -76,7 +76,7 @@
 							<thead>
 								<tr>
 									<th style="text-align: center; width:3%">No</th>
-									<th>Nama</th>
+									<th>Nama Produk</th>
 									<th style="text-align: center; width:10%">Action</th>
 								</tr>
 							</thead>
@@ -84,17 +84,17 @@
 								@foreach ($data as $row)
 								<tr>
 									<td>{{$loop->iteration}}</td>
-									<td>{{$row['nama']}}</td>
+									<td>{{$row['nama_produk']}}</td>
 									<td>
 										<div class="form-button-action">
 
-											<button type="button" onclick="buttonModalEditProduk({{$row}})" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit" >
+											<button type="button" onclick="buttonModalEditProduk({{$row}})" data-toggle="tooltip" class="btn btn-link btn-primary " data-original-title="Edit" >
 												<i class="fa fa-edit"></i>
 											</button>
-											<form action="hapus_produk" method="post" id="formHapus{{$row['id']}}">
+											<form action="hapus_produk" method="post" id="formHapus{{$row['id_produk']}}">
 												@csrf
-												<input type="hidden" name="id" value="{{$row['id']}}">
-												<button type="button" onclick="buttonHapus({{$row}})" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Hapus">
+												<input type="hidden" name="id" value="{{$row['id_produk']}}">
+												<button type="button" onclick="buttonHapus('formHapus',{{$row['id_produk']}})" data-toggle="tooltip" class="btn btn-link btn-danger" data-original-title="Hapus">
 													<i class="fa fa-trash"></i>
 												</button>
 											</form>
