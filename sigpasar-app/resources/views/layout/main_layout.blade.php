@@ -88,9 +88,11 @@
 									</li>
 									<li>
 										<div class="dropdown-divider"></div>
-										<a class="dropdown-item" href="#">My Profile</a>
+										<a class="dropdown-item" href="/profile">My Profile</a>
 										<div class="dropdown-divider"></div>
-										<a class="dropdown-item" href="#">Logout</a>
+										<a class="dropdown-item" href="/resetPassword">Reset Password</a>
+										<div class="dropdown-divider"></div>
+										<a class="dropdown-item" href="javascript:" onclick="buttonLogout()">Logout</a>
 									</li>
 								</div>
 							</ul>
@@ -122,7 +124,7 @@
 							<div class="collapse in" id="collapseExample">
 								<ul class="nav">
 									<li>
-										<a href="#profile">
+										<a href="/profile">
 											<span class="link-collapse">My Profile</span>
 										</a>
 									</li>
@@ -207,6 +209,7 @@
 		</div>
 
 	</div>
+
 	<!--   Core JS Files   -->
 	<script src="{{url('assets_user')}}/js/core/jquery.3.2.1.min.js"></script>
 	<script src="{{url('assets_user')}}/js/core/popper.min.js"></script>

@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Sistem Informasi Pemetaan Lokasi Pasar di Kota Mataram</title>
+    <title>Sistem Informasi Pemetaan Lokasi Pasar Tradisional di Kota Mataram</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -112,7 +112,7 @@
     </header>
     <div class="banner">
         <div class="container">
-            <h1 class="font-weight-semibold">Sistem Informasi Pemetaan Lokasi <br>Pasar di Kota Mataram</h1>
+            <h1 class="font-weight-semibold">Sistem Informasi Pemetaan Lokasi <br>Pasar Tradisional di Kota Mataram</h1>
             {{-- <h6 class="font-weight-normal text-muted pb-3">Simple is a simple template with a creative design that solves all your marketing and SEO queries.</h6> --}}
             {{-- <div>
         <button class="btn btn-opacity-light mr-1">Get started</button>
@@ -133,160 +133,35 @@
                             <input class="form-control input-lg" list="datalistOptions" id="exampleDataList"
                                 placeholder="Type to find youre product..." style="width: 60%;">
                             <datalist id="datalistOptions">
-                                <option value="San Francisco">
-                                <option value="New York">
-                                <option value="Seattle">
-                                <option value="Los Angeles">
-                                <option value="Chicago">
+                                @foreach ($produk as $item)
+                                <option value="{{ $item['nama_produk'] }}">    
+                                @endforeach
                             </datalist>
                         </center>
                         {{-- <h6 class="section-subtitle text-muted m-0">List product.</h6> --}}
                     </div>
                     <div class="owl-carousel owl-theme grid-margin">
-                        <div class="card customer-cards">
-                            <div class="card-body">
-                                <div class="text-center">
-                                    <img src="{{ url('assets') }}/images/face2.jpg" width="89" height="89" alt=""
-                                        class="img-customer">
-                                    <p class="m-0 py-3 text-muted">Lorem ipsum dolor sit amet, tincidunt vestibulum.
-                                        Fusce egeabus consectetuer turpis, suspendisse.</p>
-                                    <div class="content-divider m-auto"></div>
-                                    <h6 class="card-title pt-3">Tony Martinez</h6>
-                                    <h6 class="customer-designation text-muted m-0">Marketing Manager</h6>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card customer-cards">
-                            <div class="card-body">
-                                <div class="text-center">
-                                    <img src="{{ url('assets') }}/images/face3.jpg" width="89" height="89" alt=""
-                                        class="img-customer">
-                                    <p class="m-0 py-3 text-muted">Lorem ipsum dolor sit amet, tincidunt vestibulum.
-                                        Fusce egeabus consectetuer turpis, suspendisse.</p>
-                                    <div class="content-divider m-auto"></div>
-                                    <h6 class="card-title pt-3">Sophia Armstrong</h6>
-                                    <h6 class="customer-designation text-muted m-0">Marketing Manager</h6>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card customer-cards">
-                            <div class="card-body">
-                                <div class="text-center">
-                                    <img src="{{ url('assets') }}/images/face20.jpg" width="89" height="89" alt=""
-                                        class="img-customer">
-                                    <p class="m-0 py-3 text-muted">Lorem ipsum dolor sit amet, tincidunt vestibulum.
-                                        Fusce egeabus consectetuer turpis, suspendisse.</p>
-                                    <div class="content-divider m-auto"></div>
-                                    <h6 class="card-title pt-3">Cody Lambert</h6>
-                                    <h6 class="customer-designation text-muted m-0">Marketing Manager</h6>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card customer-cards">
-                            <div class="card-body">
-                                <div class="text-center">
-                                    <img src="{{ url('assets') }}/images/face15.jpg" width="89" height="89" alt=""
-                                        class="img-customer">
-                                    <p class="m-0 py-3 text-muted">Lorem ipsum dolor sit amet, tincidunt vestibulum.
-                                        Fusce egeabus consectetuer turpis, suspendisse.</p>
-                                    <div class="content-divider m-auto"></div>
-                                    <h6 class="card-title pt-3">Cody Lambert</h6>
-                                    <h6 class="customer-designation text-muted m-0">Marketing Manager</h6>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card customer-cards">
-                            <div class="card-body">
-                                <div class="text-center">
-                                    <img src="{{ url('assets') }}/images/face16.jpg" width="89" height="89" alt=""
-                                        class="img-customer">
-                                    <p class="m-0 py-3 text-muted">Lorem ipsum dolor sit amet, tincidunt vestibulum.
-                                        Fusce egeabus consectetuer turpis, suspendisse.</p>
-                                    <div class="content-divider m-auto"></div>
-                                    <h6 class="card-title pt-3">Cody Lambert</h6>
-                                    <h6 class="customer-designation text-muted m-0">Marketing Manager</h6>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card customer-cards">
-                            <div class="card-body">
-                                <div class="text-center">
-                                    <img src="{{ url('assets') }}/images/face1.jpg" width="89" height="89" alt=""
-                                        class="img-customer">
-                                    <p class="m-0 py-3 text-muted">Lorem ipsum dolor sit amet, tincidunt vestibulum.
-                                        Fusce egeabus consectetuer turpis, suspendisse.</p>
-                                    <div class="content-divider m-auto"></div>
-                                    <h6 class="card-title pt-3">Tony Martinez</h6>
-                                    <h6 class="customer-designation text-muted m-0">Marketing Manager</h6>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card customer-cards">
-                            <div class="card-body">
-                                <div class="text-center">
-                                    <img src="{{ url('assets') }}/images/face2.jpg" width="89" height="89" alt=""
-                                        class="img-customer">
-                                    <p class="m-0 py-3 text-muted">Lorem ipsum dolor sit amet, tincidunt vestibulum.
-                                        Fusce egeabus consectetuer turpis, suspendisse.</p>
-                                    <div class="content-divider m-auto"></div>
-                                    <h6 class="card-title pt-3">Tony Martinez</h6>
-                                    <h6 class="customer-designation text-muted m-0">Marketing Manager</h6>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card customer-cards">
-                            <div class="card-body">
-                                <div class="text-center">
-                                    <img src="{{ url('assets') }}/images/face3.jpg" width="89" height="89" alt=""
-                                        class="img-customer">
-                                    <p class="m-0 py-3 text-muted">Lorem ipsum dolor sit amet, tincidunt vestibulum.
-                                        Fusce egeabus consectetuer turpis, suspendisse.</p>
-                                    <div class="content-divider m-auto"></div>
-                                    <h6 class="card-title pt-3">Sophia Armstrong</h6>
-                                    <h6 class="customer-designation text-muted m-0">Marketing Manager</h6>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card customer-cards">
-                            <div class="card-body">
-                                <div class="text-center">
-                                    <img src="{{ url('assets') }}/images/face20.jpg" width="89" height="89" alt=""
-                                        class="img-customer">
-                                    <p class="m-0 py-3 text-muted">Lorem ipsum dolor sit amet, tincidunt vestibulum.
-                                        Fusce egeabus consectetuer turpis, suspendisse.</p>
-                                    <div class="content-divider m-auto"></div>
-                                    <h6 class="card-title pt-3">Cody Lambert</h6>
-                                    <h6 class="customer-designation text-muted m-0">Marketing Manager</h6>
-                                </div>
-                            </div>
-                        </div>
 
+                        @foreach ($produk as $item)
                         <div class="card customer-cards">
                             <div class="card-body">
                                 <div class="text-center">
-                                    <img src="{{ url('assets') }}/images/face20.jpg" width="89" height="89" alt=""
-                                        class="img-customer">
-                                    <p class="m-0 py-3 text-muted">PUNYA ANA.</p>
-                                    <div class="content-divider m-auto"></div>
-                                    <h6 class="card-title pt-3">Cody Lambert</h6>
-                                    <h6 class="customer-designation text-muted m-0">Marketing Manager</h6>
+                                    <div class="card-header">
+                                        {{ $item['nama_produk'] }}
+                                    </div>
+                                    {{-- <img src="{{ url('assets') }}/images/face2.jpg" width="89" height="89" alt=""
+                                        class="img-customer"> --}}
+                                        
+                                        <div class="content-divider m-auto"></div>
+                                        <h6 class="customer-designation text-muted mt-5">Tersedia di</h6>
+                                    <h6 class="card-title">Jumlah Pasar</h6>
+                                    <a href="" class="btn btn-info btn-sm mt-3"> Lihat Lokasi Pasar <i class="fa fa-arrow-right"></i></a>
+                                    
                                 </div>
                             </div>
                         </div>
-
-                        <div class="card customer-cards">
-                            <div class="card-body">
-                                <div class="text-center">
-                                    <img src="{{ url('assets') }}/images/face20.jpg" width="89" height="89" alt=""
-                                        class="img-customer">
-                                    <p class="m-0 py-3 text-muted">IYA.</p>
-                                    <div class="content-divider m-auto"></div>
-                                    <h6 class="card-title pt-3">Cody Lambert</h6>
-                                    <h6 class="customer-designation text-muted m-0">Marketing Manager</h6>
-                                </div>
-                            </div>
-                        </div>
-
+                        @endforeach
+                    
                     </div>
                 </div>
             </section>
@@ -409,16 +284,14 @@
 
 
                         var mymap = new L.Map('data_peta', {
-                            zoom: 14,
+                            zoom: 15,
                             center: new L.latLng([-8.58280355011038, 116.13464826731037])
                         });
 
                         mymap.addLayer(new L.tileLayer(
-                            'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+                            'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                                 maxZoom: 18,
-                                attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
-                                    '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-                                    'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                                attribution: 'Sistem Informasi Pemetaan Lokasi Pasar Tradisional',
                                 id: 'mapbox/streets-v11',
                             }));
 
@@ -458,14 +331,13 @@
                                   <div class="card" style="width: 15rem; height:15rem;">
                                     <div class="card-body">
                                       <h3 class="card-title">` + data[i].nama_pasar + `</h3>
-                                      <p class="card-text">` + data[i].alamat + `, ` + data[i].pasar_deskripsi + `.</p>
+                                      <p class="card-text">` + data[i].alamat + `.</p>
                                       <div class="btn-group">
                                         <form action="detilPasar" method="post">
                                             @csrf
                                             <input type="hidden" name="" value="` + data[i].id_pasar + `">
                                             <button type="submit" class="btn btn-outline-info mr-2"> Detail</button>
                                         </form>
-                                      
                                       <a href="https://www.google.com/maps/dir/?api=1&origin=` + location.coords
                                     .latitude + `,` + location.coords.longitude + `&destination=` +
                                     data[i].latitude + `,` + data[i].longitude + `" target='_blank' type="button" class="btn btn-outline-success"> Rute</a>
@@ -486,16 +358,6 @@
 
         }
 
-
-
-function button_detail(p){
-  
-    // $('#modal_detail').modal('show');
-    
-    console.log(p);
-  
-   
-  }
     </script>
 
   

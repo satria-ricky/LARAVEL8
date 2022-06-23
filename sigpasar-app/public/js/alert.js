@@ -1,4 +1,6 @@
 
+
+
 function buttonSimpan(params) {
     var link = "forminput"+params;
     const mycomp = document.getElementsByClassName("form-control "+params);
@@ -125,3 +127,11 @@ function cekFoto(){
     }
 }
 
+function show_password() {
+    var input = document.getElementById("input_password");
+    if (input.type === "password") {
+      input.type = "text";
+    } else {
+      input.type = "password";
+    }
+  } 

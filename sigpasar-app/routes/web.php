@@ -20,6 +20,7 @@ Route::get('/', [AuthController::class, 'index'])->name('home_page');
 Route::post('/login', [AuthController::class, 'login']);
 
 Route::get('/peta_by_pasar', [UserController::class, 'peta_by_pasar']);
+Route::post('/detilPasar', [UserController::class, 'detilPasar']);
 
 
 Route::group(['middleware' => 'auth'], function () {
@@ -28,9 +29,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', [UserController::class, 'tampil_dashboard']);
     
     //TAMPIL
+    Route::get('/profile', [UserController::class, 'tampil_profile']);
+    Route::get('/resetPassword', [UserController::class, 'tampil_reset_password']);
     Route::get('/pasar', [UserController::class, 'tampil_pasar']);
     Route::get('/produk', [UserController::class, 'tampil_produk']);
     Route::post('/detil_pasar', [UserController::class, 'detil_pasar']);
+
 
     //TAMBAH
     Route::post('/tambah_pasar', [UserController::class, 'tambah_pasar']);
@@ -40,6 +44,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/hapus_pasar', [UserController::class, 'hapus_pasar']);
     Route::post('/hapus_produk', [UserController::class, 'hapus_produk']);
 
+
+    //EDIT
+    Route::post('/edit_profile', [UserController::class, 'edit_profile']);
+    Route::post('/reset_password', [UserController::class, 'reset_password']);
 
     //PETA
     
