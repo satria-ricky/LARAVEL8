@@ -157,7 +157,7 @@
 							<h4 class="text-section">Data</h4>
 						</li>
 
-						<li class="nav-item @if(Request::is('pasar')) active @endif">
+						<li class="nav-item @if(Request::is('pasar')) active @elseif(Request::is('tambah_pasar')) active @endif">
 							<a data-toggle="collapse" href="#tambah_pasar">
 								<i class="fas fa-store"></i>
 								<p>Pasar</p>

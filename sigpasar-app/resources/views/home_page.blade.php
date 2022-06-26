@@ -333,10 +333,10 @@
                                       <h3 class="card-title">` + data[i].nama_pasar + `</h3>
                                       <p class="card-text">` + data[i].alamat + `.</p>
                                       <div class="btn-group">
-                                        <form action="detilPasar" method="post">
+                                        <form action="detil_pasar" method="post">
                                             @csrf
                                             <input type="hidden" name="" value="` + data[i].id_pasar + `">
-                                            <button type="submit" class="btn btn-outline-info mr-2"> Detail</button>
+                                            <button type="submit" formtarget="_blank" class="btn btn-outline-info mr-2"> Detail</button>
                                         </form>
                                       <a href="https://www.google.com/maps/dir/?api=1&origin=` + location.coords
                                     .latitude + `,` + location.coords.longitude + `&destination=` +

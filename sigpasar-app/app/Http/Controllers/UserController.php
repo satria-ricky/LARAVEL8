@@ -12,30 +12,29 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
-{  
+{
 
-    public function tampil_reset_password ()
+    public function tampil_reset_password()
     {
         return view('reset_password.reset');
     }
 
-    public function reset_password (Request $req)
+    public function reset_password(Request $req)
     {
         User::all()->where('id', Auth::user()->id)->first()->update([
             'password' => Hash::make($req['password'])
         ]);
 
         return redirect('/profile')->with('success', 'Password Berhasil Diubah');
-
     }
 
 
-    public function tampil_profile ()
+    public function tampil_profile()
     {
         return view('profile.index');
     }
 
-    public function edit_profile (Request $req)
+    public function edit_profile(Request $req)
     {
 
         $hasil = [
@@ -43,9 +42,9 @@ class UserController extends Controller
             'username' => $req['username']
         ];
 
-        if($req->file('foto')){
-            
-            if(Auth::user()->foto != 'foto-user/profile.jpg'){
+        if ($req->file('foto')) {
+
+            if (Auth::user()->foto != 'foto-user/profile.jpg') {
                 Storage::delete(Auth::user()->foto);
             }
 
@@ -55,57 +54,91 @@ class UserController extends Controller
         User::all()->where('id', Auth::user()->id)->first()->update($hasil);
 
         return redirect('/profile')->with('success', 'Profile Berhasil Diubah');
-
     }
-    
-    public function tampil_dashboard ()
+
+    public function tampil_dashboard()
     {
         $data1 = count(Pasar::all());
         $data2 = count(Produk::all());
-        return view('dashboard.index',[
+        return view('dashboard.index', [
             'pasar' => $data1,
             'produk' => $data2
         ]);
     }
 
-    public function tampil_pasar ()
+    public function tampil_pasar()
     {
         $data = Pasar::all();
-        return view('pasar.index',[
+        return view('pasar.index', [
             'data' => $data
         ]);
     }
 
     public function hapus_pasar(Request $req)
     {
-       
-        // $user = Produk::all()->where('id_produk', $req->id)->each->delete();
-        return redirect('/pasar')->with('success', 'Data Berhasil Dihapus');
 
+        $data = Pasar::findOrFail($req['id']);
+        // dd($data['foto']);
+        $data->delete();
+
+        if ($data['foto'] != 'foto-pasar/default.png' && $data['foto'] != '') {
+            Storage::delete($data['foto']);
+        }
+
+        return redirect('/pasar')->with('success', 'Data Berhasil Dihapus');
     }
 
 
-    public function tampil_tambah_pasar ()
+    public function tampil_tambah_pasar()
     {
         return view('pasar.tambah_pasar');
     }
 
-   
 
-    public function tambah_pasar (Request $req)
+
+    public function tambah_pasar(Request $req)
     {
-        return $req->file('foto')->store('foto-pasar');
-        
+
+        // return $req->file('foto')->store('foto-pasar');
+        // dd($req);
+        $hasil = [
+            'nama_pasar' => $req['nama'],
+            'alamat' => $req['alamat'],
+            'deskripsi' => $req['deskripsi'],
+            'tahun_didirikan' => $req['tahun_didirikan'],
+            'perbaikan_terakhir' => $req['perbaikan_terakhir'],
+            'status_kepemilikan' => $req['status_kepemilikan'],
+            'luas_tanah' => $req['luas_tanah'],
+            'luas_bangunan' => $req['luas_bangunan'],
+            'kondisi' => $req['kondisi'],
+            'komoditi' => $req['komoditi'],
+            'jumlah_pedagang_los' => $req['jumlah_pedagang_los'],
+            'jumlah_pedagang_kios' => $req['jumlah_pedagang_kios'],
+            'aktivitas' => $req['aktivitas'],
+            'type_pasar' => $req['type_pasar'],
+            'latitude' => $req['latitude'],
+            'longitude' => $req['longitude']
+        ];
+
+
+        if ($req->file('foto')) {
+            $hasil['foto'] = $req->file('foto')->store('foto-pasar');
+        } else {
+            $hasil['foto'] = 'foto-pasar/default.png';
+        }
+
+        Pasar::create($hasil);
+        return redirect('/pasar')->with('success', 'Data Berhasil Ditambah');
     }
 
-    public function tampil_produk ()
+    public function tampil_produk()
     {
         $data = Produk::all();
-        return view('produk.index',[
+        return view('produk.index', [
             'data' => $data
         ]);
     }
-    
+
     public function edit_produk(Request $req)
     {
         // dd($req);
@@ -120,54 +153,50 @@ class UserController extends Controller
         ]);
 
         return redirect('/produk')->with('success', 'Data Berhasil Diubah');
-
     }
 
 
-    public function tambah_produk (Request $req)
+    public function tambah_produk(Request $req)
     {
         // dd($req);
 
-        
+
 
         $this->validate(
             $req,
             ['nama' => 'required|unique:produks,nama_produk'],
             ['nama.unique' => 'nama produk telah tersedia!']
         );
-        
+
         $hasil = [
             'nama_produk' => $req['nama'],
         ];
 
         Produk::create($hasil);
-            return redirect('/produk')->with('success', 'Data Berhasil Ditambah');
-    
+        return redirect('/produk')->with('success', 'Data Berhasil Ditambah');
     }
 
 
     public function hapus_produk(Request $req)
     {
-       
-        $user = Produk::all()->where('id_produk', $req->id)->each->delete();
-        return redirect('/produk')->with('success', 'Data Berhasil Dihapus');
+        $data = Produk::findOrFail($req['id']);
+        $data->delete();
 
+        return redirect('/produk')->with('success', 'Data Berhasil Dihapus');
     }
 
 
     //GUEST
-    public function peta_by_pasar ()
-    {
-        $data = Pasar::all();
-        return response()->json($data);
-    }
-
-    public function detilPasar ()
+    public function peta_by_pasar()
     {
         $data = Pasar::all();
         return response()->json($data);
     }
 
 
-
+    public function detil_pasar()
+    {
+        $data = Pasar::all();
+        return response()->json($data);
+    }
 }

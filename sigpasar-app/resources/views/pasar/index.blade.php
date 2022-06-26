@@ -45,10 +45,10 @@
 									<td>{{$row['alamat']}}</td>
 									<td>
 										<div class="form-button-action">
-											<form action="detail_pasar" method="post">
+											<form action="detil_pasar" method="post">
 												@csrf
 												<input type="hidden" name="id" value="{{$row['id_pasar']}}">
-												<button type="submit" data-toggle="tooltip" title="" class="btn btn-link btn-info btn-lg" data-original-title="Detail">
+												<button type="submit" data-toggle="tooltip" title="" class="btn btn-link btn-info btn-lg" formtarget="_blank" data-original-title="Detail">
 													<i class="fa fa-info"></i>
 												</button>
 											</form>
