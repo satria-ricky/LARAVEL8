@@ -70,16 +70,13 @@ class AdminController extends Controller
     
     }
 
-    public function generatQR() 
+    public function pdf_qr() 
     {
-        
-        // return dd('generat');
-        // $pdf = PDF::loadView('export.pdfqr');
-        // return $pdf;
-        $pdf = PDF::loadView('export.pdfqr',[
+        // dd('ini');
+        $pdf = PDF::loadview('export.pdfqr',[
             "data" => Aset::all()
         ]);
-        return $pdf->download('generate.pdf');
+        return $pdf->stream();
     
     }
 

@@ -21,7 +21,7 @@
                     <div class="dropdown-menu">
                       <a class="dropdown-item" href="#" id="buttonImport"> <i class="fas fa-upload"></i> Import </a>
                       <a class="dropdown-item" href="/export"> <i class="fas fa-download"></i> Export</a>
-                      <a class="dropdown-item" target="_blank" href="/generatQR"> <i class="fas fa-qrcode"></i> Generate QR-Code</a>
+                      <a class="dropdown-item" target="_blank" href="/QRcode"> <i class="fas fa-qrcode"></i> Generate QR-Code</a>
                     </div>
                 </div>  
             </div>
