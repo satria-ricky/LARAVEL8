@@ -95,7 +95,6 @@ class UserController extends Controller
     }
 
 
-
     public function tambah_pasar(Request $req)
     {
 
@@ -130,6 +129,20 @@ class UserController extends Controller
         Pasar::create($hasil);
         return redirect('/pasar')->with('success', 'Data Berhasil Ditambah');
     }
+
+    public function tampil_edit_pasar(Request $req)
+    {
+        $id = $req['id'] ??  session()->get('id');
+
+        // dd($id);
+        $data = Pasar::findOrFail($id);
+        // dd($data);
+
+        return view('pasar.edit_pasar',[
+            'data' => $data
+        ]);
+    }
+
 
     public function tampil_produk()
     {

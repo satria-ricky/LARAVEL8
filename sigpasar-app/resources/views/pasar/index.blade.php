@@ -52,9 +52,13 @@
 													<i class="fa fa-info"></i>
 												</button>
 											</form>
-											<button type="button" onclick="buttonModalEdit({{$row}})" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit" >
-												<i class="fa fa-edit"></i>
-											</button>
+											<form action="edit_pasar" method="post">
+												@csrf
+												<input type="hidden" name="id" value="{{$row['id_pasar']}}">
+												<button type="submit" data-toggle="tooltip" title="" class="btn btn-link btn-info btn-lg" data-original-title="Edit">
+													<i class="fa fa-edit"></i>
+												</button>
+											</form>
 											<form action="hapus_pasar" method="post" id="formHapus{{$row['id_pasar']}}">
 												@csrf
 												<input type="hidden" name="id" value="{{$row['id_pasar']}}">

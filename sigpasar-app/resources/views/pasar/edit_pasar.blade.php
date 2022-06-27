@@ -22,25 +22,25 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="d-flex align-items-center">
-                            <h4 class="card-title">Tambah Pasar</h4>
+                            <h4 class="card-title">Edit Pasar</h4>
                         </div>
                     </div>
                     <div class="card-body">
-                        <form action="tambah_pasar" method="post" id="forminput1" enctype="multipart/form-data">
+                        <form action="edit_pasar" method="post" id="forminput1" enctype="multipart/form-data">
                             @csrf
                             <input type="hidden" id="token" name="_token" value="{{ csrf_token() }}" />
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="form-group form-group-default">
                                         <label>Nama*</label>
-                                        <input id="id_nama" name="nama" required type="text" class="form-control 1"
+                                        <input id="id_nama" name="nama" required type="text" class="form-control 1" value="{{ $data->nama_pasar }}"
                                             placeholder="nama pasar">
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
                                     <div class="form-group form-group-default">
                                         <label>Alamat*</label>
-                                        <input id="id_alamat" name="alamat" type="text" required class="form-control 1"
+                                        <input id="id_alamat" name="alamat" type="text" required class="form-control 1" value="{{ $data->alamat }}"
                                             placeholder="alamat">
                                     </div>
                                 </div>
@@ -48,6 +48,7 @@
                                     <div class="form-group form-group-default">
                                         <label>Deskripsi</label>
                                         <textarea class="form-control" id="id_alamat" rows="5" name="deskripsi">
+                                            {{ $data->deskripsi }}
                                         </textarea>
                                     </div>
                                 </div>
@@ -55,13 +56,13 @@
                                     <div class="form-group form-group-default">
                                         <label>Tahun Didirikan</label>
                                         <input id="id_tahun_didirikan" type="date" name="tahun_didirikan"
-                                            class="form-control" placeholder="tahun didirikan">
+                                            class="form-control" placeholder="tahun didirikan" value="{{ $data->tahun_didirikan }}">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group form-group-default">
                                         <label>Perbaikan Terakhir</label>
-                                        <input id="id_perbaikan_terakhir" type="date" name="perbaikan_terakhir"
+                                        <input id="id_perbaikan_terakhir" type="date" name="perbaikan_terakhir" value="{{ $data->perbaikan_terakhir }}"
                                             class="form-control" placeholder="perbaikan terakhir">
                                     </div>
                                 </div>
@@ -70,49 +71,49 @@
                                     <div class="form-group form-group-default">
                                         <label>Status Kepemilikan</label>
                                         <input id="id_status_kepemilikan" type="text" class="form-control"
-                                            name="status_kepemilikan" placeholder="status kepemilikan">
+                                            name="status_kepemilikan" value="{{ $data->status_kepemilikan }}" placeholder="status kepemilikan">
                                     </div>
                                 </div>
 
                                 <div class="col-md-6 pr-0 ">
                                     <div class="form-group form-group-default">
                                         <label>Luas Tanah</label>
-                                        <input id="id_luas_tanah" type="number" class="form-control" name="luas_tanah"
+                                        <input id="id_luas_tanah" type="number" class="form-control" name="luas_tanah" value="{{ $data->luas_tanah }}"
                                             placeholder="luas_tanah">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group form-group-default">
                                         <label>Luas Bangunan</label>
-                                        <input id="id_luas_bangunan" type="number" name="luas_bangunan"
+                                        <input id="id_luas_bangunan" type="number" name="luas_bangunan" value="{{ $data->luas_bangunan }}"
                                             class="form-control" placeholder="luas bangunan">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group form-group-default">
                                         <label>Kondisi</label>
-                                        <input id="id_kondisi" type="text" name="kondisi" class="form-control"
+                                        <input id="id_kondisi" type="text" name="kondisi" class="form-control" value="{{ $data->kondisi }}"
                                             placeholder="kondisi">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group form-group-default">
                                         <label>Komoditi</label>
-                                        <input id="id_komoditi" type="text" name="komoditi" class="form-control"
+                                        <input id="id_komoditi" type="text" name="komoditi" class="form-control" value="{{ $data->komoditi }}"
                                             placeholder="komoditi">
                                     </div>
                                 </div>
                                 <div class="col-md-6 pr-0">
                                     <div class="form-group form-group-default">
                                         <label>Jumlah Pedagang LOS</label>
-                                        <input id="id_jumlah_pedagang_los" type="number" class="form-control"
+                                        <input id="id_jumlah_pedagang_los" type="number" class="form-control" value="{{ $data->jumlah_pedagang_los }}"
                                             name="jumlah_pedagang_los" placeholder="jumlah pedagang los">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group form-group-default">
                                         <label>Jumlah Pedagang KIOS</label>
-                                        <input id="id_jumlah_pedagang_kios" type="number" class="form-control"
+                                        <input id="id_jumlah_pedagang_kios" type="number" class="form-control" value="{{ $data->jumlah_pedagang_kios }}"
                                             name="jumlah_pedagang_kios" placeholder="jumlah pedagang kios">
                                     </div>
                                 </div>
@@ -120,7 +121,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group form-group-default">
                                         <label>Aktivitas</label>
-                                        <input id="id_aktivitas" name="aktivitas" type="text" class="form-control"
+                                        <input id="id_aktivitas" name="aktivitas" type="text" class="form-control" value="{{ $data->aktivitas }}"
                                             placeholder="aktivitas">
                                     </div>
                                 </div>
@@ -128,7 +129,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group form-group-default">
                                         <label>Type Pasar</label>
-                                        <input id="id_type_pasar" type="text" class="form-control" name="type_pasar"
+                                        <input id="id_type_pasar" type="text" class="form-control" name="type_pasar" value="{{ $data->type_pasar }}"
                                             placeholder="type_pasar">
                                     </div>
                                 </div>
@@ -138,7 +139,12 @@
                                         <label>Foto</label>
                                         <input type="file" class="form-control" placeholder="foto pasar"
                                             name="foto" id="id_foto" accept="image/*" onchange="cekFoto()">
-                                        <img class="img-priview rounded mt-2" width="150" id="priviewFoto">
+                                        @if ( old('foto') )
+                                            <img class="img-priview rounded mt-2" width="150" id="priviewFoto">
+                                        @else
+                                            <img src="{{ asset('storage/'.$data->foto) }}" class="img-priview rounded mt-2" width="150" id="priviewFoto">
+                                        @endif
+                                        
                                     </div>
                                 </div>
 
@@ -146,13 +152,13 @@
                                     <div class="form-group form-group-default">
                                         <label>Latitude</label>
                                         <input id="id_latitude" type="text" class="form-control"
-                                            placeholder="latitude" name="latitude" readonly>
+                                            placeholder="latitude" name="latitude" readonly value="{{ $data->latitude }}">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group form-group-default">
                                         <label>Longitude</label>
-                                        <input id="id_longitude" type="text" name="longitude" class="form-control"
+                                        <input id="id_longitude" type="text" name="longitude" class="form-control" value="{{ $data->longitude }}"
                                             placeholder="longitude" readonly>
                                     </div>
                                 </div>
