@@ -76,14 +76,14 @@
 						<li class="nav-item dropdown hidden-caret">
 							<a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
 								<div class="avatar-sm">
-									<img src="{{url('assets_user')}}/img/profile.jpg" alt="..." class="avatar-img rounded-circle">
+									<img src="{{asset('storage/'.Auth::user()->foto)}}" alt="..." class="avatar-img rounded-circle">
 								</div>
 							</a>
 							<ul class="dropdown-menu dropdown-user animated fadeIn">
 								<div class="dropdown-user-scroll scrollbar-outer">
 									<li>
 										<div class="user-box">
-											<div class="avatar-lg"><img src="{{url('assets_user')}}/img/profile.jpg" alt="image profile" class="avatar-img rounded"></div>
+											<div class="avatar-lg"><img src="{{asset('storage/'.Auth::user()->foto)}}" alt="image profile" class="avatar-img rounded"></div>
 											<div class="u-text">
 												<h4>{{ Auth::user()->nama}}</h4>
 												<p class="text-muted">{{Auth::user()->username}}</p>
@@ -114,7 +114,7 @@
 				<div class="sidebar-content">
 					<div class="user">
 						<div class="avatar-sm float-left mr-2">
-							<img src="{{url('assets_user')}}/img/profile.jpg" alt="..." class="avatar-img rounded-circle">
+							<img src="{{asset('storage/'.Auth::user()->foto)}}" alt="..." class="avatar-img rounded-circle">
 						</div>
 						<div class="info">
 							<a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
@@ -271,6 +271,7 @@
 
 	
 	@if(Request::is('tambah_pasar')) <script src="{{ asset('js/peta_tambah_pasar.js') }}"></script> @endif
+	@if(Request::is('edit_pasar')) <script src="{{ asset('js/peta_edit_pasar.js') }}"></script> @endif
 
 	 <script>
 		$('#tabel1').DataTable({

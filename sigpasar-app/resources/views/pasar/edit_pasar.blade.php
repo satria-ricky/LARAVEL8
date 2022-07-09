@@ -139,12 +139,16 @@
                                         <label>Foto</label>
                                         <input type="file" class="form-control" placeholder="foto pasar"
                                             name="foto" id="id_foto" accept="image/*" onchange="cekFoto()">
-                                        @if ( old('foto') )
-                                            <img class="img-priview rounded mt-2" width="150" id="priviewFoto">
-                                        @else
-                                            <img src="{{ asset('storage/'.$data->foto) }}" class="img-priview rounded mt-2" width="150" id="priviewFoto">
-                                        @endif
                                         
+                                        @if ($data->foto == '')
+                                            <img src="{{ asset('storage/foto-pasar/default.png') }}" class="img-priview rounded mt-2" width="150" id="priviewFoto">
+                                        @else
+                                            @if ( old('foto') )
+                                            <img class="img-priview rounded mt-2" width="150" id="priviewFoto">
+                                            @else
+                                                <img src="{{ asset('storage/'.$data->foto) }}" class="img-priview rounded mt-2" width="150" id="priviewFoto">
+                                            @endif
+                                        @endif
                                     </div>
                                 </div>
 

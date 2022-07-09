@@ -1,14 +1,17 @@
+var edit_lat = $("#id_latitude").val();
+var edit_long = $("#id_longitude").val();
+
 getData_peta();
 function getData_peta(){
  
    document.getElementById('mapid').innerHTML = "<div id='data_peta' style='height: 400px;'><button type='button' onclick='getLocation()' style='position: absolute; top: 10px; right: 10px; padding: 5px; z-index: 1000; cursor: pointer;' > Gunakan Lokasi Saya</button></div>";
 
-  var curLocation=[0,0];
+   var curLocation=[edit_lat, edit_long];
   if (curLocation[0]==0 && curLocation[1]==0) {
     curLocation =[-8.58280355011038, 116.13464826731037]; 
   }
 
-  var mymap = L.map('data_peta').setView([-8.58280355011038, 116.13464826731037], 13);
+  var mymap = L.map('data_peta').setView([edit_lat, edit_long], 13);
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 18,
     attribution: 'Sistem Informasi Pemetaan Lokasi Pasar Tradisional di Kota Mataram',
