@@ -14,6 +14,14 @@ use Illuminate\Support\Facades\Storage;
 class UserController extends Controller
 {
 
+    
+    public function tambah_rekomendasi($id) {
+        
+        // dd($id);
+
+        
+     }
+
     public function tampil_reset_password()
     {
         return view('reset_password.reset');
@@ -207,9 +215,10 @@ class UserController extends Controller
     }
 
 
-    public function detil_pasar()
+    public function detil_pasar(Request $req)
     {
-        $data = Pasar::all();
+        $data = Pasar::findOrFail($req['id']);
+        UserController::tambah_rekomendasi($req['id']);
         return response()->json($data);
     }
 }
