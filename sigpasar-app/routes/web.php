@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PasarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,26 +32,26 @@ Route::group(['middleware' => 'auth'], function () {
     //TAMPIL
     Route::get('/profile', [UserController::class, 'tampil_profile']);
     Route::get('/resetPassword', [UserController::class, 'tampil_reset_password']);
-    Route::get('/pasar', [UserController::class, 'tampil_pasar']);
-    Route::get('/tambah_pasar', [UserController::class, 'tampil_tambah_pasar']);
-    Route::get('/produk', [UserController::class, 'tampil_produk']);
+    Route::get('/pasar', [PasarController::class, 'tampil_pasar']);
+    Route::get('/tambah_pasar', [PasarController::class, 'tampil_tambah_pasar']);
+    Route::get('/produk', [ProdukController::class, 'tampil_produk']);
 
 
 
     //TAMBAH
-    Route::post('/tambah_pasar', [UserController::class, 'tambah_pasar']);
-    Route::post('/tambah_produk', [UserController::class, 'tambah_produk']);
+    Route::post('/tambah_pasar', [PasarController::class, 'tambah_pasar']);
+    Route::post('/tambah_produk', [ProdukController::class, 'tambah_produk']);
 
     //HAPUS
-    Route::post('/hapus_pasar', [UserController::class, 'hapus_pasar']);
-    Route::post('/hapus_produk', [UserController::class, 'hapus_produk']);
+    Route::post('/hapus_pasar', [PasarController::class, 'hapus_pasar']);
+    Route::post('/hapus_produk', [ProdukController::class, 'hapus_produk']);
 
 
     //EDIT
     Route::post('/edit_profile', [UserController::class, 'edit_profile']);
-    Route::post('/edit_produk', [UserController::class, 'edit_produk']);
-    Route::post('/edit_pasar', [UserController::class, 'tampil_edit_pasar']);
-    Route::post('/editPasar', [UserController::class, 'edit_pasar']);
+    Route::post('/edit_produk', [ProdukController::class, 'edit_produk']);
+    Route::post('/edit_pasar', [PasarController::class, 'tampil_edit_pasar']);
+    Route::post('/editPasar', [PasarController::class, 'edit_pasar']);
     Route::post('/reset_password', [UserController::class, 'reset_password']);
 
     //PETA

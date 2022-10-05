@@ -27,6 +27,7 @@
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 	<script src="{{ asset('js/alert.js') }}"></script>
+	<script src="{{ asset('css/aset.css') }}"></script>
 
 	{{-- LEAFLET --}}
 	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css" integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ==" crossorigin=""/>
@@ -172,7 +173,7 @@
 									</li>
 									<li>
 										<a href="/tambah_pasar">
-											<span class="sub-item">Tambah Aset</span>
+											<span class="sub-item">Tambah Pasar</span>
 										</a>
 									</li>
 								</ul>

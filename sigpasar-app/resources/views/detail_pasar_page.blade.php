@@ -41,141 +41,133 @@
 
 </head>
 
-<body id="body" data-spy="scroll" data-target=".navbar" data-offset="100">
+<body id="body" data-spy="scroll" data-target=".navbar">
+    
     <header id="header-section">
-        <nav class="navbar navbar-expand-lg pl-3 pl-sm-0" id="navbar">
+        <nav class="navbar navbar-expand" style="background-color: #f7f8fa; padding-top:8px; padding-bottom:4px; padding-left:8px">
             <div class="container">
-                <div class="navbar-brand-wrapper d-flex w-100">
-                    <img src="{{ url('assets') }}/images/Group2.svg" alt="">
-                    <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse"
-                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="mdi mdi-menu navbar-toggler-icon"></span>
-                    </button>
-                </div>
-                <div class="collapse navbar-collapse navbar-menu-wrapper" id="navbarSupportedContent">
-                    <ul class="navbar-nav align-items-lg-center align-items-start ml-auto">
-                        <li class="d-flex align-items-center justify-content-between pl-4 pl-lg-0">
-                            <div class="navbar-collapse-logo">
-                                <img src="{{ url('assets') }}/images/Group2.svg" alt="">
-                            </div>
-                            <button class="navbar-toggler close-button" type="button" data-toggle="collapse"
-                                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                                aria-expanded="false" aria-label="Toggle navigation">
-                                <span class="mdi mdi-close navbar-toggler-icon pl-5"></span>
-                            </button>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#header-section">Home <span
-                                    class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#feedback-section">Product</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#features-section">Map</a>
-                        </li>
-                        {{-- <li class="nav-item">
-                          <a class="nav-link" href="#digital-marketing-section">Blog</a>  
-                        </li> --}}
-
-                        <li class="nav-item btn-contact-us pl-4 pl-lg-0">
-                            @if (Auth::user())
-                                <ul class="navbar-nav ml-auto">
-                                    <li class="nav-item dropdown no-arrow">
-                                        <button type="button" class="btn btn-danger dropdown-toggle"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Hi, {{ Auth::user()->nama }}
-                                        </button>
-                                        <div class="dropdown-menu dropdown-menu-right">
-                                            <a class="dropdown-item" href="dashboard">Back to Dashboard</a>
-                                            <div class="dropdown-divider"></div>
-                                            <form action="logout" method="post" id="formLogout">
-                                                @csrf
-                                                <button type="button" onclick="buttonLogout()"
-                                                    class="dropdown-item">Logout </button>
-                                            </form>
-                                        </div>
-                                    </li>
-                                </ul>
-                            @else
-                                <button class="btn btn-info" data-toggle="modal" data-target="#exampleModal">Login
-                                </button>
-                            @endif
-
-
-                        </li>
-                    </ul>
+                <div class="navbar-brand-wrapper">
+                   <h3> Detail Pasar | {{ $data->nama_pasar }}</h1>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="banner">
-        <div class="container">
-            <h1 class="font-weight-semibold">Sistem Informasi Pemetaan Lokasi <br>Pasar Tradisional di Kota Mataram</h1>
-            {{-- <h6 class="font-weight-normal text-muted pb-3">Simple is a simple template with a creative design that solves all your marketing and SEO queries.</h6> --}}
-            {{-- <div>
-        <button class="btn btn-opacity-light mr-1">Get started</button>
-        <button class="btn btn-opacity-success ml-1">Learn more</button>
-      </div> --}}
-            <img src="{{ url('assets') }}/images/Group171.svg" alt="" class="img-fluid">
-        </div>
-    </div>
 
-    <div class="content-wrapper" style="margin-top: 130px;">
+    <div class="content-wrapper">
+
+        
         <div class="container">
-            <section class="customer-feedback" id="feedback-section">
+            
+            @if ($data->foto == '')
+                <img src="{{ asset('storage/foto-pasar/default.png') }}" alt="foto pasar">
+            @else
+                <img src="{{ asset('storage/'.$data->foto) }}" alt="foto pasar">
+            @endif
+            
+            
+
+              
+            <div class="container mt-2" style="border-style:solid;border-color: silver; border-radius: 15px; padding:10px; border-width: thin; ">
+                
+                <table class="table" style="width: 100%;">
+                    <tbody>
+                      <tr>
+                        <th scope="row" style="width:20%; border-top: none !important;">Nama Pasar</th>
+                        <td style="width:1%;border-top: none !important;">:</td>
+                        <td style="border-top: none !important;">{{ $data->nama_pasar }}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Alamat</th>
+                        <td>:</td>
+                        <td>{{ $data->alamat }}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Deskripsi</th>
+                        <td>:</td>
+                        <td>{{ $data->deskripsi }}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Tahun Didirikan</th>
+                        <td>:</td>
+                        <td>{{ $data->tahun_didirikan }}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Perbaikan Terakhir</th>
+                        <td>:</td>
+                        <td>{{ $data->perbaikan_terakhir }}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Status Kepemilikan</th>
+                        <td>:</td>
+                        <td>{{ $data->status_kepemilikan }}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Luas Tanah</th>
+                        <td>:</td>
+                        <td>{{ $data->luas_tanah }}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Luas Bangunan</th>
+                        <td>:</td>
+                        <td>{{ $data->luas_bangunan }}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Kondisi</th>
+                        <td>:</td>
+                        <td>{{ $data->kondisi }}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Komoditi</th>
+                        <td>:</td>
+                        <td>{{ $data->komoditi }}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Jumlah Pedagang Los</th>
+                        <td>:</td>
+                        <td>{{ $data->jumlah_pedagang_los }}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Jumlah Pedagang Kios</th>
+                        <td>:</td>
+                        <td>{{ $data->jumlah_pedagang_kios }}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Aktivitas</th>
+                        <td>:</td>
+                        <td>{{ $data->aktivitas }}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Type Pasar</th>
+                        <td>:</td>
+                        <td>{{ $data->type_pasar }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+            </div>
+
+        <hr>
+            <section class="customer-feedback">
                 <div class="row">
                     <div class="col-12 text-center pb-5">
                         <h2>Products</h2>
-                        {{-- <input type="text" placeholder="find youre product" class="form-control"> --}}
+                        
                         <center>
                             <input class="form-control input-lg" list="datalistOptions" id="exampleDataList"
                                 placeholder="Type to find youre product..." style="width: 60%;">
-                            <datalist id="datalistOptions">
-                                @foreach ($produk as $item)
-                                <option value="{{ $item['nama_produk'] }}">    
-                                @endforeach
-                            </datalist>
                         </center>
-                        {{-- <h6 class="section-subtitle text-muted m-0">List product.</h6> --}}
+                        
                     </div>
-                    <div class="owl-carousel owl-theme grid-margin">
-
-                        @foreach ($produk as $item)
-                        <div class="card customer-cards">
-                            <div class="card-body">
-                                <div class="text-center">
-                                    <div class="card-header">
-                                        {{ $item['nama_produk'] }}
-                                    </div>
-                                    {{-- <img src="{{ url('assets') }}/images/face2.jpg" width="89" height="89" alt=""
-                                        class="img-customer"> --}}
-                                        
-                                        <div class="content-divider m-auto"></div>
-                                        <h6 class="customer-designation text-muted mt-5">Tersedia di</h6>
-                                    <h6 class="card-title">Jumlah Pasar</h6>
-                                    <a href="" class="btn btn-info btn-sm mt-3"> Lihat Lokasi Pasar <i class="fa fa-arrow-right"></i></a>
-                                    
-                                </div>
-                            </div>
-                        </div>
-                        @endforeach
                     
-                    </div>
                 </div>
             </section>
-
-            <section class="contact-us mb-5" id="features-section">
+            <hr>
+            <section class="contact-us mb-5">
                 <center>
                     <div class="content-header">
                         <h2>Maps</h2>
 
                     </div>
                 </center>
-                {{-- <div class="contact-us-bgimage grid-margin">
-                  
-                </div> --}}
                 <div id="mapid" style="width: 100%; height: 400px;"></div>
             </section>
 
@@ -187,59 +179,8 @@
 
                 {{-- <p class="text-center text-muted pt-2">Distributed By: <a href="https://www.themewagon.com/" class="px-1" target="_blank">Themewagon</a></p> --}}
             </footer>
-
-            <!-- Modal for Contact - us Button -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="exampleModalLabel">Login as Administrator</h4>
-                        </div>
-                        <div class="modal-body">
-                            <form action="login" method="post">
-                                @csrf
-                                <div class="form-group">
-                                    <label for="Name">Username</label>
-                                    <input type="text" class="form-control" id="Name" name="username"
-                                        placeholder="Username" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="Email">Password</label>
-                                    <input type="password" class="form-control" id="Email-1" name="password"
-                                        placeholder="Password" required>
-                                </div>
-
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-success">Login</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
-
-    @if (session()->has('success'))
-        <script>
-            Swal.fire({
-                icon: "success",
-                title: "Berhasil!",
-                text: "{{ session('success') }}",
-            });
-        </script>
-    @endif
-    @if (session()->has('error'))
-        <script>
-            Swal.fire({
-                icon: "error",
-                title: "Gagal!",
-                text: "{{ session('error') }}",
-            });
-        </script>
-    @endif
 
     <script src="{{ url('assets') }}/vendors/jquery/jquery.min.js"></script>
     <script src="{{ url('assets') }}/vendors/bootstrap/bootstrap.min.js"></script>

@@ -26,9 +26,10 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form action="edit_pasar" method="post" id="forminput1" enctype="multipart/form-data">
+                        <form action="editPasar" method="post" id="forminput1" enctype="multipart/form-data">
                             @csrf
                             <input type="hidden" id="token" name="_token" value="{{ csrf_token() }}" />
+                            <input type="hidden" name="id" value="{{ $data->id_pasar }}" />
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="form-group form-group-default">
@@ -172,7 +173,7 @@
                         </form>
                     </div>
 					<div class="card-action">
-						<button class="btn btn-primary mr-auto" onclick="buttonSimpan(1)">Tambah Data</button>
+						<button class="btn btn-primary mr-auto" onclick="buttonSimpan(1)">Simpan Perubahan</button>
 						{{-- <button class="btn btn-danger">Cancel</button> --}}
 					</div>
                 </div>

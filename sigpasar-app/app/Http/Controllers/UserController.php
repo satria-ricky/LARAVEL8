@@ -15,10 +15,12 @@ class UserController extends Controller
 {
 
     
-    public function tambah_rekomendasi($id) {
+    public function tambah_rekomendasi_produk($id) {
         
         // dd($id);
-
+        $produk = Produk::findOrFail($id);
+        $produk->rekomendasi += 1;
+        $produk->save();
         
      }
 
@@ -82,130 +84,21 @@ class UserController extends Controller
         ]);
     }
 
-    public function hapus_pasar(Request $req)
-    {
-
-        $data = Pasar::findOrFail($req['id']);
-        // dd($data['foto']);
-        $data->delete();
-
-        if ($data['foto'] != 'foto-pasar/default.png' && $data['foto'] != '') {
-            Storage::delete($data['foto']);
-        }
-
-        return redirect('/pasar')->with('success', 'Data Berhasil Dihapus');
-    }
+    
 
 
-    public function tampil_tambah_pasar()
-    {
-        return view('pasar.tambah_pasar');
-    }
+    
 
 
-    public function tambah_pasar(Request $req)
-    {
+    
 
-        // return $req->file('foto')->store('foto-pasar');
-        // dd($req);
-        $hasil = [
-            'nama_pasar' => $req['nama'],
-            'alamat' => $req['alamat'],
-            'deskripsi' => $req['deskripsi'],
-            'tahun_didirikan' => $req['tahun_didirikan'],
-            'perbaikan_terakhir' => $req['perbaikan_terakhir'],
-            'status_kepemilikan' => $req['status_kepemilikan'],
-            'luas_tanah' => $req['luas_tanah'],
-            'luas_bangunan' => $req['luas_bangunan'],
-            'kondisi' => $req['kondisi'],
-            'komoditi' => $req['komoditi'],
-            'jumlah_pedagang_los' => $req['jumlah_pedagang_los'],
-            'jumlah_pedagang_kios' => $req['jumlah_pedagang_kios'],
-            'aktivitas' => $req['aktivitas'],
-            'type_pasar' => $req['type_pasar'],
-            'latitude' => $req['latitude'],
-            'longitude' => $req['longitude']
-        ];
+    
 
 
-        if ($req->file('foto')) {
-            $hasil['foto'] = $req->file('foto')->store('foto-pasar');
-        } else {
-            $hasil['foto'] = 'foto-pasar/default.png';
-        }
-
-        Pasar::create($hasil);
-        return redirect('/pasar')->with('success', 'Data Berhasil Ditambah');
-    }
-
-    public function tampil_edit_pasar(Request $req)
-    {
-        $id = $req['id'] ??  session()->get('id');
-
-        // dd($id);
-        $data = Pasar::findOrFail($id);
-        // dd($data);
-
-        return view('pasar.edit_pasar',[
-            'data' => $data
-        ]);
-    }
+    
 
 
-    public function tampil_produk()
-    {
-        $data = Produk::all();
-        return view('produk.index', [
-            'data' => $data
-        ]);
-    }
-
-    public function edit_produk(Request $req)
-    {
-        // dd($req);
-        $this->validate(
-            $req,
-            ['nama' => 'required|unique:produks,nama_produk'],
-            ['nama.unique' => 'nama produk telah tersedia!']
-        );
-
-        Produk::all()->where('id_produk', $req['id'])->first()->update([
-            'nama_produk' => $req['nama']
-        ]);
-
-        return redirect('/produk')->with('success', 'Data Berhasil Diubah');
-    }
-
-
-    public function tambah_produk(Request $req)
-    {
-        // dd($req);
-
-
-
-        $this->validate(
-            $req,
-            ['nama' => 'required|unique:produks,nama_produk'],
-            ['nama.unique' => 'nama produk telah tersedia!']
-        );
-
-        $hasil = [
-            'nama_produk' => $req['nama'],
-        ];
-
-        Produk::create($hasil);
-        return redirect('/produk')->with('success', 'Data Berhasil Ditambah');
-    }
-
-
-    public function hapus_produk(Request $req)
-    {
-        $data = Produk::findOrFail($req['id']);
-        $data->delete();
-
-        return redirect('/produk')->with('success', 'Data Berhasil Dihapus');
-    }
-
+   
 
     //GUEST
     public function peta_by_pasar()
@@ -218,7 +111,9 @@ class UserController extends Controller
     public function detil_pasar(Request $req)
     {
         $data = Pasar::findOrFail($req['id']);
-        UserController::tambah_rekomendasi($req['id']);
-        return response()->json($data);
+        // UserController::tambah_rekomendasi_produk($req['id']);
+        return view('detail_pasar_page',[
+            'data' => $data
+        ]);
     }
 }

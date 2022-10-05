@@ -22,8 +22,7 @@ function buttonSimpan(params) {
           });
       } else {
         Swal.fire({
-            title: "Apakah data sudah benar?",
-            text: "Data yang sudah disimpan tidak dapat dirubah!",
+            title: "Yakin Simpan Data?",
             icon: "warning",
             showCancelButton: true,
             confirmButtonText: "Simpan",
@@ -145,3 +144,10 @@ function show_password() {
       input.type = "password";
     }
   } 
+
+
+  //DATE
+  $('.date-own').datepicker({
+    minViewMode: 2,
+    format: 'yyyy'
+  });

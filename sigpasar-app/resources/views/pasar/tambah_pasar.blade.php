@@ -54,15 +54,13 @@
                                 <div class="col-md-6 pr-0">
                                     <div class="form-group form-group-default">
                                         <label>Tahun Didirikan</label>
-                                        <input id="id_tahun_didirikan" type="date" name="tahun_didirikan"
-                                            class="form-control" placeholder="tahun didirikan">
+                                        <input id="id_tahun_didirikan" type="text" name="tahun_didirikan" class="date-own form-control">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group form-group-default">
                                         <label>Perbaikan Terakhir</label>
-                                        <input id="id_perbaikan_terakhir" type="date" name="perbaikan_terakhir"
-                                            class="form-control" placeholder="perbaikan terakhir">
+                                        <input id="id_perbaikan_terakhir" type="date" name="perbaikan_terakhir" class="form-control">
                                     </div>
                                 </div>
 
