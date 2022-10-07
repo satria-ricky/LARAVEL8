@@ -59,9 +59,11 @@
         <div class="container">
             
             @if ($data->foto == '')
-                <img src="{{ asset('storage/foto-pasar/default.png') }}" alt="foto pasar">
+                <img src="{{ asset('storage/foto-pasar/default.png') }}">
             @else
-                <img src="{{ asset('storage/'.$data->foto) }}" alt="foto pasar">
+              <center>
+                <img src="{{ asset('storage/'.$data->foto) }}" alt="foto pasar" alt="foto pasar" width="250" height="250">
+              </center>
             @endif
             
             

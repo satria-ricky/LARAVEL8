@@ -54,13 +54,15 @@
                                 <div class="col-md-6 pr-0">
                                     <div class="form-group form-group-default">
                                         <label>Tahun Didirikan</label>
-                                        <input id="id_tahun_didirikan" type="text" name="tahun_didirikan" class="date-own form-control">
+                                        {{-- <input id="id_tahun_didirikan" type="text" name="tahun_didirikan" class="date-own form-control"> --}}
+                                        <select id="id_tahun_didirikan" name="tahun_didirikan" class="form-control"></select>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group form-group-default">
                                         <label>Perbaikan Terakhir</label>
-                                        <input id="id_perbaikan_terakhir" type="date" name="perbaikan_terakhir" class="form-control">
+                                        {{-- <input id="id_perbaikan_terakhir" type="date" name="perbaikan_terakhir" class="form-control"> --}}
+                                        <select id="id_perbaikan_terakhir" name="perbaikan_terakhir" class="form-control"></select>
                                     </div>
                                 </div>
 
@@ -137,6 +139,7 @@
                                         <input type="file" class="form-control" placeholder="foto pasar"
                                             name="foto" id="id_foto" accept="image/*" onchange="cekFoto()">
                                         <img class="img-priview rounded mt-2" width="150" id="priviewFoto">
+                                        <p class="fs-6 text-danger">*Hanya menerima file jpg/png</p>
                                     </div>
                                 </div>
 

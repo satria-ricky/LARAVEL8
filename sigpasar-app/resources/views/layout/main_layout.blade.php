@@ -271,7 +271,19 @@
 	<script src="{{url('assets_user')}}/js/atlantis.min.js"></script>
 
 	
-	@if(Request::is('tambah_pasar')) <script src="{{ asset('js/peta_tambah_pasar.js') }}"></script> @endif
+	@if(Request::is('tambah_pasar')) 
+		<script src="{{ asset('js/peta_tambah_pasar.js') }}"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script>
+			let startYear = 1800;
+			let endYear = new Date().getFullYear();
+			for (i = endYear; i > startYear; i--)
+			{
+			$('#id_tahun_didirikan').append($('<option />').val(i).html(i));
+			$('#id_perbaikan_terakhir').append($('<option />').val(i).html(i));
+			}
+		</script>
+	@endif
 	@if(Request::is('edit_pasar')) <script src="{{ asset('js/peta_edit_pasar.js') }}"></script> @endif
 
 	 <script>

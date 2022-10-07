@@ -112,8 +112,10 @@ class UserController extends Controller
     {
         $data = Pasar::findOrFail($req['id']);
         // UserController::tambah_rekomendasi_produk($req['id']);
+        
         return view('detail_pasar_page',[
-            'data' => $data
+            'data' => $data,
+            'produk' => $produk
         ]);
     }
 }
