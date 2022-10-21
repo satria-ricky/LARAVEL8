@@ -56,15 +56,17 @@
                                 <div class="col-md-6 pr-0">
                                     <div class="form-group form-group-default">
                                         <label>Tahun Didirikan</label>
-                                        <input id="id_tahun_didirikan" type="date" name="tahun_didirikan"
-                                            class="form-control" placeholder="tahun didirikan" value="{{ $data->tahun_didirikan }}">
+                                        {{-- <input id="id_tahun_didirikan" type="date" name="tahun_didirikan"
+                                            class="form-control" placeholder="tahun didirikan" value="{{ $data->tahun_didirikan }}"> --}}
+                                            <select id="id_tahun_didirikan" name="tahun_didirikan" class="form-control"></select>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group form-group-default">
                                         <label>Perbaikan Terakhir</label>
-                                        <input id="id_perbaikan_terakhir" type="date" name="perbaikan_terakhir" value="{{ $data->perbaikan_terakhir }}"
-                                            class="form-control" placeholder="perbaikan terakhir">
+                                        {{-- <input id="id_perbaikan_terakhir" type="date" name="perbaikan_terakhir" value="{{ $data->perbaikan_terakhir }}"
+                                            class="form-control" placeholder="perbaikan terakhir"> --}}
+                                            <select id="id_perbaikan_terakhir" name="perbaikan_terakhir" class="form-control"></select>
                                     </div>
                                 </div>
 
@@ -150,6 +152,7 @@
                                                 <img src="{{ asset('storage/'.$data->foto) }}" class="img-priview rounded mt-2" width="150" id="priviewFoto">
                                             @endif
                                         @endif
+                                        <p class="fs-6 text-danger">*Hanya menerima file jpg/png</p>
                                     </div>
                                 </div>
 

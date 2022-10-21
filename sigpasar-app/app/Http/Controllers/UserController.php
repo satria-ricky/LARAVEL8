@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Pasar;
 use App\Models\Produk;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -84,22 +85,6 @@ class UserController extends Controller
         ]);
     }
 
-    
-
-
-    
-
-
-    
-
-    
-
-
-    
-
-
-   
-
     //GUEST
     public function peta_by_pasar()
     {
@@ -112,7 +97,11 @@ class UserController extends Controller
     {
         $data = Pasar::findOrFail($req['id']);
         // UserController::tambah_rekomendasi_produk($req['id']);
-        
+        $produk = DB::table('produk_pasars')
+            ->leftJoin('produks', 'produk_pasars.id_produk', '=', 'produks.id_produk')
+            ->get(['produks.*','produk_pasars.jumlah'])
+            ->where('produk_pasars.id_pasar',$req['id']);
+        ddd($produk);
         return view('detail_pasar_page',[
             'data' => $data,
             'produk' => $produk

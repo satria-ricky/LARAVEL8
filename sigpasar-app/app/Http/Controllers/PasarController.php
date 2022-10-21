@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Pasar;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class PasarController extends Controller
@@ -26,6 +30,19 @@ class PasarController extends Controller
 
         // return $req->file('foto')->store('foto-pasar');
         // dd($req);
+
+       $cekKoordinat =  Rule::unique("pasars")->where(
+            function ($query) use ($req) {
+                return $query->where(
+                    [
+                        ["latitude", "=", $req->latitude],
+                        ["longitude", "=", $req->longitude]
+                    ]
+                );
+            });
+            dd($cekKoordinat);
+
+            
         $hasil = [
             'nama_pasar' => $req['nama'],
             'alamat' => $req['alamat'],
@@ -87,12 +104,25 @@ class PasarController extends Controller
 
     public function edit_pasar(Request $req)
     {
-        // $id = $req['id'] ??  session()->get('id');
+        $id = $req['id'] ??  session()->get('id');
 
-        // // dd($id);
-        // $data = Pasar::findOrFail($id);
-        ddd($req);
+        $data = Pasar::findOrFail($id);
+        // ddd($req);
+        
+        $cekKoordinat = DB::table('pasars')
+        ->where('latitude',$req['latitude'])
+        ->where('longitude',$req['longitude'])
+        ->where('id_pasar','!=',$id)->get();
+        // $cekKoordinat = DB::select('select * from pasars where latitude = ? AND longitude = ? AND id_pasar != ?', [$req['latitude'],$req['longitude'],$id]);
+        // ddd($cekKoordinat);
 
+        if ($cekKoordinat != null) {
+            // ddd($cekKoordinat);
+            
+        } else {
+            return 'berhasil diubah';
+        }
+        
         $hasil = [
             'nama_pasar' => $req['nama'],
             'alamat' => $req['alamat'],
@@ -112,12 +142,18 @@ class PasarController extends Controller
             'longitude' => $req['longitude']
         ];
 
+        
 
         if ($req->file('foto')) {
+
+            if (Auth::user()->foto != 'foto-user/profile.jpg') {
+                Storage::delete(Auth::user()->foto);
+            }
+
             $hasil['foto'] = $req->file('foto')->store('foto-pasar');
-        } else {
-            $hasil['foto'] = 'foto-pasar/default.png';
         }
+
+        User::all()->where('id', Auth::user()->id)->first()->update($hasil);
 
         Pasar::create($hasil);
         return redirect('/editPasar')->with('success', 'Data Berhasil Ditambah');
