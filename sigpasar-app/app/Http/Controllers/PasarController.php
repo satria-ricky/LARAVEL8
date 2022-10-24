@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Storage;
 
 class PasarController extends Controller
@@ -28,53 +29,42 @@ class PasarController extends Controller
     public function tambah_pasar(Request $req)
     {
 
-        // return $req->file('foto')->store('foto-pasar');
-        // dd($req);
+    $cekKoordinat = DB::select('select * from pasars where latitude = ? AND longitude = ?', [$req['latitude'],$req['longitude']]);
+        // ddd($cekKoordinat);
 
-       $cekKoordinat =  Rule::unique("pasars")->where(
-            function ($query) use ($req) {
-                return $query->where(
-                    [
-                        ["latitude", "=", $req->latitude],
-                        ["longitude", "=", $req->longitude]
-                    ]
-                );
-            });
-         if ($cekKoordinat) {
-            dd('lokasi sama');
-         } else {
-            dd('lokasi beda');
-         }
+         if (!$cekKoordinat) {
+            // dd('lokasi beda');
+            $hasil = [
+                'nama_pasar' => $req['nama'],
+                'alamat' => $req['alamat'],
+                'deskripsi' => $req['deskripsi'],
+                'tahun_didirikan' => $req['tahun_didirikan'],
+                'perbaikan_terakhir' => $req['perbaikan_terakhir'],
+                'status_kepemilikan' => $req['status_kepemilikan'],
+                'luas_tanah' => $req['luas_tanah'],
+                'luas_bangunan' => $req['luas_bangunan'],
+                'kondisi' => $req['kondisi'],
+                'komoditi' => $req['komoditi'],
+                'jumlah_pedagang_los' => $req['jumlah_pedagang_los'],
+                'jumlah_pedagang_kios' => $req['jumlah_pedagang_kios'],
+                'aktivitas' => $req['aktivitas'],
+                'type_pasar' => $req['type_pasar'],
+                'latitude' => $req['latitude'],
+                'longitude' => $req['longitude']
+            ];
+            if ($req->file('foto')) {
+                $hasil['foto'] = $req->file('foto')->store('foto-pasar');
+            } else {
+                $hasil['foto'] = 'foto-pasar/default.png';
+            }
 
-            
-        $hasil = [
-            'nama_pasar' => $req['nama'],
-            'alamat' => $req['alamat'],
-            'deskripsi' => $req['deskripsi'],
-            'tahun_didirikan' => $req['tahun_didirikan'],
-            'perbaikan_terakhir' => $req['perbaikan_terakhir'],
-            'status_kepemilikan' => $req['status_kepemilikan'],
-            'luas_tanah' => $req['luas_tanah'],
-            'luas_bangunan' => $req['luas_bangunan'],
-            'kondisi' => $req['kondisi'],
-            'komoditi' => $req['komoditi'],
-            'jumlah_pedagang_los' => $req['jumlah_pedagang_los'],
-            'jumlah_pedagang_kios' => $req['jumlah_pedagang_kios'],
-            'aktivitas' => $req['aktivitas'],
-            'type_pasar' => $req['type_pasar'],
-            'latitude' => $req['latitude'],
-            'longitude' => $req['longitude']
-        ];
+            Pasar::create($hasil);
+            return redirect('/pasar')->with('success', 'Data Berhasil Ditambah');
 
-
-        if ($req->file('foto')) {
-            $hasil['foto'] = $req->file('foto')->store('foto-pasar');
         } else {
-            $hasil['foto'] = 'foto-pasar/default.png';
-        }
-
-        Pasar::create($hasil);
-        return redirect('/pasar')->with('success', 'Data Berhasil Ditambah');
+            // dd('lokasi sama');
+            return redirect('/tambah_pasar')->with('error', 'Harap memasukkan koordinat yg berbeda!');
+         }
     }
 
 
@@ -95,11 +85,8 @@ class PasarController extends Controller
 
     public function tampil_edit_pasar(Request $req)
     {
-        $id = $req['id'] ??  session()->get('id');
-
-        // dd($id);
+        $id = Crypt::decrypt($req->id_pasar);
         $data = Pasar::findOrFail($id);
-        // dd($data);
 
         return view('pasar.edit_pasar',[
             'data' => $data
@@ -113,54 +100,54 @@ class PasarController extends Controller
         $data = Pasar::findOrFail($id);
         // ddd($req);
         
-        $cekKoordinat = DB::table('pasars')
-        ->where('latitude',$req['latitude'])
-        ->where('longitude',$req['longitude'])
-        ->where('id_pasar','!=',$id)->get();
-        // $cekKoordinat = DB::select('select * from pasars where latitude = ? AND longitude = ? AND id_pasar != ?', [$req['latitude'],$req['longitude'],$id]);
+        // $cekKoordinat = DB::table('pasars')
+        // ->where('latitude',$req['latitude'])
+        // ->where('longitude',$req['longitude'])
+        // ->where('id_pasar','!=',$id)->get();
+        $cekKoordinat = DB::select('select * from pasars where latitude = ? AND longitude = ? AND id_pasar != ?', [$req['latitude'],$req['longitude'],$id]);
         // ddd($cekKoordinat);
 
-        if ($cekKoordinat != null) {
-            // ddd($cekKoordinat);
+        if (!$cekKoordinat) {
+            // return 'beda';
+            $hasil = [
+                'nama_pasar' => $req['nama'],
+                'alamat' => $req['alamat'],
+                'deskripsi' => $req['deskripsi'],
+                'tahun_didirikan' => $req['tahun_didirikan'],
+                'perbaikan_terakhir' => $req['perbaikan_terakhir'],
+                'status_kepemilikan' => $req['status_kepemilikan'],
+                'luas_tanah' => $req['luas_tanah'],
+                'luas_bangunan' => $req['luas_bangunan'],
+                'kondisi' => $req['kondisi'],
+                'komoditi' => $req['komoditi'],
+                'jumlah_pedagang_los' => $req['jumlah_pedagang_los'],
+                'jumlah_pedagang_kios' => $req['jumlah_pedagang_kios'],
+                'aktivitas' => $req['aktivitas'],
+                'type_pasar' => $req['type_pasar'],
+                'latitude' => $req['latitude'],
+                'longitude' => $req['longitude']
+            ];
+    
+            
+    
+            if ($req->file('foto')) {
+    
+                if (Auth::user()->foto != 'foto-pasar/default.png') {
+                    Storage::delete($data->foto);
+                }
+    
+                $hasil['foto'] = $req->file('foto')->store('foto-pasar');
+            }
+    
+            Pasar::all()->where('id_pasar', $id)->first()->update($hasil);
+            return redirect('/pasar')->with('success', 'Data Berhasil Diubah!');
             
         } else {
-            return 'berhasil diubah';
+            // return 'sama';
+            return redirect('/EditPasar/'.Crypt::encrypt($id))->with('error', 'Harap memasukkan koordinat yg berbeda!');
         }
         
-        $hasil = [
-            'nama_pasar' => $req['nama'],
-            'alamat' => $req['alamat'],
-            'deskripsi' => $req['deskripsi'],
-            'tahun_didirikan' => $req['tahun_didirikan'],
-            'perbaikan_terakhir' => $req['perbaikan_terakhir'],
-            'status_kepemilikan' => $req['status_kepemilikan'],
-            'luas_tanah' => $req['luas_tanah'],
-            'luas_bangunan' => $req['luas_bangunan'],
-            'kondisi' => $req['kondisi'],
-            'komoditi' => $req['komoditi'],
-            'jumlah_pedagang_los' => $req['jumlah_pedagang_los'],
-            'jumlah_pedagang_kios' => $req['jumlah_pedagang_kios'],
-            'aktivitas' => $req['aktivitas'],
-            'type_pasar' => $req['type_pasar'],
-            'latitude' => $req['latitude'],
-            'longitude' => $req['longitude']
-        ];
-
         
-
-        if ($req->file('foto')) {
-
-            if (Auth::user()->foto != 'foto-user/profile.jpg') {
-                Storage::delete(Auth::user()->foto);
-            }
-
-            $hasil['foto'] = $req->file('foto')->store('foto-pasar');
-        }
-
-        User::all()->where('id', Auth::user()->id)->first()->update($hasil);
-
-        Pasar::create($hasil);
-        return redirect('/editPasar')->with('success', 'Data Berhasil Ditambah');
     }
 
 }

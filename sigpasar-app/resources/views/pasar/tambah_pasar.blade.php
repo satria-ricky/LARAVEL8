@@ -33,7 +33,7 @@
                                 <div class="col-sm-12">
                                     <div class="form-group form-group-default">
                                         <label>Nama*</label>
-                                        <input id="id_nama" name="nama" required type="text" class="form-control 1"
+                                        <input id="id_nama" name="nama" required type="text" class="form-control 1" value="{{ old('nama') }}"
                                             placeholder="nama pasar">
                                     </div>
                                 </div>

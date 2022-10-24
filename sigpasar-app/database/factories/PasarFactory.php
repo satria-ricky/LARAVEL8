@@ -28,7 +28,7 @@ class PasarFactory extends Factory
             'jumlah_pedagang_kios' => $this->faker->randomDigit(),
             'aktivitas' => $this->faker->word(),
             'type_pasar' => $this->faker->word(),
-            // 'foto' => $this->faker->word(),
+            'foto' => 'foto-pasar/default.png',
             'latitude' => $this->faker->latitude(),
             'longitude' => $this->faker->longitude(),
         ];

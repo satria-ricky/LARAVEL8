@@ -26,7 +26,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form action="editPasar" method="post" id="forminput1" enctype="multipart/form-data">
+                        <form action="/editPasar" method="post" id="forminput1" enctype="multipart/form-data">
                             @csrf
                             <input type="hidden" id="token" name="_token" value="{{ csrf_token() }}" />
                             <input type="hidden" name="id" value="{{ $data->id_pasar }}" />

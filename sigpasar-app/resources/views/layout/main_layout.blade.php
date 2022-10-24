@@ -158,7 +158,7 @@
 							<h4 class="text-section">Data</h4>
 						</li>
 
-						<li class="nav-item @if(Request::is('pasar')) active @elseif(Request::is('tambah_pasar')) active @elseif(Request::is('edit_pasar')) active @endif">
+						<li class="nav-item @if(Request::is('pasar')) active @elseif(Request::is('tambah_pasar')) active @elseif(Request::is('EditPasar/*')) active @endif">
 							<a data-toggle="collapse" href="#tambah_pasar">
 								<i class="fas fa-store"></i>
 								<p>Pasar</p>
@@ -273,7 +273,7 @@
 	
 	@if(Request::is('tambah_pasar')) 
 		<script src="{{ asset('js/peta_tambah_pasar.js') }}"></script>
-		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		{{-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> --}}
 		<script>
 			let startYear = 1800;
 			let endYear = new Date().getFullYear();
@@ -284,9 +284,10 @@
 			}
 		</script>
 	@endif
-	@if(Request::is('edit_pasar')) 
+
+	@if(Request::is('EditPasar/*')) 
 		<script src="{{ asset('js/peta_edit_pasar.js') }}"></script> 
-		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		{{-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> --}}
 		<script>
 			let startYear = 1800;
 			let endYear = new Date().getFullYear();
@@ -300,6 +301,23 @@
 		</script>
 	@endif
 
+	
+	{{-- @if ($inActive == 'edit_pasar')
+		<script src="{{ asset('js/peta_edit_pasar.js') }}"></script> 
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script>
+			let startYear = 1800;
+			let endYear = new Date().getFullYear();
+			for (i = endYear; i > startYear; i--)
+			{
+				$('#id_tahun_didirikan').append($('<option />').val(i).html(i));
+				$('#id_perbaikan_terakhir').append($('<option />').val(i).html(i));
+				document.getElementById('id_tahun_didirikan').value={{ $data->tahun_didirikan }};
+				document.getElementById('id_perbaikan_terakhir').value={{ $data->perbaikan_terakhir }};
+			}
+		</script>
+		
+	@endif --}}
 	 <script>
 		$('#tabel1').DataTable({
 			});

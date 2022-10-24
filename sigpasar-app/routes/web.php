@@ -50,12 +50,11 @@ Route::group(['middleware' => 'auth'], function () {
     //EDIT
     Route::post('/edit_profile', [UserController::class, 'edit_profile']);
     Route::post('/edit_produk', [ProdukController::class, 'edit_produk']);
-    Route::post('/edit_pasar', [PasarController::class, 'tampil_edit_pasar']);
+    Route::get('/EditPasar/{id_pasar}', [PasarController::class, 'tampil_edit_pasar'])->name('EditPasar');
     Route::post('/editPasar', [PasarController::class, 'edit_pasar']);
     Route::post('/reset_password', [UserController::class, 'reset_password']);
 
     //PETA
-
 
 
 });

@@ -52,13 +52,11 @@
 													<i class="fa fa-info"></i>
 												</button>
 											</form>
-											<form action="edit_pasar" method="post">
-												@csrf
-												<input type="hidden" name="id" value="{{$row['id_pasar']}}">
-												<button type="submit" data-toggle="tooltip" title="" class="btn btn-link btn-info btn-lg" data-original-title="Edit">
-													<i class="fa fa-edit"></i>
-												</button>
-											</form>
+
+											<a href="/EditPasar/{{Crypt::encrypt($row['id_pasar'])}}" data-toggle="tooltip" title="" class="btn btn-link btn-info btn-lg" data-original-title="Edit">
+												<i class="fa fa-edit"></i>
+											</a>
+
 											<form action="hapus_pasar" method="post" id="formHapus{{$row['id_pasar']}}">
 												@csrf
 												<input type="hidden" name="id" value="{{$row['id_pasar']}}">
