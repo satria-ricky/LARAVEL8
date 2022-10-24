@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Pasar;
+use App\Models\Produk;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Storage;
+use PhpParser\Node\Stmt\Foreach_;
 
 class PasarController extends Controller
 {
@@ -75,7 +77,7 @@ class PasarController extends Controller
         // dd($data['foto']);
         $data->delete();
 
-        if ($data['foto'] != 'foto-pasar/default.png' && $data['foto'] != '') {
+        if ($data['foto'] != 'foto-pasar/default.png') {
             Storage::delete($data['foto']);
         }
 
@@ -87,9 +89,40 @@ class PasarController extends Controller
     {
         $id = Crypt::decrypt($req->id_pasar);
         $data = Pasar::findOrFail($id);
+        $dataProduk = DB::table('produk_pasars')
+            ->leftJoin('pasars', 'produk_pasars.id_pasar', '=', 'pasars.id_pasar')
+            ->leftJoin('produks', 'produk_pasars.id_produk', '=', 'produks.id_produk')
+            ->where('produk_pasars.id_pasar',$id)
+            ->get(['pasars.nama_pasar','produks.nama_produk','produk_pasars.*']);
 
+        // $colprodukpasar = pluck($dataProduk)->toArray();
+        $colprodukpasar = DB::table('produk_pasars')
+        ->leftJoin('pasars', 'produk_pasars.id_pasar', '=', 'pasars.id_pasar')
+        ->leftJoin('produks', 'produk_pasars.id_produk', '=', 'produks.id_produk')
+        ->where('produk_pasars.id_pasar',$id)
+        ->pluck('produks.nama_produk')->toArray();
+
+        // ddd($colprodukpasar);
+        $produk = Produk::all();
+        $colproduk = collect($produk);
+       
+        $tampung_produk = [];
+
+
+        foreach($colproduk as $result) {
+            if (in_array($result->nama_produk, $colprodukpasar)){}
+            else{
+                $tampung_produk[] = [
+                    'id_produk' => $result->id_produk,
+                    'nama_produk' => $result->nama_produk,
+                ];
+            }
+        }
+        
         return view('pasar.edit_pasar',[
-            'data' => $data
+            'data' => $data,
+            'dataProduk' => $dataProduk,
+            'dataProdukFormTambah' => $tampung_produk
         ]);
     }
 
@@ -132,7 +165,7 @@ class PasarController extends Controller
     
             if ($req->file('foto')) {
     
-                if (Auth::user()->foto != 'foto-pasar/default.png') {
+                if ($data->foto != 'foto-pasar/default.png') {
                     Storage::delete($data->foto);
                 }
     
@@ -141,7 +174,7 @@ class PasarController extends Controller
     
             Pasar::all()->where('id_pasar', $id)->first()->update($hasil);
             return redirect('/pasar')->with('success', 'Data Berhasil Diubah!');
-            
+
         } else {
             // return 'sama';
             return redirect('/EditPasar/'.Crypt::encrypt($id))->with('error', 'Harap memasukkan koordinat yg berbeda!');

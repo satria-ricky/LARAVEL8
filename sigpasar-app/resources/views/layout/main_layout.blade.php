@@ -145,7 +145,7 @@
 					</div>
 					<ul class="nav nav-primary">
 						<li class="nav-item @if(Request::is('dashboard')) active @endif">
-							<a href="dashboard">
+							<a href="/dashboard">
 								<i class="fas fa-home"></i>
 								<p>Dashboard</p>
 							</a>
@@ -181,7 +181,7 @@
 						</li>
 
 						<li class="nav-item @if(Request::is('produk')) active @endif">
-							<a href="produk">
+							<a href="/produk">
 								<i class="fas fa-th-list"></i>
 								<p> Produk </p>
 							</a>

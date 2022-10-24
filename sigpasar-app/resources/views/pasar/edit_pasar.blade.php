@@ -23,6 +23,10 @@
                     <div class="card-header">
                         <div class="d-flex align-items-center">
                             <h4 class="card-title">Edit Pasar</h4>
+                            <button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#modalKelolaProduk">
+                                <i class="fa fa-edit"></i>
+                                Produk
+                            </button>
                         </div>
                     </div>
                     <div class="card-body">
@@ -182,6 +186,96 @@
                 </div>
             </div>
 
+        </div>
+    </div>
+
+    {{-- modal --}}
+    <div class="modal fade" id="modalKelolaProduk" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header no-bd">
+                    <h5 class="modal-title">
+                        <span class="fw-mediumbold">
+                        Kelola produk di</span> 
+                        <span class="fw-light">
+                             {{ $data->nama_pasar }}
+                        </span>
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="table-responsive">
+						<table id="tabel1" class="display table table-striped table-hover" >
+							<thead>
+								<tr>
+									<th style="text-align: center; width:10%">No</th>
+									<th style="width:80%">Nama Produk</th>
+									<th style="text-align: center; width:10%">Action</th>
+								</tr>
+							</thead>
+							<tbody>
+								@foreach ($dataProduk as $row)
+								<tr>
+									<td>{{$loop->iteration}}</td>
+									<td>{{$row->nama_produk}}</td>
+									<td>
+											<form action="hapus_produk_pasar" method="post" id="formHapus{{$row->id}}">
+												@csrf
+												<input type="hidden" name="id" value="{{$row->id}}">
+												<button type="button" onclick="buttonHapus('formHapus',{{$row->id}})" data-toggle="tooltip" class="btn btn-link btn-danger" data-original-title="Hapus">
+													<i class="fa fa-trash"></i>
+												</button>
+											</form>
+										</div>
+									</td>
+								</tr>
+								@endforeach
+							</tbody>
+						</table>
+					</div>
+                    
+                </div>
+                <div class="modal-footer no-bd">
+                    <button type="button" data-toggle="modal" data-target="#modalTambahProduk" class="btn btn-primary">Tambah Produk</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- modal tambah produk --}}
+    <div class="modal fade" id="modalTambahProduk" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header no-bd">
+                    <h5 class="modal-title">
+                        <span class="fw-mediumbold">
+                            List Produk 
+                        </span> 
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <hr style="border-top: 1px solid rgb(199, 193, 193);">
+                    <form action="/tambahProdukPasar" method="post">
+                        @csrf
+                        <div class="form-group">
+                            @foreach ($dataProdukFormTambah as $row)
+                                <input type="checkbox" id="produk{{ $row['id_produk'] }}" name="produk{{ $row['id_produk'] }}" value="{{ $row['id_produk'] }}"><label for="produk1"> {{ $row['nama_produk'] }}</label><br>
+                            @endforeach
+                            
+                        </div>
+                    </form>
+                    <hr style="border-top: 1px solid rgb(199, 193, 193);">
+                </div>
+                <div class="modal-footer no-bd">
+                    <button type="button" id="addRowButton" onclick="return confirm('Yakin ingin ditambah?')" class="btn btn-primary">Tambah</button>
+                </div>
+            </div>
         </div>
     </div>
 @endsection

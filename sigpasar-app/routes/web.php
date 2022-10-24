@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PasarController;
+use App\Http\Controllers\ProdukController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +42,7 @@ Route::group(['middleware' => 'auth'], function () {
     //TAMBAH
     Route::post('/tambah_pasar', [PasarController::class, 'tambah_pasar']);
     Route::post('/tambah_produk', [ProdukController::class, 'tambah_produk']);
+    Route::post('/tambah_produk_pasar', [PasarController::class, 'tambah_produk_pasar']);
 
     //HAPUS
     Route::post('/hapus_pasar', [PasarController::class, 'hapus_pasar']);
