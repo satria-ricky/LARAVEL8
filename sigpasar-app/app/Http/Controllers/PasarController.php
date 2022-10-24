@@ -40,7 +40,11 @@ class PasarController extends Controller
                     ]
                 );
             });
-            dd($cekKoordinat);
+         if ($cekKoordinat) {
+            dd('lokasi sama');
+         } else {
+            dd('lokasi beda');
+         }
 
             
         $hasil = [
