@@ -93,6 +93,7 @@ class PasarController extends Controller
             ->leftJoin('pasars', 'produk_pasars.id_pasar', '=', 'pasars.id_pasar')
             ->leftJoin('produks', 'produk_pasars.id_produk', '=', 'produks.id_produk')
             ->where('produk_pasars.id_pasar',$id)
+            ->orderByRaw('produks.nama_produk ASC')
             ->get(['pasars.nama_pasar','produks.nama_produk','produk_pasars.*']);
 
         // $colprodukpasar = pluck($dataProduk)->toArray();
@@ -103,7 +104,7 @@ class PasarController extends Controller
         ->pluck('produks.nama_produk')->toArray();
 
         // ddd($colprodukpasar);
-        $produk = Produk::all();
+        $produk = Produk::orderBy('nama_produk','ASC')->get();
         $colproduk = collect($produk);
        
         $tampung_produk = [];
@@ -131,12 +132,6 @@ class PasarController extends Controller
         $id = $req['id'] ??  session()->get('id');
 
         $data = Pasar::findOrFail($id);
-        // ddd($req);
-        
-        // $cekKoordinat = DB::table('pasars')
-        // ->where('latitude',$req['latitude'])
-        // ->where('longitude',$req['longitude'])
-        // ->where('id_pasar','!=',$id)->get();
         $cekKoordinat = DB::select('select * from pasars where latitude = ? AND longitude = ? AND id_pasar != ?', [$req['latitude'],$req['longitude'],$id]);
         // ddd($cekKoordinat);
 
@@ -182,5 +177,21 @@ class PasarController extends Controller
         
         
     }
+
+
+    public function tambah_produk_pasar(Request $req)
+    {
+        // ddd($req->id_produk);
+
+        foreach ($req->id_produk as $row) {
+            DB::table('produk_pasars')->insert([
+                'id_pasar' => $req->id_pasar, 
+                'id_produk' => $row
+                ]);
+        }
+
+        return redirect('/EditPasar/'.Crypt::encrypt($req->id_pasar))->with('success', 'Data Produk Berhasil Ditambahkan!');
+    }
+
 
 }

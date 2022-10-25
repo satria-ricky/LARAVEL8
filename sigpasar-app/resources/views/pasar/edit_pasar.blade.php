@@ -261,20 +261,21 @@
                 </div>
                 <div class="modal-body">
                     <hr style="border-top: 1px solid rgb(199, 193, 193);">
-                    <form action="/tambahProdukPasar" method="post">
+                    <form action="/tambah_produk_pasar" method="post">
                         @csrf
+                        <input type="hidden" name="id_pasar" value="{{ $data->id_pasar }}" />
                         <div class="form-group">
                             @foreach ($dataProdukFormTambah as $row)
-                                <input type="checkbox" id="produk{{ $row['id_produk'] }}" name="produk{{ $row['id_produk'] }}" value="{{ $row['id_produk'] }}"><label for="produk1"> {{ $row['nama_produk'] }}</label><br>
+                                <input type="checkbox" id="produk{{ $row['id_produk'] }}" name="id_produk[]" value="{{ $row['id_produk'] }}"><label for="produk{{ $row['id_produk'] }}"> {{ $row['nama_produk'] }}</label><br>
                             @endforeach
-                            
                         </div>
-                    </form>
+                   
                     <hr style="border-top: 1px solid rgb(199, 193, 193);">
                 </div>
                 <div class="modal-footer no-bd">
-                    <button type="button" id="addRowButton" onclick="return confirm('Yakin ingin ditambah?')" class="btn btn-primary">Tambah</button>
+                    <button type="submit" onclick="return confirm('Yakin ingin ditambah?')" class="btn btn-primary">Tambah</button>
                 </div>
+            </form>
             </div>
         </div>
     </div>
