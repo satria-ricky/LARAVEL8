@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Produk;
+use App\Models\ProdukPasar;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 
 class ProdukController extends Controller
 {
@@ -43,6 +45,14 @@ class ProdukController extends Controller
         $data->delete();
 
         return redirect('/produk')->with('success', 'Data Berhasil Dihapus');
+    }
+
+    public function hapus_produk_pasar(Request $req)
+    {
+        $data = ProdukPasar::findOrFail($req['id']);
+        $data->delete();
+
+        return redirect('/EditPasar/'.Crypt::encrypt($req->id_pasar))->with('success', 'Data Produk Berhasil Dihapus!');
     }
 
 

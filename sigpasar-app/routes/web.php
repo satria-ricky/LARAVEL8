@@ -47,6 +47,7 @@ Route::group(['middleware' => 'auth'], function () {
     //HAPUS
     Route::post('/hapus_pasar', [PasarController::class, 'hapus_pasar']);
     Route::post('/hapus_produk', [ProdukController::class, 'hapus_produk']);
+    Route::post('/hapus_produk_pasar', [ProdukController::class, 'hapus_produk_pasar']);
 
 
     //EDIT

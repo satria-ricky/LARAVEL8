@@ -222,9 +222,10 @@
 									<td>{{$loop->iteration}}</td>
 									<td>{{$row->nama_produk}}</td>
 									<td>
-											<form action="hapus_produk_pasar" method="post" id="formHapus{{$row->id}}">
+											<form action="/hapus_produk_pasar" method="post" id="formHapus{{$row->id}}">
 												@csrf
 												<input type="hidden" name="id" value="{{$row->id}}">
+												<input type="hidden" name="id_pasar" value="{{$data->id_pasar}}">
 												<button type="button" onclick="buttonHapus('formHapus',{{$row->id}})" data-toggle="tooltip" class="btn btn-link btn-danger" data-original-title="Hapus">
 													<i class="fa fa-trash"></i>
 												</button>
