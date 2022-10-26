@@ -88,9 +88,9 @@
                                             Hi, {{ Auth::user()->nama }}
                                         </button>
                                         <div class="dropdown-menu dropdown-menu-right">
-                                            <a class="dropdown-item" href="dashboard">Back to Dashboard</a>
+                                            <a class="dropdown-item" href="/dashboard">Back to Dashboard</a>
                                             <div class="dropdown-divider"></div>
-                                            <form action="logout" method="post" id="formLogout">
+                                            <form action="/logout" method="post" id="formLogout">
                                                 @csrf
                                                 <button type="button" onclick="buttonLogout()"
                                                     class="dropdown-item">Logout </button>
@@ -142,20 +142,20 @@
                     </div>
                     <div class="owl-carousel owl-theme grid-margin">
 
-                        @foreach ($produk as $item)
+                        @foreach ($dataProduk as $item)
                         <div class="card customer-cards">
                             <div class="card-body">
                                 <div class="text-center">
                                     <div class="card-header">
-                                        {{ $item['nama_produk'] }}
+                                        Produk {{ $item->nama_produk }}
                                     </div>
                                     {{-- <img src="{{ url('assets') }}/images/face2.jpg" width="89" height="89" alt=""
                                         class="img-customer"> --}}
                                         
                                         <div class="content-divider m-auto"></div>
                                         <h6 class="customer-designation text-muted mt-5">Tersedia di</h6>
-                                    <h6 class="card-title">Jumlah Pasar</h6>
-                                    <a href="" class="btn btn-info btn-sm mt-3"> Lihat Lokasi Pasar <i class="fa fa-arrow-right"></i></a>
+                                    <h6 class="card-title">{{ $item->total_pasar }} Pasar</h6>
+                                    <a href="/" class="btn btn-info btn-sm mt-3"> Lihat Lokasi Pasar <i class="fa fa-arrow-right"></i></a>
                                     
                                 </div>
                             </div>
@@ -284,7 +284,7 @@
 
 
                         var mymap = new L.Map('data_peta', {
-                            zoom: 15,
+                            zoom: 12,
                             center: new L.latLng([-8.58280355011038, 116.13464826731037])
                         });
 

@@ -95,16 +95,21 @@ class UserController extends Controller
 
     public function detil_pasar(Request $req)
     {
-        $data = Pasar::findOrFail($req['id']);
+        $id = $req['id'];
+        $data = Pasar::findOrFail($id);
         // UserController::tambah_rekomendasi_produk($req['id']);
-        $produk = DB::table('produk_pasars')
+        $dataProduk = DB::table('produk_pasars')
+            ->leftJoin('pasars', 'produk_pasars.id_pasar', '=', 'pasars.id_pasar')
             ->leftJoin('produks', 'produk_pasars.id_produk', '=', 'produks.id_produk')
-            ->get(['produks.*','produk_pasars.jumlah'])
-            ->where('produk_pasars.id_pasar',$req['id']);
-        ddd($produk);
+            ->where('produk_pasars.id_pasar',$id)
+            ->orderByRaw('produks.nama_produk ASC')
+            ->get(['pasars.nama_pasar','produks.nama_produk','produk_pasars.*']);
+
+        // ddd($dataProduk);
+
         return view('detail_pasar_page',[
             'data' => $data,
-            'produk' => $produk
+            'produk' => $dataProduk
         ]);
     }
 }

@@ -45,7 +45,7 @@
 									<td>{{$row['alamat']}}</td>
 									<td>
 										<div class="form-button-action">
-											<form action="detil_pasar" method="post">
+											<form action="/detil_pasar" method="post">
 												@csrf
 												<input type="hidden" name="id" value="{{$row['id_pasar']}}">
 												<button type="submit" data-toggle="tooltip" title="" class="btn btn-link btn-info btn-lg" formtarget="_blank" data-original-title="Detail">
@@ -57,7 +57,7 @@
 												<i class="fa fa-edit"></i>
 											</a>
 
-											<form action="hapus_pasar" method="post" id="formHapus{{$row['id_pasar']}}">
+											<form action="/hapus_pasar" method="post" id="formHapus{{$row['id_pasar']}}">
 												@csrf
 												<input type="hidden" name="id" value="{{$row['id_pasar']}}">
 												<button type="button" onclick="buttonHapus('formHapus',{{$row['id_pasar']}})" data-toggle="tooltip" class="btn btn-link btn-danger" data-original-title="Hapus">
