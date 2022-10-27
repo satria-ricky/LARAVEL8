@@ -3,6 +3,7 @@
 
 <head>
     <title>Sistem Informasi Pemetaan Lokasi Pasar Tradisional di Kota Mataram</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -48,7 +49,8 @@
             style="background-color: #f7f8fa; padding-top:8px; padding-bottom:4px; padding-left:8px">
             <div class="container">
                 <div class="navbar-brand-wrapper">
-                    <h3> Detail Pasar | {{ $data->nama_pasar }}</h1>
+                    <h3> <a href="/"><i class="fa fa-arrow-left"></i></a> Lihat Lokasi Produk | {{ $data->nama_produk }}</h1>
+                        <input type="hidden" value="{{ $data->id_produk }}" id="idProduk">
                 </div>
             </div>
         </nav>
@@ -59,98 +61,8 @@
 
         <div class="container">
 
-            @if ($data->foto == '')
-                <img src="{{ asset('storage/foto-pasar/default.png') }}">
-            @else
-                <center>
-                    <img src="{{ asset('storage/' . $data->foto) }}" alt="foto pasar" alt="foto pasar" width="250"
-                        height="250">
-                </center>
-            @endif
 
-
-
-
-            <div class="container mt-2"
-                style="border-style:solid;border-color: silver; border-radius: 15px; padding:10px; border-width: thin; ">
-
-                <table class="table" style="width: 100%;">
-                    <tbody>
-                        <tr>
-                            <th scope="row" style="width:20%; border-top: none !important;">Nama Pasar</th>
-                            <td style="width:1%;border-top: none !important;">:</td>
-                            <td style="border-top: none !important;">{{ $data->nama_pasar }}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Alamat</th>
-                            <td>:</td>
-                            <td>{{ $data->alamat }}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Deskripsi</th>
-                            <td>:</td>
-                            <td>{{ $data->deskripsi }}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Tahun Didirikan</th>
-                            <td>:</td>
-                            <td>{{ $data->tahun_didirikan }}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Perbaikan Terakhir</th>
-                            <td>:</td>
-                            <td>{{ $data->perbaikan_terakhir }}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Status Kepemilikan</th>
-                            <td>:</td>
-                            <td>{{ $data->status_kepemilikan }}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Luas Tanah</th>
-                            <td>:</td>
-                            <td>{{ $data->luas_tanah }}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Luas Bangunan</th>
-                            <td>:</td>
-                            <td>{{ $data->luas_bangunan }}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Kondisi</th>
-                            <td>:</td>
-                            <td>{{ $data->kondisi }}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Komoditi</th>
-                            <td>:</td>
-                            <td>{{ $data->komoditi }}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Jumlah Pedagang Los</th>
-                            <td>:</td>
-                            <td>{{ $data->jumlah_pedagang_los }}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Jumlah Pedagang Kios</th>
-                            <td>:</td>
-                            <td>{{ $data->jumlah_pedagang_kios }}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Aktivitas</th>
-                            <td>:</td>
-                            <td>{{ $data->aktivitas }}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Type Pasar</th>
-                            <td>:</td>
-                            <td>{{ $data->type_pasar }}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <hr>
+            {{-- <hr>
             <section class="customer-feedback">
                 <div class="row">
                     <div class="col-12 text-center pb-5">
@@ -170,7 +82,7 @@
 
                 </div>
             </section>
-            <hr>
+            <hr> --}}
             <section class="contact-us mb-5">
                 <center>
                     <div class="content-header">
@@ -199,65 +111,127 @@
     <script src="{{ url('assets') }}/js/landingpage.js"></script>
 
     <script>
-        navigator.geolocation.getCurrentPosition(function(location) {
-            var latlng = new L.LatLng(location.coords.latitude, location.coords.longitude);
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
 
 
-            console.log(location.coords.latitude, location.coords.longitude);
+        getData_peta();
+        // console.log(id_produk);
+        function getData_peta() {
+            var id_produk = document.getElementById("idProduk").value;
+            $.ajax({
+                type: 'post',
+                url: "{{ url('peta_by_produk') }}",
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    id_produk: id_produk
+                },
+                success: function(data) {
+                    // console.log(data);
 
-            document.getElementById('mapid').innerHTML =
-                "<div id='data_peta' style='width: 100%; height: 450px;'></div>";
+                    //load data
+                    var datasearch = [];
+                    for (var i = 0; i < data.length; i++) {
+                        if (data[i].latitude != null || data[i].longitude != null) {
+                            datasearch.push({
+                                "titik_koordinat": [data[i].latitude, data[i].longitude],
+                                "nama": data[i].nama_pasar
+                            });
+                        }
+                    }
+
+                    // console.log(datasearch);
 
 
-            var mymap = new L.Map('data_peta', {
-                zoom: 18,
-                center: new L.latLng([{{ $data->latitude }}, {{ $data->longitude }}])
-            });
-
-            mymap.addLayer(new L.tileLayer(
-                'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    maxZoom: 12,
-                    attribution: 'Sistem Informasi Pemetaan Lokasi Pasar Tradisional',
-                    id: 'mapbox/streets-v11',
-                }));
+                    navigator.geolocation.getCurrentPosition(function(location) {
+                        var latlng = new L.LatLng(location.coords.latitude, location.coords.longitude);
 
 
-            var markersLayer = new L.LayerGroup();
-            mymap.addLayer(markersLayer);
+                        console.log(location.coords.latitude, location.coords.longitude);
+
+                        document.getElementById('mapid').innerHTML =
+                            "<div id='data_peta' style='width: 100%; height: 450px;'></div>";
 
 
-            var mylocation = L.marker(latlng).addTo(mymap).bindPopup('Youre location!');
+                        var mymap = new L.Map('data_peta', {
+                            zoom: 12,
+                            center: new L.latLng([-8.58280355011038, 116.13464826731037])
+                        });
 
-            var icon_map = L.icon({
-                iconUrl: '{{ url('assets') }}/images/marker.png',
-                iconSize: [40, 40], // size of the icon
-            });
+                        mymap.addLayer(new L.tileLayer(
+                            'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                                maxZoom: 18,
+                                attribution: 'Sistem Informasi Pemetaan Lokasi Pasar Tradisional',
+                                id: 'mapbox/streets-v11',
+                            }));
 
-            var nama_pasar = '{{ $data->nama_pasar }}';
-            var titik_koordinat = [{{ $data->latitude }}, {{ $data->longitude }}];
 
-            marker = new L.Marker(new L.latLng(titik_koordinat), {
-                title: nama_pasar,
-                icon: icon_map
-            });
+                        var markersLayer = new L.LayerGroup();
+                        mymap.addLayer(markersLayer);
 
-            marker.bindPopup(`
+                        mymap.addControl(new L.Control.Search({
+                            position: 'topleft',
+                            layer: markersLayer,
+                            initial: false,
+                            collapsed: true,
+                            zoom: 17
+                        }));
+
+
+                        var mylocation = L.marker(latlng).addTo(mymap).bindPopup('Youre location!');
+
+
+                        for (var i = 0; i < data.length; i++) {
+                            if (data[i].latitude != null || data[i].longitude != null) {
+
+                                var icon_map = L.icon({
+                                    iconUrl: '{{ url('assets') }}/images/marker.png',
+                                    iconSize: [40, 40], // size of the icon
+                                });
+
+                                var nama_pasar = data[i].nama_pasar;
+                                var titik_koordinat = [data[i].latitude, data[i].longitude];
+
+                                marker = new L.Marker(new L.latLng(titik_koordinat), {
+                                    title: nama_pasar,
+                                    icon: icon_map
+                                });
+
+                                marker.bindPopup(`
                                   <div class="card" style="width: 15rem; height:15rem;">
                                     <div class="card-body">
-                                      <h3 class="card-title">{{ $data->nama_pasar }}</h3>
-                                      <p class="card-text">{{ $data->alamat }}.</p>
-                                      <a href="https://www.google.com/maps/dir/?api=1&origin=` + location.coords .latitude + `,` + location.coords.longitude + `&destination=` +{{ $data->latitude }} + `,` + {{ $data->longitude }} + `" target='_blank' type="button" class="btn btn-outline-success"> Rute</a>
+                                      <h3 class="card-title">` + data[i].nama_pasar + `</h3>
+                                      <p class="card-text">` + data[i].alamat + `.</p>
+                                      <div class="btn-group">
+                                        <form action="detil_pasar" method="post">
+                                            @csrf
+                                            <input type="hidden" name="id" value="` + data[i].id_pasar + `">
+                                            <button type="submit" formtarget="_blank" class="btn btn-outline-info mr-2"> Detail</button>
+                                        </form>
+                                      <a href="https://www.google.com/maps/dir/?api=1&origin=` + location.coords
+                                    .latitude + `,` + location.coords.longitude + `&destination=` +
+                                    data[i].latitude + `,` + data[i].longitude + `" target='_blank' type="button" class="btn btn-outline-success"> Rute</a>
                                       </div>
                                     </div>
                                   </div>`
-            );
+                                );
 
-            markersLayer.addLayer(marker);
+                                markersLayer.addLayer(marker);
 
+                            }
+                        }
 
+                    });
+                }
 
-        });
+            });
+
+        }
     </script>
+
 
 
 </body>

@@ -48,7 +48,7 @@
             style="background-color: #f7f8fa; padding-top:8px; padding-bottom:4px; padding-left:8px">
             <div class="container">
                 <div class="navbar-brand-wrapper">
-                    <h3> Detail Pasar | {{ $data->nama_pasar }}</h1>
+                    <h3> <a href="/"><i class="fa fa-arrow-left"></i></a> Detail Pasar | {{ $data->nama_pasar }}</h1>
                 </div>
             </div>
         </nav>
@@ -154,7 +154,7 @@
             <section class="customer-feedback">
                 <div class="row">
                     <div class="col-12 text-center pb-5">
-                        <h2>Products</h2>
+                        <h2>List Products</h2>
 
                         <center>
                             <input class="form-control input-lg" list="datalistOptions" id="exampleDataList"

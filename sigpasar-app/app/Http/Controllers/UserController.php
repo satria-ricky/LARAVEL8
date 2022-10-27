@@ -8,6 +8,7 @@ use App\Models\Pasar;
 use App\Models\Produk;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -92,9 +93,20 @@ class UserController extends Controller
         return response()->json($data);
     }
 
+    public function peta_by_produk(Request $request)
+    {
+
+        $data = DB::select('SELECT pasars.* FROM produk_pasars LEFT JOIN pasars ON pasars.id_pasar = produk_pasars.id_pasar WHERE produk_pasars.id_produk = ?', [$request['id_produk']]);
+       
+        return response()->json($data);
+       
+    }
 
     public function detil_pasar(Request $req)
     {
+         
+
+
         $id = $req['id'];
         $data = Pasar::findOrFail($id);
         // UserController::tambah_rekomendasi_produk($req['id']);
@@ -111,5 +123,21 @@ class UserController extends Controller
             'data' => $data,
             'produk' => $dataProduk
         ]);
+    }
+
+    public function lihat_produk_pasar(Request $req)
+    {
+        $id = $req['id'];
+        $data = Produk::findOrFail($id);
+        UserController::tambah_rekomendasi_produk($id);
+        $dataProduk = DB::select('SELECT * FROM produk_pasars LEFT JOIN pasars ON pasars.id_pasar = produk_pasars.id_pasar WHERE produk_pasars.id_produk = ?', [$id]);
+
+        // ddd($dataProduk);
+
+        return view('produk_pasar_page',[
+            'data' => $data
+        ]);
+
+        
     }
 }

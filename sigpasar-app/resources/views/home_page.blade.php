@@ -155,7 +155,12 @@
                                         <div class="content-divider m-auto"></div>
                                         <h6 class="customer-designation text-muted mt-5">Tersedia di</h6>
                                     <h6 class="card-title">{{ $item->total_pasar }} Pasar</h6>
-                                    <a href="/" class="btn btn-info btn-sm mt-3"> Lihat Lokasi Pasar <i class="fa fa-arrow-right"></i></a>
+                                    <form action="/lokasi_pasar" method="post">
+                                        @csrf
+                                        <input type="hidden" name="id" value="{{ $item->id_produk }}">
+                                        <button type="submit" class="btn btn-info btn-sm mt-3"> Lihat Lokasi Pasar <i class="fa fa-arrow-right"></i></button>
+                                    </form>
+                                    
                                     
                                 </div>
                             </div>
@@ -336,7 +341,7 @@
                                         <form action="detil_pasar" method="post">
                                             @csrf
                                             <input type="hidden" name="id" value="` + data[i].id_pasar + `">
-                                            <button type="submit" formtarget="_blank" class="btn btn-outline-info mr-2"> Detail</button>
+                                            <button type="submit" class="btn btn-outline-info mr-2"> Detail</button>
                                         </form>
                                       <a href="https://www.google.com/maps/dir/?api=1&origin=` + location.coords
                                     .latitude + `,` + location.coords.longitude + `&destination=` +
