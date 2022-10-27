@@ -104,8 +104,6 @@ class UserController extends Controller
 
     public function detil_pasar(Request $req)
     {
-         
-
 
         $id = $req['id'];
         $data = Pasar::findOrFail($id);

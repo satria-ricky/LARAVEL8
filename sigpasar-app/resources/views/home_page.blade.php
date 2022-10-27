@@ -131,12 +131,15 @@
                         {{-- <input type="text" placeholder="find youre product" class="form-control"> --}}
                         <center>
                             <input class="form-control input-lg" list="datalistOptions" id="exampleDataList"
-                                placeholder="Type to find youre product..." style="width: 60%;">
+                                placeholder="Type to find youre product..." name="Typelist" style="width: 60%;">
                             <datalist id="datalistOptions">
                                 @foreach ($produk as $item)
-                                <option value="{{ $item['nama_produk'] }}">    
+                                <option data-value="{{ $item['id_produk'] }}"> {{ $item['nama_produk'] }}</option>
                                 @endforeach
                             </datalist>
+                            <form action="/lokasi_pasar" method="post" id="formProduk">
+                                <input type="hidden" name="id" id="idFormProduk">
+                            </form>
                         </center>
                         {{-- <h6 class="section-subtitle text-muted m-0">List product.</h6> --}}
                     </div>
@@ -254,14 +257,13 @@
 
     <script>
         getData_peta();
-
         function getData_peta() {
             $.ajax({
                 url: "peta_by_pasar",
                 method:"GET",
                 dataType: "json",
                 success: function(data) {
-                    console.log(data);
+                    // console.log(data);
 
                     //load data
 
@@ -362,6 +364,37 @@
             });
 
         }
+
+
+        function seeLocationProduk(f,id){
+            var formProduk = f;
+            var idformProduk = id;
+            console.log(formProduk,idformProduk);
+        }
+
+
+        $(document).on('change', '#exampleDataList', function() {
+            
+            var val = document.getElementById("exampleDataList").value;
+            var value = $('#datalistOptions option').filter(function() {
+                return this.value == val;
+            }).data('value');
+            if (!value) {
+                // var msg = 'No Match';
+                Swal.fire({
+                    icon: "error",
+                    title: "Opps!",
+                    text: "Produk yg Anda cari tidak tersedia :(",
+                });
+            } else {
+                var msg = value 
+                alert(msg);
+            }
+            // var msg = value ? value : 'No Match';
+
+            // alert(msg);
+
+            });
 
     </script>
 
