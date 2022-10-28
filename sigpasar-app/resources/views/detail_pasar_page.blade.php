@@ -48,7 +48,8 @@
             style="background-color: #f7f8fa; padding-top:8px; padding-bottom:4px; padding-left:8px">
             <div class="container">
                 <div class="navbar-brand-wrapper">
-                    <h3> <a href="/"><i class="fa fa-arrow-left"></i></a> Detail Pasar | {{ $data->nama_pasar }}</h1>
+                    <h3> <a href="/"><i class="fa fa-arrow-left"></i></a> Detail Pasar | {{ $data->nama_pasar }}
+                        </h1>
                 </div>
             </div>
         </nav>
@@ -159,11 +160,16 @@
                         <center>
                             <input class="form-control input-lg" list="datalistOptions" id="exampleDataList"
                                 placeholder="Type to find youre product..." style="width: 60%;">
-                                <datalist id="datalistOptions">
-                                  @foreach ($produk as $item)
-                                  <option value="{{ $item->nama_produk }}">    
-                                  @endforeach
-                              </datalist>
+                            <datalist id="datalistOptions">
+                                @foreach ($produk as $item)
+                                    <option data-value="{{ $item->id_produk }}"> {{ $item->nama_produk }}
+                                    </option>
+                                @endforeach
+                            </datalist>
+                            <form action="/lokasi_pasar" method="post" id="formProduk">
+                                @csrf
+                                <input type="hidden" name="id" id="idProdukFormProduk">
+                            </form>
                         </center>
 
                     </div>
@@ -246,7 +252,9 @@
                                     <div class="card-body">
                                       <h3 class="card-title">{{ $data->nama_pasar }}</h3>
                                       <p class="card-text">{{ $data->alamat }}.</p>
-                                      <a href="https://www.google.com/maps/dir/?api=1&origin=` + location.coords .latitude + `,` + location.coords.longitude + `&destination=` +{{ $data->latitude }} + `,` + {{ $data->longitude }} + `" target='_blank' type="button" class="btn btn-outline-success"> Rute</a>
+                                      <a href="https://www.google.com/maps/dir/?api=1&origin=` + location.coords
+                .latitude + `,` + location.coords.longitude + `&destination=` + {{ $data->latitude }} + `,` +
+                {{ $data->longitude }} + `" target='_blank' type="button" class="btn btn-outline-success"> Rute</a>
                                       </div>
                                     </div>
                                   </div>`
@@ -256,6 +264,27 @@
 
 
 
+        });
+
+
+        $(document).on('change', '#exampleDataList', function() {
+
+            var val = document.getElementById("exampleDataList").value;
+            var value = $('#datalistOptions option').filter(function() {
+                return this.value == val;
+            }).data('value');
+            if (!value) {
+                // var msg = 'No Match';
+                Swal.fire({
+                    icon: "error",
+                    title: "Opps!",
+                    text: "Produk yg Anda cari tidak tersedia :(",
+                });
+            } else {
+                var msg = value
+                document.getElementById("idProdukFormProduk").value = msg;
+                document.getElementById('formProduk').submit();
+            }
         });
     </script>
 

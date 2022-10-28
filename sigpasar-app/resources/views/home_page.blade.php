@@ -34,7 +34,7 @@
 
     {{-- <link rel="stylesheet" href="{{url('js')}}/alert.js"> --}}
     {{-- FONT AWESOM --}}
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    <link rel="stylesheet" href="http://pro.fontawesome.com/releases/v5.10.0/css/all.css"
         integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 
     <script src="{{ asset('js/alert.js') }}"></script>
@@ -66,8 +66,7 @@
                             </button>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#header-section">Home <span
-                                    class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="#header-section">Home <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#feedback-section">Product</a>
@@ -134,11 +133,13 @@
                                 placeholder="Type to find youre product..." name="Typelist" style="width: 60%;">
                             <datalist id="datalistOptions">
                                 @foreach ($produk as $item)
-                                <option data-value="{{ $item['id_produk'] }}"> {{ $item['nama_produk'] }}</option>
+                                    <option data-value="{{ $item['id_produk'] }}"> {{ $item['nama_produk'] }}
+                                    </option>
                                 @endforeach
                             </datalist>
                             <form action="/lokasi_pasar" method="post" id="formProduk">
-                                <input type="hidden" name="id" id="idFormProduk">
+                                @csrf
+                                <input type="hidden" name="id" id="idProdukFormProduk">
                             </form>
                         </center>
                         {{-- <h6 class="section-subtitle text-muted m-0">List product.</h6> --}}
@@ -146,30 +147,31 @@
                     <div class="owl-carousel owl-theme grid-margin">
 
                         @foreach ($dataProduk as $item)
-                        <div class="card customer-cards">
-                            <div class="card-body">
-                                <div class="text-center">
-                                    <div class="card-header">
-                                        Produk {{ $item->nama_produk }}
-                                    </div>
-                                    {{-- <img src="{{ url('assets') }}/images/face2.jpg" width="89" height="89" alt=""
+                            <div class="card customer-cards">
+                                <div class="card-body">
+                                    <div class="text-center">
+                                        <div class="card-header">
+                                            Produk {{ $item->nama_produk }}
+                                        </div>
+                                        {{-- <img src="{{ url('assets') }}/images/face2.jpg" width="89" height="89" alt=""
                                         class="img-customer"> --}}
-                                        
+
                                         <div class="content-divider m-auto"></div>
                                         <h6 class="customer-designation text-muted mt-5">Tersedia di</h6>
-                                    <h6 class="card-title">{{ $item->total_pasar }} Pasar</h6>
-                                    <form action="/lokasi_pasar" method="post">
-                                        @csrf
-                                        <input type="hidden" name="id" value="{{ $item->id_produk }}">
-                                        <button type="submit" class="btn btn-info btn-sm mt-3"> Lihat Lokasi Pasar <i class="fa fa-arrow-right"></i></button>
-                                    </form>
-                                    
-                                    
+                                        <h6 class="card-title">{{ $item->total_pasar }} Pasar</h6>
+                                        <form action="/lokasi_pasar" method="post">
+                                            @csrf
+                                            <input type="hidden" name="id" value="{{ $item->id_produk }}">
+                                            <button type="submit" class="btn btn-info btn-sm mt-3"> Lihat Lokasi
+                                                Pasar <i class="fa fa-arrow-right"></i></button>
+                                        </form>
+
+
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                         @endforeach
-                    
+
                     </div>
                 </div>
             </section>
@@ -257,10 +259,11 @@
 
     <script>
         getData_peta();
+
         function getData_peta() {
             $.ajax({
                 url: "peta_by_pasar",
-                method:"GET",
+                method: "GET",
                 dataType: "json",
                 success: function(data) {
                     // console.log(data);
@@ -365,16 +368,8 @@
 
         }
 
-
-        function seeLocationProduk(f,id){
-            var formProduk = f;
-            var idformProduk = id;
-            console.log(formProduk,idformProduk);
-        }
-
-
         $(document).on('change', '#exampleDataList', function() {
-            
+
             var val = document.getElementById("exampleDataList").value;
             var value = $('#datalistOptions option').filter(function() {
                 return this.value == val;
@@ -387,18 +382,14 @@
                     text: "Produk yg Anda cari tidak tersedia :(",
                 });
             } else {
-                var msg = value 
-                alert(msg);
+                var msg = value
+                document.getElementById("idProdukFormProduk").value = msg;
+                document.getElementById('formProduk').submit();
             }
-            // var msg = value ? value : 'No Match';
-
-            // alert(msg);
-
-            });
-
+        });
     </script>
 
-  
+
 </body>
 
 </html>
