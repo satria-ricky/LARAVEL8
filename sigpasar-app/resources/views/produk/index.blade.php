@@ -54,9 +54,13 @@
 													<label>Nama*</label>
 													<input id="id_nama" name="nama" required type="text" class="form-control 1 @error('nama') is-invalid @enderror" placeholder="nama produk" >
 													@error('nama') 
-														<div class="invalid-feedback">
-															{{ $message }}
-														</div>
+														<script>
+															Swal.fire({
+																icon: "error",
+																title: "Gagal!",
+																text: "Nama produk telah tersedia!",
+															});
+														</script>
 													@enderror
 												</div>
 											</div>
