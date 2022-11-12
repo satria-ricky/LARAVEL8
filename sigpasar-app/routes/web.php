@@ -21,7 +21,7 @@ Route::get('/', [AuthController::class, 'index'])->name('home_page');
 
 Route::post('/login', [AuthController::class, 'login']);
 
-Route::get('/peta_by_pasar', [UserController::class, 'peta_by_pasar']);
+Route::get('/peta_by_pasar', [UserController::class, 'peta_by_pasar'])->name('peta_by_pasar');
 
 Route::post('/detil_pasar', [UserController::class, 'detil_pasar']);
 Route::post('/lokasi_pasar', [UserController::class, 'lihat_produk_pasar']);

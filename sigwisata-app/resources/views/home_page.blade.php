@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Sistem Informasi Pemetaan Lokasi Pasar Tradisional di Kota Mataram</title>
+    <title>Sistem Informasi Pemetaan Lokasi Wisata</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
