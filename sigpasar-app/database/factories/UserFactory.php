@@ -18,10 +18,8 @@ class UserFactory extends Factory
         return [
             'nama' => $this->faker->name(),
             'username' => $this->faker->userName(),
-            // 'email_verified_at' => now(),
             'password' => Hash::make('123'),
             'foto' => 'foto-user/profile.jpg',
-            // 'remember_token' => Str::random(10),
         ];
     }
 
