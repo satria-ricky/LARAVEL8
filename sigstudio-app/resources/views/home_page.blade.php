@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Sistem Informasi Pemetaan Lokasi Pasar Tradisional di Kota Mataram</title>
+    <title>{{ $title }}</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -30,10 +30,6 @@
     <link rel="stylesheet" href="{{ url('leaflet-search') }}/src/leaflet-search.css" />
     <script src="{{ url('leaflet-search') }}/src/leaflet-search.js"></script>
 
-    {{-- <a href="https://www.flaticon.com/free-icons/pin" title="pin icons"></a> --}}
-
-    {{-- <link rel="stylesheet" href="{{url('js')}}/alert.js"> --}}
-    {{-- FONT AWESOM --}}
     <link rel="stylesheet" href="http://pro.fontawesome.com/releases/v5.10.0/css/all.css"
         integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 
@@ -67,9 +63,6 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#header-section">Home <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#feedback-section">Product</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#features-section">Map</a>
@@ -111,71 +104,13 @@
     </header>
     <div class="banner">
         <div class="container">
-            <h1 class="font-weight-semibold">Sistem Informasi Pemetaan Lokasi <br>Pasar Tradisional di Kota Mataram</h1>
-            {{-- <h6 class="font-weight-normal text-muted pb-3">Simple is a simple template with a creative design that solves all your marketing and SEO queries.</h6> --}}
-            {{-- <div>
-        <button class="btn btn-opacity-light mr-1">Get started</button>
-        <button class="btn btn-opacity-success ml-1">Learn more</button>
-      </div> --}}
+            <h1 class="font-weight-semibold">{{ $title}}</h1>
             <img src="{{ url('assets') }}/images/Group171.svg" alt="" class="img-fluid">
         </div>
     </div>
 
     <div class="content-wrapper" style="margin-top: 130px;">
         <div class="container">
-            <section class="customer-feedback" id="feedback-section">
-                <div class="row">
-                    <div class="col-12 text-center pb-5">
-                        <h2>Products</h2>
-                        {{-- <input type="text" placeholder="find youre product" class="form-control"> --}}
-                        <center>
-                            <input class="form-control input-lg" list="datalistOptions" id="exampleDataList"
-                                placeholder="Type to find youre product..." name="Typelist" style="width: 60%;">
-                            <datalist id="datalistOptions">
-                                @foreach ($produk as $item)
-                                    <option data-value="{{ $item['id_produk'] }}"> {{ $item['nama_produk'] }}
-                                    </option>
-                                @endforeach
-                            </datalist>
-                            <form action="/lokasi_pasar" method="post" id="formProduk">
-                                @csrf
-                                <input type="hidden" name="id" id="idProdukFormProduk">
-                            </form>
-                        </center>
-                        {{-- <h6 class="section-subtitle text-muted m-0">List product.</h6> --}}
-                    </div>
-                    <div class="owl-carousel owl-theme grid-margin">
-
-                        @foreach ($dataProduk as $item)
-                            <div class="card customer-cards">
-                                <div class="card-body">
-                                    <div class="text-center">
-                                        <div class="card-header">
-                                            Produk {{ $item->nama_produk }}
-                                        </div>
-                                        {{-- <img src="{{ url('assets') }}/images/face2.jpg" width="89" height="89" alt=""
-                                        class="img-customer"> --}}
-
-                                        <div class="content-divider m-auto"></div>
-                                        <h6 class="customer-designation text-muted mt-5">Tersedia di</h6>
-                                        <h6 class="card-title">{{ $item->total_pasar }} Pasar</h6>
-                                        <form action="/lokasi_pasar" method="post">
-                                            @csrf
-                                            <input type="hidden" name="id" value="{{ $item->id_produk }}">
-                                            <button type="submit" class="btn btn-info btn-sm mt-3"> Lihat Lokasi
-                                                Pasar <i class="fa fa-arrow-right"></i></button>
-                                        </form>
-
-
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
-
-                    </div>
-                </div>
-            </section>
-
             <section class="contact-us mb-5" id="features-section">
                 <center>
                     <div class="content-header">
@@ -183,15 +118,12 @@
 
                     </div>
                 </center>
-                {{-- <div class="contact-us-bgimage grid-margin">
-                  
-                </div> --}}
                 <div id="mapid" style="width: 100%; height: 400px;"></div>
             </section>
 
             <footer class="border-top">
                 <p class="text-center text-muted pt-4">
-                    Sistem Informasi Pemetaan Lokasi Pasar Tradisional di Kota Mataram
+                    {{ $title}}
                     {{-- Copyright © 2021<a href="https://www.bootstrapdash.com/" class="px-1">Bootstrapdash.</a>All rights reserved. --}}
                 </p>
 
@@ -258,36 +190,27 @@
     <script src="{{ url('assets') }}/js/landingpage.js"></script>
 
     <script>
-        getData_peta();
-
-        function getData_peta() {
+        getPeta();
+        function getPeta() {
             $.ajax({
-                url: "peta_by_pasar",
-                method: "GET",
-                dataType: "json",
+                type: 'get',
+                url: "{{ url('getPeta') }}",
                 success: function(data) {
-                    // console.log(data);
-
-                    //load data
-
+                    console.log(data);
                     var datasearch = [];
                     for (var i = 0; i < data.length; i++) {
                         if (data[i].latitude != null || data[i].longitude != null) {
                             datasearch.push({
                                 "titik_koordinat": [data[i].latitude, data[i].longitude],
-                                "nama": data[i].nama_pasar
+                                "nama": data[i].nama_studio
                             });
                         }
                     }
 
                     // console.log(datasearch);
-
-
                     navigator.geolocation.getCurrentPosition(function(location) {
                         var latlng = new L.LatLng(location.coords.latitude, location.coords.longitude);
-
-
-                        console.log(location.coords.latitude, location.coords.longitude);
+                        // console.log(location.coords.latitude, location.coords.longitude);
 
                         document.getElementById('mapid').innerHTML =
                             "<div id='data_peta' style='width: 100%; height: 450px;'></div>";
@@ -301,7 +224,7 @@
                         mymap.addLayer(new L.tileLayer(
                             'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                                 maxZoom: 18,
-                                attribution: 'Sistem Informasi Pemetaan Lokasi Pasar Tradisional',
+                                attribution: '{{ $title}}',
                                 id: 'mapbox/streets-v11',
                             }));
 
@@ -329,23 +252,23 @@
                                     iconSize: [40, 40], // size of the icon
                                 });
 
-                                var nama_pasar = data[i].nama_pasar;
+                                var nama = data[i].nama_studio;
                                 var titik_koordinat = [data[i].latitude, data[i].longitude];
 
                                 marker = new L.Marker(new L.latLng(titik_koordinat), {
-                                    title: nama_pasar,
+                                    title: nama,
                                     icon: icon_map
                                 });
 
                                 marker.bindPopup(`
                                   <div class="card" style="width: 15rem; height:15rem;">
                                     <div class="card-body">
-                                      <h3 class="card-title">` + data[i].nama_pasar + `</h3>
+                                      <h3 class="card-title">` + data[i].nama_studio + `</h3>
                                       <p class="card-text">` + data[i].alamat + `.</p>
                                       <div class="btn-group">
-                                        <form action="detil_pasar" method="post">
+                                        <form action="detilBengkel" method="post">
                                             @csrf
-                                            <input type="hidden" name="id" value="` + data[i].id_pasar + `">
+                                            <input type="hidden" name="id" value="` + data[i].id_studio + `">
                                             <button type="submit" class="btn btn-outline-info mr-2"> Detail</button>
                                         </form>
                                       <a href="https://www.google.com/maps/dir/?api=1&origin=` + location.coords
@@ -365,28 +288,7 @@
                 }
 
             });
-
         }
-
-        $(document).on('change', '#exampleDataList', function() {
-
-            var val = document.getElementById("exampleDataList").value;
-            var value = $('#datalistOptions option').filter(function() {
-                return this.value == val;
-            }).data('value');
-            if (!value) {
-                // var msg = 'No Match';
-                Swal.fire({
-                    icon: "error",
-                    title: "Opps!",
-                    text: "Produk yg Anda cari tidak tersedia :(",
-                });
-            } else {
-                var msg = value
-                document.getElementById("idProdukFormProduk").value = msg;
-                document.getElementById('formProduk').submit();
-            }
-        });
     </script>
 
 
