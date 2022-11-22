@@ -54,7 +54,6 @@
                                 <div class="col-md-6 pr-0">
                                     <div class="form-group form-group-default">
                                         <label>Tahun Didirikan</label>
-                                        {{-- <input id="id_tahun_didirikan" type="text" name="tahun_didirikan" class="date-own form-control"> --}}
                                         <select id="id_tahun_didirikan" name="tahun_didirikan" class="form-control"></select>
                                     </div>
                                 </div>

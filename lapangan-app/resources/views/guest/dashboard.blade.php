@@ -11,10 +11,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
-    <title>Sistem Informasi Lapangan</title>
+    <title>{{ $title}}</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="{{ url('/assetsGuest/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url('/assetsGuest') }}/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
 
     <!-- Additional CSS Files -->
